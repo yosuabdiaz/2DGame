@@ -1,4 +1,4 @@
 package model;
 
-public class Medicine implements cure {
+public class Medicine implements Cure {
 }
