@@ -2,13 +2,15 @@ package model.actions;
 
 import model.Player;
 
+import java.util.ArrayList;
+
 public class GoFightAction extends Action  {
-    GoFightAction(Player player) {
+    public GoFightAction(Player player) {
         super(player);
     }
 
     @Override
-    public void execute() {
+    public void execute(ArrayList<GameContex> contex) {
 
     }
 

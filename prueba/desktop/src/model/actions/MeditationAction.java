@@ -2,13 +2,15 @@ package model.actions;
 
 import model.Player;
 
+import java.util.ArrayList;
+
 public class MeditationAction extends Action{
-    MeditationAction(Player player) {
+    public MeditationAction(Player player) {
         super(player);
     }
 
     @Override
-    public void execute() {
+    public void execute(ArrayList<GameContex> contex) {
 
     }
 

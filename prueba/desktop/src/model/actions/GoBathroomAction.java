@@ -2,13 +2,15 @@ package model.actions;
 
 import model.Player;
 
+import java.util.ArrayList;
+
 public class GoBathroomAction extends Action{
-    GoBathroomAction(Player player) {
+    public GoBathroomAction(Player player) {
         super(player);
     }
 
     @Override
-    public void execute() {
+    public void execute(ArrayList<GameContex> contex) {
 
     }
 
