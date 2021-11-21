@@ -1,11 +1,13 @@
 package model;
 
-public class Food {
+import model.actions.GameContex;
+
+public class Food implements GameContex {
     private String name;
     private int energy;
     private boolean isSolid;
 
-    public Food(String name, int energy, boolean isSolid) {
+    public Food(String name, int energy, boolean isSolid){
         this.name = name;
         this.energy = energy;
         this.isSolid = isSolid;
