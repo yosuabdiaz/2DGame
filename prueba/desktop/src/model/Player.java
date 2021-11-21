@@ -10,8 +10,8 @@ public class Player extends Figther {
     protected int hunger = 0;
     protected Disease disease = null;
     protected int trainingCharge = 0;
-    protected int retainedLiquids = 0;
-    protected int eatenFood = 0;
+    protected int retainedLiquids = 0; //piss
+    protected int eatenFood = 0; //poop
     protected int happiness = 0;
     protected int muscles = 0;
     protected int speed = 0;
