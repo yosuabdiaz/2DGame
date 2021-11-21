@@ -1,4 +1,7 @@
-package model;
+package model.actions;
+
+import model.Cure;
+import model.Player;
 
 public abstract class Action implements Cure {
     Player player;
@@ -6,5 +9,5 @@ public abstract class Action implements Cure {
         this.player = player;
     }
     public abstract void execute();
-    //public abstract void render();
+    public abstract void render();
 }
