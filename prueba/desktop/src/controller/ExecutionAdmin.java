@@ -17,7 +17,7 @@ public class ExecutionAdmin extends Thread{
     private MementoAdmin mementoAdmin;
     private Storage storage;
 
-    ExecutionAdmin(Player player){
+    public ExecutionAdmin(Player player){
         this.player = player;
     }
 

@@ -2,8 +2,10 @@ package View;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -26,11 +28,22 @@ public class mainView extends Game {
     private Animation animationTopRight, animationTopLeft,
             animationDownRight, animationDownLeft;
 
+    private BitmapFont  myText;
+
     private	float elapsedTime;
 
     private MainController myController = new MainController();
 
-    private Player player1 = new Player();
+    private Player player1 = myController.getPlayer();
+
+    private Storage storage = myController.getStorage();
+
+    private ExecutionAdmin myExecutionAdmin = new ExecutionAdmin(player1);
+
+    private MementoAdmin myMementoAdmin = new MementoAdmin();
+
+    private NPCAdmin myNPCAdmin = new NPCAdmin();
+
 
     @Override
     public void create() {
@@ -40,14 +53,14 @@ public class mainView extends Game {
         moveTexture2 = new Texture("moving2.png");
         attackTexture = new Texture("attack2.png");
         sleepTexture = new Texture("sleep.png");
-
+        myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
         makeAnimationB(attackTexture,6);
         makeAnimationC(moveTexture2,9);
         makeAnimationD(sleepTexture,3);
-
         weight = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
+
     }
 
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
@@ -91,6 +104,7 @@ public class mainView extends Game {
 
     @Override
     public void render () {
+        player1 = myController.getPlayer();
         elapsedTime += Gdx.graphics.getDeltaTime();
         ScreenUtils.clear(1, 0, 0, 1);
         batch.begin();
@@ -100,14 +114,30 @@ public class mainView extends Game {
         batch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58);
         batch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5);
         batch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0);
+        drawPlayerInfo();
         batch.end();
 
-
-        player1 = myController.getPlayer();
-        System.out.printf(""+player1.getAge());
     }
 
     public void drawPlayerInfo(){
-
+        // titles : value
+        myText.setColor(Color.BLACK);
+        myText.draw(batch,"Stats: ",555,460 );
+        myText.draw(batch,"Age: "+ player1.getAge(),515,440 );
+        myText.draw(batch,"Sleep: "+ player1.getSleep(),515,420 );
+        myText.draw(batch,"hunger: "+ player1.getHunger(),515,400 );
+        myText.draw(batch,"disease: "+ player1.getDisease(),515,380 );//faltan los metodos de disease
+        myText.draw(batch,"trainingCharge: "+ player1.getTrainingCharge(),515,360 );
+        myText.draw(batch,"retainedLiquids: "+ player1.getRetainedLiquids(),515,340 );
+        myText.draw(batch,"eatenFood: "+ player1.getEatenFood(),515,320 );
+        myText.draw(batch,"happiness: "+ player1.getHappiness(),515,300 );
+        myText.draw(batch,"muscles: "+ player1.getMuscles(),515,280 );
+        myText.draw(batch,"speed: "+ player1.getSpeed(),515,260 );
+        myText.draw(batch,"strength: "+ player1.getStrength(),515,240 );
+        myText.draw(batch,"fatness: "+ player1.getFatness(),515,220 );
+        myText.draw(batch,"mentalHealth: "+ player1.getMentalHealth(),515,200 );
+        myText.draw(batch,"physicalHealth: "+ player1.getPhysicalHealth(),515,180 );
+        myText.draw(batch,"meditation: "+ player1.getMeditation(),515,160 );
+        //myText.draw(batch,""+player1.getAge(),515,460 );
     }
 }
