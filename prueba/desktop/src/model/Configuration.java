@@ -10,6 +10,16 @@ public class Configuration {
     // ***ACTUALIZAR EL TOTAL SI SE CAMBIAN***
     private int energyDecrease = 1;
 
+    public int getSavedDays() {
+        return savedDays;
+    }
+
+    public void setSavedDays(int savedDays) {
+        this.savedDays = savedDays;
+    }
+
+    private int savedDays = 3;
+
     public int getHoursPerDay() {
         return hoursPerDay;
     }
