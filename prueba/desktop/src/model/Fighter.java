@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-public abstract class Figther {
+public abstract class Fighter {
     private int energy;
     private String name;
     private ArrayList<Attack> attackSkills = new ArrayList<>();
-    public abstract void attack(Figther figther);
+    public abstract void attack(Fighter fighter);
     public void addAttack(Attack attack) {
         attackSkills.add(attack);
     }

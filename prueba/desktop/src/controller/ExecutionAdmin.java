@@ -7,7 +7,7 @@ import model.Storage;
 
 import java.util.Date;
 
-public class ExecutionAdmin {
+public class ExecutionAdmin extends Thread{
     private Date startTime = new Date(System.currentTimeMillis());
     private int dayOfYear = 0;
     private int hours = 0;
@@ -21,9 +21,9 @@ public class ExecutionAdmin {
         this.player = player;
     }
 
-    private void run(){
+    @Override
+    public void run(){
         while (true){
-            Date currTime = new Date(System.currentTimeMillis());
             if(isNextHour()){
                 hours++;
                 player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
@@ -41,8 +41,14 @@ public class ExecutionAdmin {
             if(player.getInjury() != null){
                 injuryStarted = new Date(System.currentTimeMillis());
             }
-            else if(player.getInjury() == null && injuryStarted != null){
-                injuryStarted = null;
+            if(injuryStarted != null) {
+                Date currTime = new Date(System.currentTimeMillis());
+                int difference = (int) (currTime.getTime() - injuryStarted.getTime() / 1000);
+                if (difference >= player.getInjury().getRecuperationTime()){
+                    injuryStarted = null;
+                    player.setSpeed(player.getSpeed() + player.getInjury().getRecuperationTime());
+                    player.setInjury(null);
+                }
             }
         }
     }

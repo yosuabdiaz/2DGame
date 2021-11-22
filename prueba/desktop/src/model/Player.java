@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import  java.util.HashMap;
 
-public class Player extends Figther {
+public class Player extends Fighter {
     protected int age = 0;
     protected  int sleep = 0;
     protected HashMap<Integer,String> sprites = new HashMap<>();
@@ -185,8 +185,8 @@ public class Player extends Figther {
         this.y = y;
     }
 
-    public void learnAttacks(Figther figther){
-        ArrayList<Attack> opponentSkills= figther.getAttackSkills();
+    public void learnAttacks(Fighter fighter){
+        ArrayList<Attack> opponentSkills= fighter.getAttackSkills();
         for(Attack skill : opponentSkills){
             if(!super.getAttackSkills().contains(skill)){
                 super.getAttackSkills().add(skill);
@@ -195,7 +195,7 @@ public class Player extends Figther {
     }
 
     @Override
-    public void attack(Figther figther) {
+    public void attack(Fighter fighter) {
         //TO-DO
     }
 }
