@@ -10,7 +10,7 @@ public class MementoAdmin {
     private Queue<Memento> states = new LinkedList<>();
     private int maxSavedStates = 3;
 
-    MementoAdmin(){
+    public MementoAdmin(){
         maxSavedStates = Configuration.getInstance().getSavedDays();
     }
 

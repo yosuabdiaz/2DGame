@@ -17,11 +17,11 @@ public class ExecutionAdmin {
     private MementoAdmin mementoAdmin;
     private Storage storage;
 
-    ExecutionAdmin(Player player){
+    public ExecutionAdmin(Player player){
         this.player = player;
     }
 
-    private void run(){
+    public void run(){
         while (true){
             Date currTime = new Date(System.currentTimeMillis());
             if(isNextHour()){
