@@ -21,12 +21,19 @@ public class GoBathroomAction extends Action{
 
     }
 
+    /**
+     * Check if retained liquids is over 100%, bathroom actions just minus 100%
+     */
     private void piss(){
         if(player.getRetainedLiquids() > 100){
             int newRetainedLiquids = player.getRetainedLiquids() - 100;
             player.setRetainedLiquids(newRetainedLiquids);
         }
     }
+
+    /**
+     * Check if pood is over 100%, bathroom actions just minus 100%
+     */
     private void poop(){
         if(player.getEatenFood() > 100){
             int newEatenFood = player.getEatenFood() - 100;
