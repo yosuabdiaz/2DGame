@@ -1,9 +1,6 @@
 package controller;
 
-import model.Configuration;
-import model.Memento;
-import model.Player;
-import model.Storage;
+import model.*;
 
 import java.util.Date;
 
@@ -16,6 +13,7 @@ public class ExecutionAdmin extends Thread{
     private Date injuryStarted;
     private MementoAdmin mementoAdmin;
     private Storage storage;
+    private Garden garden;
 
     public ExecutionAdmin(Player player){
         this.player = player;
@@ -30,6 +28,7 @@ public class ExecutionAdmin extends Thread{
                 if(hours == config.getHoursPerDay()){
                     dayOfYear++;
                     hours = 0;
+                    garden.growGarden();
                     mementoAdmin.addMemento(new Memento(player, storage));
                     }
                 if(dayOfYear == config.getDaysPerYear()){player.setAge(player.getAge()+1); dayOfYear = 0;}

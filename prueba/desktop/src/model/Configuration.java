@@ -9,6 +9,42 @@ public class Configuration {
     //20 minutos para que pase un año con los defaults.
     // ***ACTUALIZAR EL TOTAL SI SE CAMBIAN***
     private int energyDecrease = 1;
+    private int foodInGarden = 20;
+    private int cureProbability = 10;
+    private int friendProbability = 10;
+    private int enemyProbability = 10;
+
+    public int getFriendProbability() {
+        return friendProbability;
+    }
+
+    public void setFriendProbability(int friendProbability) {
+        this.friendProbability = friendProbability;
+    }
+
+    public int getEnemyProbability() {
+        return enemyProbability;
+    }
+
+    public void setEnemyProbability(int enemyProbability) {
+        this.enemyProbability = enemyProbability;
+    }
+
+    public int getCureProbability() {
+        return cureProbability;
+    }
+
+    public void setCureProbability(int cureProbability) {
+        this.cureProbability = cureProbability;
+    }
+
+    public int getFoodInGarden() {
+        return foodInGarden;
+    }
+
+    public void setFoodInGarden(int foodInGarden) {
+        this.foodInGarden = foodInGarden;
+    }
 
     public int getSavedDays() {
         return savedDays;
