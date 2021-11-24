@@ -21,7 +21,7 @@ public class Player extends Fighter {
     protected ArrayList<FriendPlayer> friends= new ArrayList();
     protected int physicalHealth = 0;
     protected Injury injury = null;
-    protected int meditation = 0;
+    protected int meditation = 0; //number of meditations in a day, top is 3
     protected int x = 0;
     protected int y = 0;
 
