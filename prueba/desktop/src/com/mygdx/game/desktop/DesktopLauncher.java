@@ -9,6 +9,7 @@ import View.mainView;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new mainView(), config);
+		mainView myMainView = mainView.getInstance();
+		new LwjglApplication(myMainView, config);
 	}
 }
