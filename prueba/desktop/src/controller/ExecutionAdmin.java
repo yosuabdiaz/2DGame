@@ -3,6 +3,7 @@ package controller;
 import model.*;
 
 import java.util.Date;
+import java.util.Random;
 
 public class ExecutionAdmin extends Thread{
     private Date startTime = new Date(System.currentTimeMillis());
@@ -21,6 +22,7 @@ public class ExecutionAdmin extends Thread{
 
     @Override
     public void run(){
+        Random rand = new Random();
         while (true){
             if(isNextHour()){
                 hours++;
@@ -30,12 +32,20 @@ public class ExecutionAdmin extends Thread{
                     hours = 0;
                     garden.growGarden();
                     mementoAdmin.addMemento(new Memento(player, storage));
+                    NPCAdmin.setAttacksToDay(0);
+                    NPCAdmin.setVisited(false);
                     }
                 if(dayOfYear == config.getDaysPerYear()){player.setAge(player.getAge()+1); dayOfYear = 0;}
+                int npcProbability = rand.nextInt();
+                if(npcProbability > 2) {
+
+                }
+
+                }
                 //NPCAdmin
                 //DiseaseAdmin
 
-            }
+
 
             if(player.getInjury() != null){
                 injuryStarted = new Date(System.currentTimeMillis());
