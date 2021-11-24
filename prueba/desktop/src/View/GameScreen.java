@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin; // yes
 import controller.ExecutionAdmin;
 import controller.MainController;
 import controller.MementoAdmin;
@@ -15,7 +18,7 @@ import controller.NPCAdmin;
 import model.Player;
 import model.Storage;
 
-import java.awt.*;
+
 
 public class GameScreen extends BaseScreen{
     //Interface variables
@@ -28,6 +31,10 @@ public class GameScreen extends BaseScreen{
     private final BitmapFont  myText;
     private	float elapsedTime;
 
+    private Stage stage;
+    private Skin skin;
+
+
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
@@ -35,8 +42,12 @@ public class GameScreen extends BaseScreen{
     private Storage storage = myController.getStorage();
     private ExecutionAdmin myExecutionAdmin = new ExecutionAdmin(player1);
     private MementoAdmin myMementoAdmin = new MementoAdmin();
+    private boolean AcceptFight = false;
+    private boolean AcceptFriend = false;
+    private boolean AcceptDisease = false;
 
     private NPCAdmin myNPCAdmin = new NPCAdmin();
+
     public GameScreen(mainView myView) {
         super(myView);
         localBatch = myView.getBatch();
@@ -52,7 +63,72 @@ public class GameScreen extends BaseScreen{
         makeAnimationD(sleepTexture,3);
         weight = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
+        skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
+        Gdx.input.setInputProcessor(stage = new Stage());
+
+        boolean x = AcceptFigth();
+        boolean y = AcceptFriend();
+        boolean z = AcceptDisease();
+
+
+
     }
+
+    public boolean AcceptFigth(){
+        if (AcceptFight == false){
+            new Dialog("Confirm Figth", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptFight = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptFight;
+    }
+    public boolean AcceptFriend(){
+        if (AcceptFriend == false){
+            new Dialog("Confirm Friend", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptFriend = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptFriend;
+    }
+    public boolean AcceptDisease(){
+        if (AcceptDisease == false){
+            new Dialog("Confirm Disease", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptDisease = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptDisease;
+    }
+
 
     @Override
     public void render(float delta) {
@@ -69,14 +145,17 @@ public class GameScreen extends BaseScreen{
         drawPlayerInfo();
         localBatch.end();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+        /*if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
             myGame.setScreen(myGame.myAskScreen);
         }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
             myGame.setScreen(myGame.myStorageScreen);
         }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
             myGame.setScreen(myGame.myGameScreen);
-        }
+        }*/
 
+        stage.draw();
+
+        stage.act(elapsedTime);
     }
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
