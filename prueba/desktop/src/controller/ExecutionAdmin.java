@@ -30,6 +30,7 @@ public class ExecutionAdmin extends Thread{
                     hours = 0;
                     garden.growGarden();
                     mementoAdmin.addMemento(new Memento(player, storage));
+                    player.setMeditation(0);
                     }
                 if(dayOfYear == config.getDaysPerYear()){player.setAge(player.getAge()+1); dayOfYear = 0;}
                 //NPCAdmin
