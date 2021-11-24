@@ -19,10 +19,11 @@ public class MeditationAction extends Action{
     public void render() {
 
     }
-
+    
     private void updateMentalHealth(){
         if(player.getMentalHealth() < 100 && player.getMeditation() < 3){
-            player.setMentalHealth(player.getMentalHealth() + 20);
+            int mentalHealt = player.getMentalHealth() > 80 ? 100 : player.getMentalHealth() + 20;
+            player.setMentalHealth(mentalHealt);
             player.setMeditation(player.getMeditation() + 1);
         }
     }
