@@ -11,11 +11,19 @@ public class MeditationAction extends Action{
 
     @Override
     public void execute(ArrayList<GameContex> contex) {
-
+        render();
+        updateMentalHealth();
     }
 
     @Override
     public void render() {
 
+    }
+
+    private void updateMentalHealth(){
+        if(player.getMentalHealth() < 100 && player.getMeditation() < 3){
+            player.setMentalHealth(player.getMentalHealth() + 20);
+            player.setMeditation(player.getMeditation() + 1);
+        }
     }
 }
