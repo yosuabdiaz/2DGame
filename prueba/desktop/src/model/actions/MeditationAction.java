@@ -19,7 +19,10 @@ public class MeditationAction extends Action{
     public void render() {
 
     }
-    
+
+    /**
+     * Check if can add more mental healt value or have less of 3 meditation times
+     */
     private void updateMentalHealth(){
         if(player.getMentalHealth() < 100 && player.getMeditation() < 3){
             int mentalHealt = player.getMentalHealth() > 80 ? 100 : player.getMentalHealth() + 20;
