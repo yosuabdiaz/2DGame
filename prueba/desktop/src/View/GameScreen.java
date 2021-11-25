@@ -166,13 +166,6 @@ public class GameScreen extends BaseScreen{
         drawIndications();
         localBatch.end();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
-
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
-            System.out.printf("num2");
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
-            System.out.printf("num3");
-        }
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -282,4 +275,11 @@ public class GameScreen extends BaseScreen{
         this.AcceptDisease = x;
     }
 
+    public Player getPlayer(){
+        return this.player1;
+    }
+
+    public MainController getMyController(){
+        return this.myController;
+    }
 }

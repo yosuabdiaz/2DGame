@@ -13,13 +13,8 @@ import model.Storage;
 public class mainView extends Game {
 
     private SpriteBatch batch;
-
-    public AskScreen myAskScreen;
-
-    public StorageScreen myStorageScreen;
-
-    public GameScreen myGameScreen;
-
+    private StorageScreen myStorageScreen;
+    private GameScreen myGameScreen;
     private MainController myController = new MainController();
     private Player player1 = myController.getPlayer();
     private Storage storage = myController.getStorage();
@@ -39,11 +34,18 @@ public class mainView extends Game {
     private mainView(){
 
     }
+
+    public StorageScreen getMyStorageScreen(){
+        return this.myStorageScreen;
+    }
+
+    public GameScreen getMyGameScreen(){
+        return this.myGameScreen;
+    }
     @Override
     public void create() {
         batch = new SpriteBatch();
 
-        myAskScreen = new AskScreen(this);
         myStorageScreen = new StorageScreen(this);
         myGameScreen = new GameScreen(this);
 

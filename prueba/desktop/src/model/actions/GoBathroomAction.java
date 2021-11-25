@@ -1,5 +1,8 @@
 package model.actions;
 
+import View.GameScreen;
+import View.mainView;
+import com.badlogic.gdx.graphics.Texture;
 import model.Player;
 
 import java.util.ArrayList;
@@ -18,6 +21,12 @@ public class GoBathroomAction extends Action{
 
     @Override
     public void render() {
+        mainView myMainview = mainView.getInstance();
+        GameScreen g = myMainview.getMyGameScreen();
+        g.makeAnimationA(new Texture("sleep.png"),3);
+        g.makeAnimationB(new Texture("sleep.png"),3);
+        g.makeAnimationC(new Texture("sleep.png"),3);
+        g.makeAnimationD(new Texture("sleep.png"),3);
 
     }
 
