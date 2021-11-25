@@ -35,7 +35,8 @@ public class ExecutionAdmin extends Thread{
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
                     }
-                if(dayOfYear == config.getDaysPerYear()){player.setAge(player.getAge()+1); dayOfYear = 0;}
+                if(dayOfYear == config.getDaysPerYear()){
+                    player.setAge(player.getAge()+1); dayOfYear = 0;}
                 int npcProbability = rand.nextInt();
                 if(npcProbability > 2) {
 

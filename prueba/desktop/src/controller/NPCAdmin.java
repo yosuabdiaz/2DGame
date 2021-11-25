@@ -26,7 +26,7 @@ public class NPCAdmin {
 
     private static void generateFriend(){
         FriendPlayer friend = new FriendPlayer("Player","" );
-        //mainView.getInstance().
+        //boolean response = mainView.getInstance().
     }
 
     private static void generateEnemy(int playerSkills, int playerEnergy){
