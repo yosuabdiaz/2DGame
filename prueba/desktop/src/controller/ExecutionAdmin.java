@@ -34,6 +34,7 @@ public class ExecutionAdmin extends Thread{
                     mementoAdmin.addMemento(new Memento(player, storage));
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
+                    player.setMeditation(0);
                     }
                 if(dayOfYear == config.getDaysPerYear()){
                     player.setAge(player.getAge()+1); dayOfYear = 0;}

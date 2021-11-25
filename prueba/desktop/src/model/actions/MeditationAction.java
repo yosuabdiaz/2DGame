@@ -1,33 +1,25 @@
 package model.actions;
 
+import View.GameScreen;
+import View.mainView;
+import com.badlogic.gdx.graphics.Texture;
 import model.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MeditationAction extends Action{
-    public MeditationAction(Player player) {
-        super(player);
-    }
+    public MeditationAction() {}
 
     @Override
-    public void execute(ArrayList<GameContex> contex) {
+    public void execute(HashMap<String, GameContex> contex) {
+        Player player = (Player) contex.get("player");
         render();
-        updateMentalHealth();
     }
 
     @Override
     public void render() {
-
-    }
-
-    /**
-     * Check if can add more mental healt value or have less of 3 meditation times
-     */
-    private void updateMentalHealth(){
-        if(player.getMentalHealth() < 100 && player.getMeditation() < 3){
-            int mentalHealt = player.getMentalHealth() > 80 ? 100 : player.getMentalHealth() + 20;
-            player.setMentalHealth(mentalHealt);
-            player.setMeditation(player.getMeditation() + 1);
-        }
+        mainView m = mainView.getInstance();
+        GameScreen g = m.getMyGameScreen();
+        g.makeAnimationA(new Texture("sleep.png"),3);
     }
 }

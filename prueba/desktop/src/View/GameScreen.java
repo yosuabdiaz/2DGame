@@ -35,6 +35,7 @@ public class GameScreen extends BaseScreen{
     private Skin skin;
 
 
+
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
@@ -45,8 +46,11 @@ public class GameScreen extends BaseScreen{
     private boolean AcceptFight = false;
     private boolean AcceptFriend = false;
     private boolean AcceptDisease = false;
+    private boolean AcceptSleep = false;
 
     private NPCAdmin myNPCAdmin = new NPCAdmin();
+
+    private int control=0;
 
     public GameScreen(mainView myView) {
         super(myView);
@@ -54,7 +58,7 @@ public class GameScreen extends BaseScreen{
         houseMap = new Texture("map.jpeg");
         Texture moveTexture = new Texture("moving1.png");
         Texture moveTexture2 = new Texture("moving2.png");
-        Texture attackTexture = new Texture("attack2.png");
+        Texture attackTexture = new Texture("attack.png");
         Texture sleepTexture = new Texture("sleep.png");
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
@@ -65,13 +69,11 @@ public class GameScreen extends BaseScreen{
         height = Gdx.graphics.getHeight();
         skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
         Gdx.input.setInputProcessor(stage = new Stage());
-
-        boolean x = AcceptFigth();
-        boolean y = AcceptFriend();
-        boolean z = AcceptDisease();
-
-
-
+        Texture img = new Texture("moving1.png");
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
+        MyActor actor = new MyActor(moveTextureRegion[0][2]);
+        stage.addActor(actor);
+        stage.setKeyboardFocus(actor);
     }
 
     public boolean AcceptFigth(){
@@ -128,6 +130,24 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptDisease;
     }
+    public boolean AcceptSleep(){
+        if (AcceptSleep == false){
+            new Dialog("Confirm Sleep", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptSleep = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptSleep;
+    }
 
 
     @Override
@@ -138,26 +158,19 @@ public class GameScreen extends BaseScreen{
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);
 
-        localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,51);
-        localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58);
-        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5);
-        localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0);
+        localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
+        localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
+        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,50);
+        localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
         drawPlayerInfo();
+        drawIndications();
         localBatch.end();
 
-        /*if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
-            myGame.setScreen(myGame.myAskScreen);
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
-            myGame.setScreen(myGame.myStorageScreen);
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
-            myGame.setScreen(myGame.myGameScreen);
-        }*/
-
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-        stage.act(elapsedTime);
     }
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
+
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
         TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
         int index = 0;
@@ -217,5 +230,57 @@ public class GameScreen extends BaseScreen{
         myText.draw(localBatch,"physicalHealth: "+ player1.getPhysicalHealth(),515,180 );
         myText.draw(localBatch,"meditation: "+ player1.getMeditation(),515,160 );
         myText.draw(localBatch,"energy: "+ player1.getEnergy(),515,140 );
+    }
+    public void drawIndications(){
+        myText.draw(localBatch,"1.Bathroom",10,90);
+        myText.draw(localBatch,"2.Kitchen",10,75);
+        myText.draw(localBatch,"3.Bedroom",10,60);
+        myText.draw(localBatch,"4.Fight Room",10,45);
+        myText.draw(localBatch,"5.Meditation",10,30);
+        myText.draw(localBatch,"6.Socialize",100,90);
+        myText.draw(localBatch,"7.Train",100,75);
+        myText.draw(localBatch,"8.Gather",100,60);
+        myText.draw(localBatch,"9.Eat",100,45);
+
+    }
+
+    public boolean getAcceptSleep(){
+        return this.AcceptSleep;
+    }
+
+    public boolean getAcceptFight(){
+        return this.AcceptFight;
+    }
+
+    public boolean getAcceptFriend(){
+        return this.AcceptFriend;
+    }
+
+    public boolean getAcceptDisease(){
+        return this.AcceptDisease;
+    }
+
+    public void setAcceptSleep(boolean x){
+        this.AcceptSleep = x;
+    }
+
+    public void setAcceptFight(boolean x){
+        this.AcceptFight = x;
+    }
+
+    public void setAcceptFriend(boolean x){
+        this.AcceptFriend = x;
+    }
+
+    public void setAcceptDisease(boolean x){
+        this.AcceptDisease = x;
+    }
+
+    public Player getPlayer(){
+        return this.player1;
+    }
+
+    public MainController getMyController(){
+        return this.myController;
     }
 }

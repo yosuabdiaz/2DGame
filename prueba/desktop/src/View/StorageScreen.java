@@ -23,13 +23,7 @@ public class StorageScreen extends BaseScreen{
         localBatch.begin();
         myText.draw(localBatch, "Storage Screen",100,100);
         localBatch.end();
-        if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
-            myGame.setScreen(myGame.myAskScreen);
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
-            myGame.setScreen(myGame.myStorageScreen);
-        }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
-            myGame.setScreen(myGame.myGameScreen);
-        }
+
     }
 
     @Override
