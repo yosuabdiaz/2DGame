@@ -1,5 +1,6 @@
 package controller;
 
+import model.Garden;
 import model.Player;
 import model.Sport;
 import model.Storage;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 public class MainController {//I need a new name
     private Player player;
     private Storage storage;
+    private Garden garden;
     private HashMap<String ,Action> actions;
     private ArrayList<Sport> sports;
 
@@ -18,6 +20,7 @@ public class MainController {//I need a new name
         //All init stuff
         player = new Player();
         storage = new Storage();
+        garden = new Garden();
         actions = new HashMap<String, Action>();
         addActions();
         sports = new ArrayList<Sport>();
@@ -25,10 +28,26 @@ public class MainController {//I need a new name
     }
 
     public void executeAction(String nameAction){
-        HashMap<String,GameContex> context = new HashMap<String,GameContex>();
-        context.put("player", (GameContex) player);
+        HashMap<String,GameContex> context = makeContext(nameAction);
         actions.get(nameAction).execute(context);
     }
+
+    public void executeAction(String nameAction, HashMap<String, GameContex> context){
+        actions.get(nameAction).execute(context);
+    }
+
+    private HashMap<String, GameContex> makeContext(String nameAction) {
+        HashMap<String,GameContex> context = new HashMap<String,GameContex>();
+        context.put("player", (GameContex) player);
+        switch (nameAction){
+            case "Gather":
+                context.put("garden", (GameContex) garden);
+                return context;
+            default:
+                return context;
+        }
+    }
+
     private void addActions(){
         actions.put("DoNothing", new DoNothingAction());
         actions.put("Eat", new EatAction());
