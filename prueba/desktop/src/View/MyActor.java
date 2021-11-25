@@ -32,8 +32,6 @@ public class MyActor extends Image {
                     speedMove = 0.05f;
                 }
                 MainController controller = x.getMyController();
-                ArrayList<Action> actions = controller.getActions();
-                ArrayList<GameContex> gc = new ArrayList<>();
                 switch (keycode){
                     case Input.Keys.NUM_1: // bathroom
                         mba.setPosition(130f,200f);
@@ -43,48 +41,48 @@ public class MyActor extends Image {
                             mba.setDuration(speedMove); // this change the speed
                         }
                         MyActor.this.addAction(mba);
-                        controller.executeAction(gc,3);//GoBathroomAction
+                        controller.executeAction("GoBathroom");//GoBathroomAction
                         break;
                     case Input.Keys.NUM_2: // kitchen
                         mba.setPosition(290f,210f);
                         mba.setDuration(speedMove); // this change the speed
                         MyActor.this.addAction(mba);
-                        controller.executeAction(gc,8);//ToStockAction
+                        controller.executeAction("ToStock");//ToStockAction
                         break;
                     case Input.Keys.NUM_3:// bedroom
                         mba.setPosition(310f,390f);
                         mba.setDuration(speedMove); // this change the speed
                         MyActor.this.addAction(mba);
-                        controller.executeAction(gc,6);//SleepAction
+                        controller.executeAction("Sleep");//SleepAction
                         break;
                     case Input.Keys.NUM_4:// fight Room
                         mba.setPosition(10f,350f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,4);//GoFightAction
+                        controller.executeAction("GoFight");//GoFightAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_5: // Meditation
                         mba.setPosition(280f,100f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,5);//MeditationAction
+                        controller.executeAction("Meditation");//MeditationAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_6: // Socialize
                         mba.setPosition(350f,100f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,7);//SocializeAction
+                        controller.executeAction("Socialize");//SocializeAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_7: // train
                         mba.setPosition(10,100);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,9);//WorkoutAction
+                        controller.executeAction("Workout");//WorkoutAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_8: // Gather
                         mba.setPosition(10f,200f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,2);//GatherAction
+                        controller.executeAction("Gather");//GatherAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_9: // Eat
@@ -92,12 +90,6 @@ public class MyActor extends Image {
                         mba.setDuration(speedMove); // this change the speed
                         //No puedo llamar a comer porque no tengo comida
                         //controller.executeAction(gc,1);//EatAction
-                        MyActor.this.addAction(mba);
-                        break;
-                    case Input.Keys.NUM_0: // nothing
-                        mba.setPosition(10f,200f);//falta comportameinto random
-                        mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction(gc,0);//GatherAction
                         MyActor.this.addAction(mba);
                         break;
                 }

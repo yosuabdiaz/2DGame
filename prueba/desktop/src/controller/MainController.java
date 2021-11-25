@@ -24,7 +24,8 @@ public class MainController {//I need a new name
         addSports();
     }
 
-    public void executeAction(HashMap<String,GameContex> context, String nameAction){
+    public void executeAction(String nameAction){
+        HashMap<String,GameContex> context = new HashMap<String,GameContex>();
         context.put("player", (GameContex) player);
         actions.get(nameAction).execute(context);
     }
