@@ -25,22 +25,28 @@ public class NPCAdmin {
     }
 
     private static void generateFriend(){
-        FriendPlayer friend = new FriendPlayer("Player","" );
-        //boolean response = mainView.getInstance().
+        boolean response  = mainView.getInstance().getMyGameScreen().getAcceptFriend();
+        if(response) {
+            FriendPlayer friend = new FriendPlayer("Player", "");
+            //mainView.getInstance().getMyGameScreen()
+        }
+        visited = true;
     }
 
     private static void generateEnemy(int playerSkills, int playerEnergy){
-        Random rand = new Random();
-        ArrayList<Attack> enemySkills = new ArrayList<>();
-        for(int i= 0; i< playerSkills; i++){
-            int index = rand.nextInt(skills.size());
-            enemySkills.add(skills.get(index));
+        boolean response  = mainView.getInstance().getMyGameScreen().getAcceptFight();
+        if(response) {
+            Random rand = new Random();
+            ArrayList<Attack> enemySkills = new ArrayList<>();
+            for (int i = 0; i < playerSkills; i++) {
+                int index = rand.nextInt(skills.size());
+                enemySkills.add(skills.get(index));
+            }
+            EnemyPlayer enemy = new EnemyPlayer();
+            enemy.setAttackSkills(enemySkills);
+            enemy.setEnergy(rand.nextInt(playerEnergy));
+            //enviar el enemy al mainView
         }
-        EnemyPlayer enemy = new EnemyPlayer();
-        enemy.setAttackSkills(enemySkills);
-        enemy.setEnergy(rand.nextInt(playerEnergy));
-        //mainView.getInstance().
-        
     }
 
     public static Boolean getVisited() {
