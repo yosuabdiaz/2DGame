@@ -4,6 +4,7 @@ import model.Garden;
 import model.Player;
 import model.Sport;
 import model.Storage;
+import model.Food;  
 import model.actions.*;
 
 import java.util.ArrayList;
@@ -34,6 +35,13 @@ public class MainController {//I need a new name
 
     public void executeAction(String nameAction, HashMap<String, GameContex> context){
         actions.get(nameAction).execute(context);
+    }
+
+    public void eatAction(Food selectedFood){
+        HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+        context.put("player", (GameContex) player);
+        context.put("food", (GameContex) selectedFood);
+        executeAction("Eat", context);
     }
 
     private HashMap<String, GameContex> makeContext(String nameAction) {
