@@ -35,6 +35,7 @@ public class GameScreen extends BaseScreen{
     private Skin skin;
 
 
+
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
@@ -66,12 +67,14 @@ public class GameScreen extends BaseScreen{
         skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
         Gdx.input.setInputProcessor(stage = new Stage());
 
-        boolean x = AcceptFigth();
-        boolean y = AcceptFriend();
-        boolean z = AcceptDisease();
-
-
-
+        //boolean x = AcceptFigth();
+        //boolean y = AcceptFriend();
+        //boolean z = AcceptDisease();
+        Texture img = new Texture("moving1.png");
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
+        MyActor actor = new MyActor(moveTextureRegion[0][2]);
+        stage.addActor(actor);
+        stage.setKeyboardFocus(actor);
     }
 
     public boolean AcceptFigth(){
@@ -152,10 +155,8 @@ public class GameScreen extends BaseScreen{
         }else if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
             myGame.setScreen(myGame.myGameScreen);
         }*/
-
+        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-        stage.act(elapsedTime);
     }
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
