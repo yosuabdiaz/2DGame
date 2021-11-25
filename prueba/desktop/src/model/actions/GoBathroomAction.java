@@ -5,7 +5,6 @@ import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
 import model.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GoBathroomAction extends Action{

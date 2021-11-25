@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import model.Food;
 import model.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EatAction extends Action{
