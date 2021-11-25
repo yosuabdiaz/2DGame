@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public abstract class Fighter {
-    private int energy;
+    private int energy = 100;
     private String name;
     private ArrayList<Attack> attackSkills = new ArrayList<>();
     public abstract void attack(Fighter fighter);

@@ -5,21 +5,21 @@ import  java.util.HashMap;
 
 public class Player extends Fighter {
     protected int age = 0;
-    protected  int sleep = 0;
+    protected  int sleep = 0;//0 - 100%
     protected HashMap<Integer,String> sprites = new HashMap<>();
-    protected int hunger = 0;
+    protected int hunger = 0;//0 - 100%
     protected Disease disease = null;
-    protected int trainingCharge = 0;
-    protected int retainedLiquids = 0; //piss
-    protected int eatenFood = 0; //poop
-    protected int happiness = 0;
-    protected int muscles = 0;
-    protected int speed = 0;
-    protected int strength = 0;
-    protected int fatness = 0;
-    protected int mentalHealth = 0;
+    protected int trainingCharge = 0;//0 - 100%
+    protected int retainedLiquids = 0; //piss //0 - 100%
+    protected int eatenFood = 0; //poop //0 - 100%
+    protected int happiness = 0;//0 - 100%
+    protected int muscles = 0;//0 - 100%
+    protected int speed = 0;//0 - 100%
+    protected int strength = 0;//0 - 100%
+    protected int fatness = 0;//0 - 100%
+    protected int mentalHealth = 0;//0 - 100%
     protected ArrayList<FriendPlayer> friends= new ArrayList();
-    protected int physicalHealth = 0;
+    protected int physicalHealth = 0;//0 - 100%
     protected Injury injury = null;
     protected int meditation = 0; //number of meditations in a day, top is 3
     protected int x = 0;

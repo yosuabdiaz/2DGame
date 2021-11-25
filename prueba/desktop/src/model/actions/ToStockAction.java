@@ -7,7 +7,7 @@ import model.Player;
 
 import java.util.ArrayList;
 
-public class ToStockAction extends Action{
+public class ToStockAction extends Action{ //select food to eat
     public ToStockAction(Player player) {
         super(player);
     }
