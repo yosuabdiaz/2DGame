@@ -1,15 +1,15 @@
 package model.actions;
 
 import model.Cure;
-import model.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Action implements Cure {
-    Player player;
-    Action(Player player){
-        this.player = player;
-    }
-    public abstract void execute(ArrayList<GameContex> contex);
+    Action(){}
+    /**
+     * Context have ({"player",player},{"anothername",anotherStuff},...)
+     * @param contex
+     */
+    public abstract void execute(HashMap<String,GameContex> contex);
     public abstract void render();
 }

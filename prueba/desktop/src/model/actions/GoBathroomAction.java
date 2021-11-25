@@ -5,18 +5,17 @@ import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
 import model.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GoBathroomAction extends Action{
-    public GoBathroomAction(Player player) {
-        super(player);
-    }
+    public GoBathroomAction() { }
 
     @Override
-    public void execute(ArrayList<GameContex> contex) {
+    public void execute(HashMap<String, GameContex> contex) {
+        Player player = (Player) contex.get("player");
         render();
-        piss();
-        poop();
+        piss(player);
+        poop(player);
     }
 
     @Override
@@ -29,8 +28,9 @@ public class GoBathroomAction extends Action{
 
     /**
      * Check if retained liquids is over 100%, bathroom actions just minus 100%
+     * @param player
      */
-    private void piss(){
+    private void piss(Player player){
         if(player.getRetainedLiquids() > 100){
             int newRetainedLiquids = player.getRetainedLiquids() - 100;
             player.setRetainedLiquids(newRetainedLiquids);
@@ -39,8 +39,9 @@ public class GoBathroomAction extends Action{
 
     /**
      * Check if pood is over 100%, bathroom actions just minus 100%
+     * @param player
      */
-    private void poop(){
+    private void poop(Player player){
         if(player.getEatenFood() > 100){
             int newEatenFood = player.getEatenFood() - 100;
             player.setEatenFood(newEatenFood);
