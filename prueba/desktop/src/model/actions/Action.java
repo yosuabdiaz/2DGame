@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 public abstract class Action implements Cure {
     Action(){}
-
     /**
      * Context have ({"player",player},{"anothername",anotherStuff},...)
      * @param contex

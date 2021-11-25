@@ -6,6 +6,8 @@ import model.Storage;
 import model.actions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class MainController {//I need a new name
     private Player player;
@@ -23,20 +25,20 @@ public class MainController {//I need a new name
         addSports();
     }
 
-    public void executeAction(ArrayList<GameContex> context, int indexAction){
+    public void executeAction(HashMap<String,GameContex> context, int indexAction){
         actions.get(indexAction).execute(context);
     }
     private void addActions(){
-        actions.add(new DoNothingAction(player)); //0
-        actions.add(new EatAction(player));//1
-        actions.add(new GatherAction(player));//2
-        actions.add(new GoBathroomAction(player));//3
-        actions.add(new GoFightAction(player));//4
-        actions.add(new MeditationAction(player));//5
-        actions.add(new SleepAction(player));//6
-        actions.add(new SocializeAction(player));//7
-        actions.add(new ToStockAction(player));//8 kitchen
-        actions.add(new WorkoutAction(player));//9
+        actions.add(new DoNothingAction()); //0
+        actions.add(new EatAction());//1
+        actions.add(new GatherAction());//2
+        actions.add(new GoBathroomAction());//3
+        actions.add(new GoFightAction());//4
+        actions.add(new MeditationAction());//5
+        actions.add(new SleepAction());//6
+        actions.add(new SocializeAction());//7
+        actions.add(new ToStockAction());//8 kitchen
+        actions.add(new WorkoutAction());//9
     }
     private void addSports(){
         //

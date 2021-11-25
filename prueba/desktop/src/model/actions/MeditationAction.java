@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.Texture;
 import model.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MeditationAction extends Action{
-    public MeditationAction(Player player) {
-        super(player);
-    }
+    public MeditationAction() {}
 
     @Override
-    public void execute(ArrayList<GameContex> contex) {
+    public void execute(HashMap<String, GameContex> contex) {
+        Player player = (Player) contex.get("player");
         render();
     }
 
