@@ -27,16 +27,16 @@ public class MainController {//I need a new name
         actions.get(indexAction).execute(context);
     }
     private void addActions(){
-        actions.add(new DoNothingAction(player));
-        actions.add(new EatAction(player));
-        actions.add(new GatherAction(player));
-        actions.add(new GoBathroomAction(player));
-        actions.add(new GoFightAction(player));
-        actions.add(new MeditationAction(player));
-        actions.add(new SleepAction(player));
-        actions.add(new SocializeAction(player));
-        actions.add(new ToStockAction(player));
-        actions.add(new WorkoutAction(player));
+        actions.add(new DoNothingAction(player)); //0
+        actions.add(new EatAction(player));//1
+        actions.add(new GatherAction(player));//2
+        actions.add(new GoBathroomAction(player));//3
+        actions.add(new GoFightAction(player));//4
+        actions.add(new MeditationAction(player));//5
+        actions.add(new SleepAction(player));//6
+        actions.add(new SocializeAction(player));//7
+        actions.add(new ToStockAction(player));//8 kitchen
+        actions.add(new WorkoutAction(player));//9
     }
     private void addSports(){
         //

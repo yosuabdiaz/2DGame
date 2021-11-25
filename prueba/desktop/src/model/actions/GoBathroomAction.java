@@ -23,10 +23,7 @@ public class GoBathroomAction extends Action{
     public void render() {
         mainView myMainview = mainView.getInstance();
         GameScreen g = myMainview.getMyGameScreen();
-        g.makeAnimationA(new Texture("sleep.png"),3);
-        g.makeAnimationB(new Texture("sleep.png"),3);
-        g.makeAnimationC(new Texture("sleep.png"),3);
-        g.makeAnimationD(new Texture("sleep.png"),3);
+        g.makeAnimationA(new Texture("pop.png"),6);
 
     }
 

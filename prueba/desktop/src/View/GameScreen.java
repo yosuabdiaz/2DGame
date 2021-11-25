@@ -58,7 +58,7 @@ public class GameScreen extends BaseScreen{
         houseMap = new Texture("map.jpeg");
         Texture moveTexture = new Texture("moving1.png");
         Texture moveTexture2 = new Texture("moving2.png");
-        Texture attackTexture = new Texture("attack2.png");
+        Texture attackTexture = new Texture("attack.png");
         Texture sleepTexture = new Texture("sleep.png");
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
@@ -158,10 +158,10 @@ public class GameScreen extends BaseScreen{
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);
 
-        localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,51);
-        localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58);
-        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5);
-        localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0);
+        localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
+        localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
+        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,50);
+        localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
         drawPlayerInfo();
         drawIndications();
         localBatch.end();
@@ -170,6 +170,7 @@ public class GameScreen extends BaseScreen{
         stage.draw();
     }
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
+
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
         TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
         int index = 0;

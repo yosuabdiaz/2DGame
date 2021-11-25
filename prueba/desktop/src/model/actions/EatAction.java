@@ -1,5 +1,8 @@
 package model.actions;
 
+import View.GameScreen;
+import View.mainView;
+import com.badlogic.gdx.graphics.Texture;
 import model.Food;
 import model.Player;
 
@@ -20,7 +23,9 @@ public class EatAction extends Action{
 
     @Override
     public void render() {
-
+        mainView m = mainView.getInstance();
+        GameScreen g = m.getMyGameScreen();
+        g.makeAnimationA(new Texture("sleep.png"),3);
     }
 
     /**
