@@ -9,8 +9,8 @@ public class Disease implements GameContex {
         private String name;
         private String sprite;
         private ArrayList<Cure> cures;
-        private HashMap<Stats, Integer> effects;
-        private HashMap<Stats, Integer> triggers;
+        private HashMap<Stats, DiseaseInfo> effects;
+        private HashMap<Stats, DiseaseInfo> triggers;
 
     public String getName() {
         return name;
@@ -36,19 +36,19 @@ public class Disease implements GameContex {
         this.cures = cures;
     }
 
-    public HashMap<Stats, Integer> getEffects() {
+    public HashMap<Stats, DiseaseInfo> getEffects() {
         return effects;
     }
 
-    public void setEffects(HashMap<Stats, Integer> effects) {
+    public void setEffects(HashMap<Stats, DiseaseInfo> effects) {
         this.effects = effects;
     }
 
-    public HashMap<Stats, Integer> getTriggers() {
+    public HashMap<Stats, DiseaseInfo> getTriggers() {
         return triggers;
     }
 
-    public void setTriggers(HashMap<Stats, Integer> triggers) {
+    public void setTriggers(HashMap<Stats, DiseaseInfo> triggers) {
         this.triggers = triggers;
     }
 }

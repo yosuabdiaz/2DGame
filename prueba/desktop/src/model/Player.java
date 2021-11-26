@@ -4,6 +4,7 @@ import model.actions.GameContex;
 
 import java.util.ArrayList;
 import  java.util.HashMap;
+import java.util.jar.Attributes;
 
 public class Player extends Fighter implements GameContex {
     protected int age = 0;
@@ -194,6 +195,82 @@ public class Player extends Fighter implements GameContex {
                 super.getAttackSkills().add(skill);
             }
         }
+    }
+
+    public int getIntegerStats(Stats stat){
+        switch (stat){
+            case EATEN_FOOD:
+                return  eatenFood;
+            case FATNESS:
+                return fatness;
+            case HAPPINESS:
+                return happiness;
+            case MENTAL_HEALTH:
+                return mentalHealth;
+            case MUSCLES:
+                return muscles;
+            case PHYSICAL_HEALTH:
+                return physicalHealth;
+            case RETAINED_LIQUIDS:
+                return retainedLiquids;
+            case HUNGER:
+                return hunger;
+            case SLEEP:
+                return sleep;
+            case STRENGTH:
+                return strength;
+            case SPEED:
+                return speed;
+            case TRAINING_CHARGE:
+                return trainingCharge;
+            case MEDITATION:
+                return meditation;
+        }
+        return 0;
+    }
+
+    public void setIntegerStats(Stats stat,int value){
+        switch (stat){
+            case EATEN_FOOD:
+                eatenFood = value;
+                return;
+            case FATNESS:
+                fatness = value;
+                return;
+            case HAPPINESS:
+                happiness = value;
+                return;
+            case MENTAL_HEALTH:
+                mentalHealth = value;
+            case MUSCLES:
+                muscles = value;
+                return;
+            case PHYSICAL_HEALTH:
+                physicalHealth = value;
+                return;
+            case RETAINED_LIQUIDS:
+                retainedLiquids = value;
+                return;
+            case HUNGER:
+                hunger = value;
+                return;
+            case SLEEP:
+                sleep = value;
+                return;
+            case STRENGTH:
+                strength = value ;
+                return;
+            case SPEED:
+                speed = value;
+                return;
+            case TRAINING_CHARGE:
+                trainingCharge = value;
+                return;
+            case MEDITATION:
+                meditation = value;
+                return;
+        }
+
     }
 
     @Override

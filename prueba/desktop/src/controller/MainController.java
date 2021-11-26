@@ -28,33 +28,33 @@ public class MainController {//I need a new name
         timingThread.start();
     }
 
-    public void executeAction(String nameAction){
-        HashMap<String,GameContex> context = makeContext(nameAction);
+    public void executeAction(String nameAction) {
+        HashMap<String, GameContex> context = makeContext(nameAction);
         actions.get(nameAction).execute(context);
     }
 
-    public void executeAction(String nameAction, HashMap<String, GameContex> context){
+    public void executeAction(String nameAction, HashMap<String, GameContex> context) {
         actions.get(nameAction).execute(context);
     }
 
-    public void eatAction(Food selectedFood){
+    public void eatAction(Food selectedFood) {
         HashMap<String, GameContex> context = new HashMap<String, GameContex>();
         context.put("player", (GameContex) player);
         context.put("food", (GameContex) selectedFood);
         executeAction("Eat", context);
     }
 
-    public void workoutAction(String nameSport){
+    public void workoutAction(String nameSport) {
         HashMap<String, GameContex> context = new HashMap<String, GameContex>();
         context.put("player", (GameContex) player);
         context.put("sport", (GameContex) sports.get(nameSport));
-        executeAction("Workout",context);
+        executeAction("Workout", context);
     }
 
     private HashMap<String, GameContex> makeContext(String nameAction) {
-        HashMap<String,GameContex> context = new HashMap<String,GameContex>();
+        HashMap<String, GameContex> context = new HashMap<String, GameContex>();
         context.put("player", (GameContex) player);
-        switch (nameAction){
+        switch (nameAction) {
             case "Gather":
                 context.put("garden", (GameContex) garden);
                 return context;
@@ -63,7 +63,7 @@ public class MainController {//I need a new name
         }
     }
 
-    private void addActions(){
+    private void addActions() {
         actions.put("DoNothing", new DoNothingAction());
         actions.put("Eat", new EatAction());
         actions.put("Gather", new GatherAction());
@@ -75,7 +75,8 @@ public class MainController {//I need a new name
         actions.put("ToStock", new ToStockAction());
         actions.put("Workout", new WorkoutAction());
     }
-    private void addSports(){
+
+    private void addSports() {
         sports.put("Soccer", new Soccer());
         sports.put("Swing", new Swing());
     }
@@ -92,10 +93,7 @@ public class MainController {//I need a new name
         return garden;
     }
 
-    public ArrayList<String> SportsNames(){
+    public ArrayList<String> SportsNames() {
         return new ArrayList<String>(sports.keySet());
-    }
-    public ArrayList<Sport> getSports() {
-        return sports;
     }
 }
