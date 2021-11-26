@@ -90,8 +90,13 @@ public class MainController {//I need a new name
         return garden;
     }
 
-    public ArrayList<String> SportsNames(){
-        return new ArrayList<String>(sports.keySet());
+    public Array<String> SportsNames(){
+        Array<String> array = new Array<String>();
+        ArrayList<String> keySet = new ArrayList<>(sports.keySet());
+        for(String key:keySet){
+            array.add(key);
+        }
+        return array;
     }
 
     public Array getStorageNames(){
