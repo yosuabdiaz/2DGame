@@ -33,7 +33,9 @@ public class ExecutionAdmin extends Thread{
             }
 
             hours++;
-            player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
+            if(player.getEnergy() > 1) {
+                player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
+            }
             if (hours == config.getHoursPerDay()) {
                 dayOfYear++;
                 hours = 0;
@@ -49,10 +51,10 @@ public class ExecutionAdmin extends Thread{
             }
             int npcProbability = rand.nextInt();
             if (npcProbability > 2) {
-
+                NPCAdmin.generateNPC(player);
             }
 
-            NPCAdmin.generateNPC(player);
+
             //NPCAdmin
             //DiseaseAdmin
 

@@ -25,7 +25,7 @@ public class NPCAdmin {
     }
 
     private static void generateFriend(){
-        boolean response  = mainView.getInstance().getMyGameScreen().getAcceptFriend();
+        boolean response  = mainView.getInstance().getMyGameScreen().AcceptFriend();
         if(response) {
             FriendPlayer friend = new FriendPlayer("Player", "");
             //mainView.getInstance().getMyGameScreen()
@@ -34,7 +34,7 @@ public class NPCAdmin {
     }
 
     private static void generateEnemy(int playerSkills, int playerEnergy){
-        boolean response  = mainView.getInstance().getMyGameScreen().getAcceptFight();
+        boolean response  = mainView.getInstance().getMyGameScreen().AcceptFigth();
         if(response) {
             Random rand = new Random();
             ArrayList<Attack> enemySkills = new ArrayList<>();
