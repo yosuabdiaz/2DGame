@@ -20,9 +20,6 @@ public class WorkoutAction extends Action{
 
     @Override
     public void render() {
-        mainView m = mainView.getInstance();
-        GameScreen g = m.getMyGameScreen();
-        g.makeAnimationA(new Texture("sleep.png"),3);
-        g.SportSelected();
+
     }
 }

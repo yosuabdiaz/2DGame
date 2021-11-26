@@ -75,7 +75,7 @@ public class MyActor extends Image {
                     case Input.Keys.NUM_7: // train
                         mba.setPosition(10,100);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction("Workout");//WorkoutAction
+                        x.SportSelected();
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_8: // Gather

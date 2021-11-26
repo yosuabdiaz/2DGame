@@ -242,14 +242,10 @@ public class GameScreen extends BaseScreen{
 
 
         }.show(stage);
-    }//tiene datos base, cambiar a reales
+    }
     public void SportSelected(){
         Array<String> sport = new Array<>();
         sport = myController.SportsNames();
-        /*sport.add("food:a:2");
-        sport.add("food:b:2");
-        sport.add("medicine:a:2");
-        sport.add("medicine:b:2");*/
         final SelectBox<String> selectBox=new SelectBox<String>(skin);
         final Array<String> finalSport = sport;
         Dialog d = new Dialog("Select sport", skin) {
@@ -268,13 +264,12 @@ public class GameScreen extends BaseScreen{
                 System.out.printf(object.toString());
                 if((boolean)object){
                     //set sport
-                    //myController.workoutAction(selectBox.getSelected());
+                    myController.workoutAction(selectBox.getSelected());
                     makeAnimationA(new Texture(myController.getSportSprite(selectBox.getSelected())),4);
                 }
-                //System.out.printf(selectBox.getSelected());
             }
         }.show(stage);
-    }//tiene datos base, cambiar a reales
+    }
     public boolean AcceptFigth(){
         if (AcceptFight == false){
             new Dialog("Confirm Figth", skin) {
