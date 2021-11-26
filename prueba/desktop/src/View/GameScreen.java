@@ -54,6 +54,7 @@ public class GameScreen extends BaseScreen{
 
     public GameScreen(mainView myView) {
         super(myView);
+        System.out.println(player1);
         localBatch = myView.getBatch();
         houseMap = new Texture("map.jpeg");
         Texture moveTexture = new Texture("moving1.png");
@@ -153,7 +154,7 @@ public class GameScreen extends BaseScreen{
     @Override
     public void render(float delta) {
         player1 = myController.getPlayer();
-        player1.setAge(player1.getAge()+1);
+        //player1.setAge(player1.getAge()+1);
         elapsedTime += Gdx.graphics.getDeltaTime();
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);

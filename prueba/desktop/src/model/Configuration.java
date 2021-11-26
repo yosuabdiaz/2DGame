@@ -3,9 +3,9 @@ package model;
 public class Configuration {
 
     private static Configuration instance;
-    private int hourDuration = 5;
-    private int hoursPerDay = 24;
-    private int daysPerYear = 10;
+    private int hourDuration = 5;  //5
+    private int hoursPerDay = 2;//24
+    private int daysPerYear = 1; //10
     //20 minutos para que pase un año con los defaults.
     // ***ACTUALIZAR EL TOTAL SI SE CAMBIAN***
     private int energyDecrease = 1;

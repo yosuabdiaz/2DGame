@@ -1,7 +1,5 @@
 package model;
 
-
-
 import model.actions.GameContex;
 
 import java.util.ArrayList;

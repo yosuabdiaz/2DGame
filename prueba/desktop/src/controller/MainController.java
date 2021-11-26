@@ -14,6 +14,7 @@ public class MainController {//I need a new name
     private HashMap<String, Action> actions;
     private HashMap<String, Sport> sports;
 
+
     public MainController() {
         //All init stuff
         player = new Player();
@@ -23,6 +24,8 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
+        Thread timingThread = new Thread(new ExecutionAdmin(player));
+        timingThread.start();
     }
 
     public void executeAction(String nameAction){
@@ -91,5 +94,8 @@ public class MainController {//I need a new name
 
     public ArrayList<String> SportsNames(){
         return new ArrayList<String>(sports.keySet());
+    }
+    public ArrayList<Sport> getSports() {
+        return sports;
     }
 }

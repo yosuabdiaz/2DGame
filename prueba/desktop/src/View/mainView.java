@@ -18,7 +18,7 @@ public class mainView extends Game {
     private MainController myController = new MainController();
     private Player player1 = myController.getPlayer();
     private Storage storage = myController.getStorage();
-    private ExecutionAdmin myExecutionAdmin = new ExecutionAdmin(player1);
+
     private MementoAdmin myMementoAdmin = new MementoAdmin();
     private NPCAdmin myNPCAdmin = new NPCAdmin();
 
