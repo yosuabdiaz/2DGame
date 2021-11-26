@@ -27,7 +27,7 @@ public class ExecutionAdmin extends Thread{
         while (true) {
             try {
                 Thread.sleep(config.getHourDuration() * 1000);
-                System.out.println("esperado");
+                //System.out.println("esperado");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -49,8 +49,8 @@ public class ExecutionAdmin extends Thread{
                 player.setAge(player.getAge() + 1);
                 dayOfYear = 0;
             }
-            int npcProbability = rand.nextInt();
-            if (npcProbability > 2) {
+            int npcProbability = rand.nextInt(100);
+            if (npcProbability < 2) {
                 NPCAdmin.generateNPC(player);
             }
 
