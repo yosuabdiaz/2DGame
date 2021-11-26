@@ -78,6 +78,10 @@ public class MainController {//I need a new name
         return storage;
     }
 
+    public Garden getGarden() {
+        return garden;
+    }
+
     public ArrayList<String> SportsNames(){
         ArrayList<String> names = new ArrayList<String>();
         for (Sport sport:sports) {
