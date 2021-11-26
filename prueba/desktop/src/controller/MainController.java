@@ -1,11 +1,8 @@
 package controller;
 
-import model.Garden;
-import model.Player;
-import model.Sport;
-import model.Storage;
-import model.Food;  
+import model.*;
 import model.actions.*;
+import org.SportLib.Sport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +66,8 @@ public class MainController {//I need a new name
         actions.put("Workout", new WorkoutAction());
     }
     private void addSports(){
-        //
+        sports.add(new Soccer());
+        sports.add(new Swing());
     }
 
     public Player getPlayer() {
@@ -80,7 +78,15 @@ public class MainController {//I need a new name
         return storage;
     }
 
-    public ArrayList<Sport> getSports() {
-        return sports;
+    public Garden getGarden() {
+        return garden;
+    }
+
+    public ArrayList<String> SportsNames(){
+        ArrayList<String> names = new ArrayList<String>();
+        for (Sport sport:sports) {
+            names.add(sport.getName());
+        }
+        return names;
     }
 }
