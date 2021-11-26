@@ -13,6 +13,7 @@ public class ToStockAction extends Action{ //select food to eat
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        player.setToEat(contex.get("toStock"));
         render();
     }
 
