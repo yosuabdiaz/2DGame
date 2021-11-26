@@ -1,7 +1,6 @@
 package View;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin; // yes
 import controller.ExecutionAdmin;
 import controller.MainController;
@@ -17,7 +17,8 @@ import controller.MementoAdmin;
 import controller.NPCAdmin;
 import model.Player;
 import model.Storage;
-
+import com.badlogic.gdx.utils.Array;
+import java.util.ArrayList;
 
 
 public class GameScreen extends BaseScreen{
@@ -47,6 +48,7 @@ public class GameScreen extends BaseScreen{
     private boolean AcceptFriend = false;
     private boolean AcceptDisease = false;
     private boolean AcceptSleep = false;
+    private boolean FoodSelected = false;
 
     private NPCAdmin myNPCAdmin = new NPCAdmin();
 
@@ -75,6 +77,15 @@ public class GameScreen extends BaseScreen{
         stage.addActor(actor);
         stage.setKeyboardFocus(actor);
     }
+
+    public Skin getSkin(){
+        return this.skin;
+    }
+
+    public Stage getStage(){
+        return this.stage;
+    }
+
 
     public boolean AcceptFigth(){
         if (AcceptFight == false){
@@ -149,6 +160,34 @@ public class GameScreen extends BaseScreen{
         return AcceptSleep;
     }
 
+    public void FoodSelected(){
+        final Array<String> food = new Array<>();
+        //food = myController.getStorageNames();
+        final SelectBox<String> selectBox=new SelectBox<String>(skin);
+        Dialog d = new Dialog("Select food", skin) {
+            {
+                text("Yes/No");
+                button("Yes", true);
+                button("No", false);
+                selectBox.setItems(food);
+                getContentTable().defaults().pad(10);
+                getContentTable().add(selectBox);
+
+            }
+
+            @Override
+            protected void result(final Object object) {
+                AcceptDisease = (boolean)object;
+                System.out.printf(object.toString());
+                if((boolean)object){
+                    //set food
+                }
+                System.out.printf(selectBox.getSelected());
+            }
+
+
+        }.show(stage);
+    }
 
     @Override
     public void render(float delta) {
