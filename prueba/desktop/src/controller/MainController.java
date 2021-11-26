@@ -5,6 +5,7 @@ import model.actions.*;
 
 
 import java.util.ArrayList;
+import com.badlogic.gdx.utils.Array;
 import java.util.HashMap;
 
 public class MainController {//I need a new name
@@ -91,5 +92,9 @@ public class MainController {//I need a new name
 
     public ArrayList<String> SportsNames(){
         return new ArrayList<String>(sports.keySet());
+    }
+
+    public Array getStorageNames(){
+        return storage.getAll();
     }
 }
