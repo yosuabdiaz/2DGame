@@ -35,10 +35,14 @@ public class MainController {//I need a new name
         actions.get(nameAction).execute(context);
     }
 
-    public void eatAction(Food selectedFood){
+    public void eatAction(String nameSelected){
         HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+        if(storage.isFood(nameSelected)){
+           context.put("food", (GameContex) storage.getFood(nameSelected));
+        }else{
+            context.put("medicine", (GameContex) storage.getMedicine(nameSelected));
+        }
         context.put("player", (GameContex) player);
-        context.put("food", (GameContex) selectedFood);
         executeAction("Eat", context);
     }
 
