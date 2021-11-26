@@ -5,6 +5,7 @@ import model.actions.*;
 
 
 import java.util.ArrayList;
+import com.badlogic.gdx.utils.Array;
 import java.util.HashMap;
 
 public class MainController {//I need a new name
@@ -37,10 +38,14 @@ public class MainController {//I need a new name
         actions.get(nameAction).execute(context);
     }
 
-    public void eatAction(Food selectedFood) {
+    public void eatAction(String nameSelected){
         HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+        if(storage.isFood(nameSelected)){
+           context.put("food", (GameContex) storage.getFood(nameSelected));
+        }else{
+            context.put("medicine", (GameContex) storage.getMedicine(nameSelected));
+        }
         context.put("player", (GameContex) player);
-        context.put("food", (GameContex) selectedFood);
         executeAction("Eat", context);
     }
 
@@ -93,7 +98,20 @@ public class MainController {//I need a new name
         return garden;
     }
 
-    public ArrayList<String> SportsNames() {
-        return new ArrayList<String>(sports.keySet());
+    public Array<String> SportsNames(){
+        Array<String> array = new Array<String>();
+        ArrayList<String> keySet = new ArrayList<>(sports.keySet());
+        for(String key:keySet){
+            array.add(key);
+        }
+        return array;
+    }
+
+    public Array getStorageNames(){
+        return storage.getAll();
+    }
+
+    public String getSportSprite(String name){
+        return sports.get(name).getSprite();
     }
 }

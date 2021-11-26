@@ -21,5 +21,6 @@ public class ToStockAction extends Action{ //select food to eat
         mainView m = mainView.getInstance();
         GameScreen g = m.getMyGameScreen();
         g.makeAnimationA(new Texture("chest.png"),3);
+        g.FoodSelected();
     }
 }

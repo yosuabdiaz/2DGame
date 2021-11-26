@@ -23,7 +23,6 @@ public class StorageScreen extends BaseScreen{
         localBatch.begin();
         myText.draw(localBatch, "Storage Screen",100,100);
         localBatch.end();
-
     }
 
     @Override

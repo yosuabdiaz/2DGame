@@ -45,7 +45,6 @@ public class mainView extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-
         myStorageScreen = new StorageScreen(this);
         myGameScreen = new GameScreen(this);
 
