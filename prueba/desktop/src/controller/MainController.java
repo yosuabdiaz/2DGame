@@ -106,4 +106,8 @@ public class MainController {//I need a new name
     public Array getStorageNames(){
         return storage.getAll();
     }
+
+    public String getSportSprite(String name){
+        return sports.get(name).getSprite();
+    }
 }
