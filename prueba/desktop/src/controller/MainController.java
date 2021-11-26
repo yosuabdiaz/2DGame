@@ -2,10 +2,10 @@ package controller;
 
 import model.Garden;
 import model.Player;
-import model.Sport;
 import model.Storage;
 import model.Food;  
 import model.actions.*;
+import org.SportLib.Sport;
 
 import java.util.ArrayList;
 import java.util.HashMap;

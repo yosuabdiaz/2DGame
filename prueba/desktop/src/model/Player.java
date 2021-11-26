@@ -1,5 +1,7 @@
 package model;
 
+import org.SportLib.Attack;
+
 import java.util.ArrayList;
 import  java.util.HashMap;
 

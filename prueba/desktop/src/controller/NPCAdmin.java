@@ -1,8 +1,7 @@
 package controller;
 
-import model.Attack;
 import model.EnemyPlayer;
-import model.FriendPlayer;
+import org.SportLib.Attack;
 
 import java.util.Random;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class NPCAdmin {
 
     private static void generateEnemy(int playerSkills, int playerEnergy){
         Random rand = new Random();
-        ArrayList<Attack> enemySkills = new ArrayList<>();
+        ArrayList<Attack> enemySkills = new ArrayList<Attack>();
         for(int i= 0; i< playerSkills; i++){
             int index = rand.nextInt(skills.size());
             enemySkills.add(skills.get(index));
