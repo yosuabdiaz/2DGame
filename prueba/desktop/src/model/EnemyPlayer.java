@@ -1,6 +1,5 @@
 package model;
 
-import javax.swing.table.AbstractTableModel;
 import java.util.Random;
 
 public class EnemyPlayer extends Fighter{

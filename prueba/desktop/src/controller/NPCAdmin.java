@@ -1,7 +1,8 @@
 package controller;
 
+import model.Attack;
 import model.EnemyPlayer;
-import org.SportLib.Attack;
+
 
 import java.util.Random;
 import java.util.ArrayList;
