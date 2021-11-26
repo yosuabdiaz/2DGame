@@ -1,8 +1,10 @@
 package model;
 
+import model.actions.GameContex;
+
 import java.util.HashMap;
 
-public class Medicine implements Cure {
+public class Medicine implements Cure, GameContex {
     String name;
     int energy;
     HashMap<Stats, Integer> effects;

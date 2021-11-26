@@ -1,8 +1,10 @@
 package model;
 
+import model.actions.GameContex;
+
 import java.util.Random;
 
-public class EnemyPlayer extends Fighter{
+public class EnemyPlayer extends Fighter implements GameContex {
 
     @Override
     public void attack(Fighter fighter) {

@@ -2,10 +2,12 @@ package model;
 
 
 
+import model.actions.GameContex;
+
 import java.util.ArrayList;
 import  java.util.HashMap;
 
-public class Player extends Fighter {
+public class Player extends Fighter implements GameContex {
     protected int age = 0;
     protected  int sleep = 0;//0 - 100%
     protected HashMap<Integer,String> sprites = new HashMap<>();

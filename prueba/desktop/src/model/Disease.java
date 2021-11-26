@@ -1,9 +1,11 @@
 package model;
 
+import model.actions.GameContex;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Disease {
+public class Disease implements GameContex {
         private String name;
         private String sprite;
         private ArrayList<Cure> cures;

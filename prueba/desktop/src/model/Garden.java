@@ -1,9 +1,12 @@
 package model;
 
+import com.badlogic.gdx.Game;
+import model.actions.GameContex;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Garden {
+public class Garden implements GameContex {
     private ArrayList<Food> existentFood = new ArrayList<Food>();
     private ArrayList<Cure> existentCures = new ArrayList<Cure>();
     private ArrayList<Food> food = new ArrayList<Food>();

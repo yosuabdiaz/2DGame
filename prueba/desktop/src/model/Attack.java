@@ -1,6 +1,8 @@
 package model;
 
-public class Attack {
+import model.actions.GameContex;
+
+public class Attack implements GameContex {
     private String name;
     private int damage;
     private String sprite;

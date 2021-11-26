@@ -1,4 +1,6 @@
 package model;
 
-public class Storage {
+import model.actions.GameContex;
+
+public class Storage implements GameContex {
 }
