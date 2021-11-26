@@ -27,7 +27,6 @@ public class Player extends Fighter implements GameContex {
     protected int meditation = 0; //number of meditations in a day, top is 3
     protected int x = 0;
     protected int y = 0;
-    protected GameContex toEat;
 
     public int getAge() {
         return age;
@@ -187,14 +186,6 @@ public class Player extends Fighter implements GameContex {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public GameContex getToEat() {
-        return toEat;
-    }
-
-    public void setToEat(GameContex toEat) {
-        this.toEat = toEat;
     }
 
     public void learnAttacks(Fighter fighter){
