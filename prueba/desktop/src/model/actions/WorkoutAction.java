@@ -15,7 +15,6 @@ public class WorkoutAction extends Action{
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         Sport sport = (Sport) contex.get("sport");
-
         render();
     }
 
@@ -24,5 +23,6 @@ public class WorkoutAction extends Action{
         mainView m = mainView.getInstance();
         GameScreen g = m.getMyGameScreen();
         g.makeAnimationA(new Texture("sleep.png"),3);
+        g.SportSelected();
     }
 }

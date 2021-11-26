@@ -23,7 +23,6 @@ public class MyActor extends Image {
         addListener(new InputListener(){
             @Override
             public boolean keyDown(InputEvent event, int keycode){
-
                 float speedMove = 0.5f;
                 MoveToAction mba = new MoveToAction();
                 GameScreen x =myMainview.getMyGameScreen();
@@ -47,7 +46,7 @@ public class MyActor extends Image {
                         mba.setPosition(290f,210f);
                         mba.setDuration(speedMove); // this change the speed
                         MyActor.this.addAction(mba);
-                        controller.executeAction("ToStock");//ToStockAction
+                        controller.executeAction("ToStock");//ToStockAction->Select Food
                         break;
                     case Input.Keys.NUM_3:// bedroom
                         mba.setPosition(310f,390f);
@@ -82,7 +81,7 @@ public class MyActor extends Image {
                     case Input.Keys.NUM_8: // Gather
                         mba.setPosition(10f,200f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction("Gather");//GatherAction
+                        controller.executeAction("Gather");//GatherAction![](../../../../../Downloads/swing.png)
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_9: // Eat

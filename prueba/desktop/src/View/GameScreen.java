@@ -24,19 +24,15 @@ import java.util.ArrayList;
 public class GameScreen extends BaseScreen{
     //Interface variables
     private final SpriteBatch localBatch;
-    private final Texture houseMap;
-    private final int weight;
-    private final int height;
+    private  Texture houseMap;
+    private int weight;
+    private int height;
     private Animation animationTopRight, animationTopLeft,
             animationDownRight, animationDownLeft;
-    private final BitmapFont  myText;
+    private BitmapFont  myText;
     private	float elapsedTime;
-
     private Stage stage;
     private Skin skin;
-
-
-
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
@@ -49,144 +45,14 @@ public class GameScreen extends BaseScreen{
     private boolean AcceptDisease = false;
     private boolean AcceptSleep = false;
     private boolean FoodSelected = false;
-
     private NPCAdmin myNPCAdmin = new NPCAdmin();
-
     private int control=0;
 
     public GameScreen(mainView myView) {
         super(myView);
         localBatch = myView.getBatch();
-        houseMap = new Texture("map.jpeg");
-        Texture moveTexture = new Texture("moving1.png");
-        Texture moveTexture2 = new Texture("moving2.png");
-        Texture attackTexture = new Texture("attack.png");
-        Texture sleepTexture = new Texture("sleep.png");
-        myText = new BitmapFont();
-        makeAnimationA(moveTexture,6);
-        makeAnimationB(attackTexture,6);
-        makeAnimationC(moveTexture2,9);
-        makeAnimationD(sleepTexture,3);
-        weight = Gdx.graphics.getWidth();
-        height = Gdx.graphics.getHeight();
-        skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
-        Gdx.input.setInputProcessor(stage = new Stage());
-        Texture img = new Texture("moving1.png");
-        TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
-        MyActor actor = new MyActor(moveTextureRegion[0][2]);
-        stage.addActor(actor);
-        stage.setKeyboardFocus(actor);
-    }
-
-    public Skin getSkin(){
-        return this.skin;
-    }
-
-    public Stage getStage(){
-        return this.stage;
-    }
-
-
-    public boolean AcceptFigth(){
-        if (AcceptFight == false){
-            new Dialog("Confirm Figth", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
-
-                @Override
-                protected void result(final Object object) {
-                    AcceptFight = (boolean)object;
-                    System.out.printf(object.toString());
-                }
-            }.show(stage);
-        }
-        return AcceptFight;
-    }
-    public boolean AcceptFriend(){
-        if (AcceptFriend == false){
-            new Dialog("Confirm Friend", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
-
-                @Override
-                protected void result(final Object object) {
-                    AcceptFriend = (boolean)object;
-                    System.out.printf(object.toString());
-                }
-            }.show(stage);
-        }
-        return AcceptFriend;
-    }
-    public boolean AcceptDisease(){
-        if (AcceptDisease == false){
-            new Dialog("Confirm Disease", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
-
-                @Override
-                protected void result(final Object object) {
-                    AcceptDisease = (boolean)object;
-                    System.out.printf(object.toString());
-                }
-            }.show(stage);
-        }
-        return AcceptDisease;
-    }
-    public boolean AcceptSleep(){
-        if (AcceptSleep == false){
-            new Dialog("Confirm Sleep", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
-
-                @Override
-                protected void result(final Object object) {
-                    AcceptSleep = (boolean)object;
-                    System.out.printf(object.toString());
-                }
-            }.show(stage);
-        }
-        return AcceptSleep;
-    }
-
-    public void FoodSelected(){
-        final Array<String> food = new Array<>();
-        //food = myController.getStorageNames();
-        final SelectBox<String> selectBox=new SelectBox<String>(skin);
-        Dialog d = new Dialog("Select food", skin) {
-            {
-                text("Yes/No");
-                button("Yes", true);
-                button("No", false);
-                selectBox.setItems(food);
-                getContentTable().defaults().pad(10);
-                getContentTable().add(selectBox);
-
-            }
-
-            @Override
-            protected void result(final Object object) {
-                AcceptDisease = (boolean)object;
-                System.out.printf(object.toString());
-                if((boolean)object){
-                    //set food
-                }
-                System.out.printf(selectBox.getSelected());
-            }
-
-
-        }.show(stage);
+        loadImages();
+        loadCharacter();
     }
 
     @Override
@@ -207,6 +73,31 @@ public class GameScreen extends BaseScreen{
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+    public void loadImages(){
+        houseMap = new Texture("map.jpeg");
+        Texture moveTexture = new Texture("moving1.png");
+        Texture moveTexture2 = new Texture("moving2.png");
+        Texture attackTexture = new Texture("attack.png");
+        Texture sleepTexture = new Texture("sleep.png");
+        myText = new BitmapFont();
+        makeAnimationA(moveTexture,6);
+        makeAnimationB(attackTexture,6);
+        makeAnimationC(moveTexture2,9);
+        makeAnimationD(sleepTexture,3);
+        weight = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+
+
+    }
+    public void loadCharacter(){
+        skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
+        Gdx.input.setInputProcessor(stage = new Stage());
+        Texture img = new Texture("moving1.png");
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
+        MyActor actor = new MyActor(moveTextureRegion[0][2]);
+        stage.addActor(actor);
+        stage.setKeyboardFocus(actor);
     }
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
 
@@ -282,44 +173,178 @@ public class GameScreen extends BaseScreen{
         myText.draw(localBatch,"9.Eat",100,45);
 
     }
-
-    public boolean getAcceptSleep(){
-        return this.AcceptSleep;
-    }
-
-    public boolean getAcceptFight(){
-        return this.AcceptFight;
-    }
-
-    public boolean getAcceptFriend(){
-        return this.AcceptFriend;
-    }
-
-    public boolean getAcceptDisease(){
-        return this.AcceptDisease;
-    }
-
-    public void setAcceptSleep(boolean x){
-        this.AcceptSleep = x;
-    }
-
-    public void setAcceptFight(boolean x){
-        this.AcceptFight = x;
-    }
-
-    public void setAcceptFriend(boolean x){
-        this.AcceptFriend = x;
-    }
-
-    public void setAcceptDisease(boolean x){
-        this.AcceptDisease = x;
-    }
-
     public Player getPlayer(){
         return this.player1;
     }
-
     public MainController getMyController(){
         return this.myController;
+    }
+    public Skin getSkin(){
+        return this.skin;
+    }
+    public Stage getStage(){
+        return this.stage;
+    }
+    public boolean getAcceptSleep(){
+        return this.AcceptSleep;
+    }
+    public boolean getAcceptFight(){
+        return this.AcceptFight;
+    }
+    public boolean getAcceptFriend(){
+        return this.AcceptFriend;
+    }
+    public boolean getAcceptDisease(){
+        return this.AcceptDisease;
+    }
+    public void setAcceptSleep(boolean x){
+        this.AcceptSleep = x;
+    }
+    public void setAcceptFight(boolean x){
+        this.AcceptFight = x;
+    }
+    public void setAcceptFriend(boolean x){
+        this.AcceptFriend = x;
+    }
+    public void setAcceptDisease(boolean x){
+        this.AcceptDisease = x;
+    }
+    public void FoodSelected(){
+        Array<String> food = new Array<>();
+        //food = myController.getStorageNames();
+        food.add("food:a:2");
+        food.add("food:b:2");
+        food.add("medicine:a:2");
+        food.add("medicine:b:2");
+        final SelectBox<String> selectBox=new SelectBox<String>(skin);
+        final Array<String> finalFood = food;
+        Dialog d = new Dialog("Select food", skin) {
+            {
+                text("Select:");
+                button("Yes", true);
+                button("No", false);
+                selectBox.setItems(finalFood);
+                getContentTable().defaults().pad(20);
+                getContentTable().add(selectBox);
+            }
+
+            @Override
+            protected void result(final Object object) {
+                AcceptDisease = (boolean)object;
+                System.out.printf(object.toString());
+                if((boolean)object){
+                    //set food
+                    System.out.printf(selectBox.getSelected().split(":")[1]);
+                    //myController.eatAction(selectBox.getSelected().split(":")[1]);
+                }
+                //System.out.printf(selectBox.getSelected());
+            }
+
+
+        }.show(stage);
+    }//tiene datos base, cambiar a reales
+    public void SportSelected(){
+        Array<String> sport = new Array<>();
+        sport = myController.SportsNames();
+        /*sport.add("food:a:2");
+        sport.add("food:b:2");
+        sport.add("medicine:a:2");
+        sport.add("medicine:b:2");*/
+        final SelectBox<String> selectBox=new SelectBox<String>(skin);
+        final Array<String> finalSport = sport;
+        Dialog d = new Dialog("Select sport", skin) {
+            {
+                text("Select:");
+                button("Yes", true);
+                button("No", false);
+                selectBox.setItems(finalSport);
+                getContentTable().defaults().pad(20);
+                getContentTable().add(selectBox);
+            }
+
+            @Override
+            protected void result(final Object object) {
+                AcceptDisease = (boolean)object;
+                System.out.printf(object.toString());
+                if((boolean)object){
+                    //set sport
+                    //myController.workoutAction(selectBox.getSelected());
+                    makeAnimationA(new Texture(myController.getSportSprite(selectBox.getSelected())),4);
+                }
+                //System.out.printf(selectBox.getSelected());
+            }
+        }.show(stage);
+    }//tiene datos base, cambiar a reales
+    public boolean AcceptFigth(){
+        if (AcceptFight == false){
+            new Dialog("Confirm Figth", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptFight = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptFight;
+    }
+    public boolean AcceptFriend(){
+        if (AcceptFriend == false){
+            new Dialog("Confirm Friend", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptFriend = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptFriend;
+    }
+    public boolean AcceptDisease(){
+        if (AcceptDisease == false){
+            new Dialog("Confirm Disease", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptDisease = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptDisease;
+    }
+    public boolean AcceptSleep(){
+        if (AcceptSleep == false){
+            new Dialog("Confirm Sleep", skin) {
+                {
+                    text("Yes/No");
+                    button("Yes", true);
+                    button("No", false);
+                }
+
+                @Override
+                protected void result(final Object object) {
+                    AcceptSleep = (boolean)object;
+                    System.out.printf(object.toString());
+                }
+            }.show(stage);
+        }
+        return AcceptSleep;
     }
 }
