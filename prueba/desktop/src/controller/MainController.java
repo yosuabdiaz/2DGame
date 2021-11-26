@@ -11,8 +11,8 @@ public class MainController {//I need a new name
     private Player player;
     private Storage storage;
     private Garden garden;
-    private HashMap<String ,Action> actions;
-    private ArrayList<Sport> sports;
+    private HashMap<String, Action> actions;
+    private HashMap<String, Sport> sports;
 
     public MainController() {
         //All init stuff
@@ -21,7 +21,7 @@ public class MainController {//I need a new name
         garden = new Garden();
         actions = new HashMap<String, Action>();
         addActions();
-        sports = new ArrayList<Sport>();
+        sports = new HashMap<String, Sport>();
         addSports();
     }
 
@@ -39,6 +39,13 @@ public class MainController {//I need a new name
         context.put("player", (GameContex) player);
         context.put("food", (GameContex) selectedFood);
         executeAction("Eat", context);
+    }
+
+    public void workoutAction(String nameSport){
+        HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+        context.put("player", (GameContex) player);
+        context.put("sport", (GameContex) sports.get(nameSport));
+        executeAction("Workout",context);
     }
 
     private HashMap<String, GameContex> makeContext(String nameAction) {
@@ -66,8 +73,8 @@ public class MainController {//I need a new name
         actions.put("Workout", new WorkoutAction());
     }
     private void addSports(){
-        sports.add(new Soccer());
-        sports.add(new Swing());
+        sports.put("Soccer", new Soccer());
+        sports.put("Swing", new Swing());
     }
 
     public Player getPlayer() {
@@ -83,10 +90,6 @@ public class MainController {//I need a new name
     }
 
     public ArrayList<String> SportsNames(){
-        ArrayList<String> names = new ArrayList<String>();
-        for (Sport sport:sports) {
-            names.add(sport.getName());
-        }
-        return names;
+        return new ArrayList<String>(sports.keySet());
     }
 }

@@ -1,11 +1,12 @@
 package model;
 
+import model.actions.GameContex;
 import org.SportLib.Attack;
 import org.SportLib.Sport;
 
 import java.util.ArrayList;
 
-public class Swing extends Sport {
+public class Swing extends Sport implements GameContex {
     public Swing() {
         super("Swing", new ArrayList<Attack>(), "swing.png", 15f);
         ArrayList<Attack> newLoot = new ArrayList<Attack>();
