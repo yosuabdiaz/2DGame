@@ -18,7 +18,6 @@ public class GatherAction extends Action{
         Storage storage = (Storage) contex.get("storage");
         collectFood(garden, storage);
         collectMedicine(garden, storage);
-        System.out.println(storage);
         render();
     }
 

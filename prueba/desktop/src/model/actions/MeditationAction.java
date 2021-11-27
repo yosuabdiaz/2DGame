@@ -13,7 +13,16 @@ public class MeditationAction extends Action{
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        relax(player);
         render();
+    }
+
+    private void relax(Player player) {
+        if(player.getMeditation() < 3 && player.getMentalHealth() < 100){
+            int newMentalHealth = player.getMentalHealth() < 80 ? player.getMentalHealth() + 20 : 100;
+            player.setMentalHealth(newMentalHealth);
+            player.setMeditation(player.getMeditation() + 1);
+        }
     }
 
     @Override
