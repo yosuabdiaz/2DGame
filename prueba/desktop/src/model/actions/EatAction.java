@@ -55,6 +55,7 @@ public class EatAction extends Action{
         } else {
             player.setRetainedLiquids(player.getRetainedLiquids() + food.getEnergy());
         }
+        player.setEnergy(player.getEnergy() + food.getEnergy());
     }
 
     /**
