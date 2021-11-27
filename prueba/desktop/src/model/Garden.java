@@ -41,8 +41,7 @@ public class Garden implements GameContex {
         if(cures.isEmpty()) {
             int cureProbability = rand.nextInt(100);
             if (cureProbability < config.getCureProbability()) {
-                int cureQuantity = rand.nextInt();
-
+                int cureQuantity = rand.nextInt(50);
                 for(int i = 0; i < cureQuantity; i++){
                     int randIndex = rand.nextInt(existentCures.size());
                     cures.add(existentCures.get(randIndex));
