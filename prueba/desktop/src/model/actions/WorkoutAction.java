@@ -1,8 +1,5 @@
 package model.actions;
 
-import View.GameScreen;
-import View.mainView;
-import com.badlogic.gdx.graphics.Texture;
 import model.Attack;
 import model.Injury;
 import model.Player;
@@ -19,9 +16,28 @@ public class WorkoutAction extends Action{
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         Sport sport = (Sport) contex.get("sport");
-        getAttack(sport,player);
-        getInjury(sport,player);
-        render();
+        if(player.getEnergy() > 10){
+            getAttack(sport,player);
+            getInjury(sport,player);
+            updateStats(player);
+            render();
+        }
+    }
+
+    private void updateStats(Player player) {
+        int newPhysicalHealth = player.getPhysicalHealth() < 80 ? player.getPhysicalHealth() + 20 : 100;
+        player.setPhysicalHealth(newPhysicalHealth);
+        int newMentalHealth = player.getMentalHealth() < 90 ? player.getMentalHealth() + 10 : 100;
+        player.setMentalHealth(newMentalHealth);
+        int newFatness = player.getFatness() > 5 ? player.getFatness() - 5 : 0;
+        player.setFatness(newFatness);
+        int newStrength = player.getStrength() < 95 ? player.getStrength() + 5 : 100;
+        player.setStrength(newStrength);
+        int newSpeed = player.getSpeed() < 95 ? player.getSpeed() + 5 : 100;
+        player.setSpeed(newSpeed);
+        int newEnergy = player.getEnergy() - 10;
+        player.setEnergy(newEnergy);
+
     }
 
     private void getInjury(Sport sport, Player player) {
