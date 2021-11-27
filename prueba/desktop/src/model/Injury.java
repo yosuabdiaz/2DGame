@@ -3,9 +3,9 @@ package model;
 public class Injury {
     String name;
     int recuperationTime;
-    int speedReduction;
+    float speedReduction;
 
-    public Injury(String name, int recuperationTime, int speedReduction) {
+    public Injury(String name, int recuperationTime, float speedReduction) {
         this.name = name;
         this.recuperationTime = recuperationTime;
         this.speedReduction = speedReduction;
@@ -27,11 +27,11 @@ public class Injury {
         this.recuperationTime = recuperationTime;
     }
 
-    public int getSpeedReduction() {
+    public float getSpeedReduction() {
         return speedReduction;
     }
 
-    public void setSpeedReduction(int speedReduction) {
+    public void setSpeedReduction(float speedReduction) {
         this.speedReduction = speedReduction;
     }
 }
