@@ -111,6 +111,15 @@ public class MainController {//I need a new name
         return array;
     }
 
+    public Array<String> attacksNames(){
+        Array<String> array = new Array<String>();
+        ArrayList<Attack> list = player.getAttackSkills();
+        for(Attack attack:list){
+            array.add(attack.getName() + ": " + attack.getDamage());
+        }
+        return array;
+    }
+
     public Array getStorageNames(){
         return storage.getAll();
     }
