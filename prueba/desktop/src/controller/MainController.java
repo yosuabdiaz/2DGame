@@ -98,6 +98,10 @@ public class MainController {//I need a new name
         return garden;
     }
 
+    public void setGarden(Garden garden){
+        this.garden = garden;
+    }
+
     public Array<String> SportsNames(){
         Array<String> array = new Array<String>();
         ArrayList<String> keySet = new ArrayList<>(sports.keySet());
