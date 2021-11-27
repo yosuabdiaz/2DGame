@@ -77,7 +77,6 @@ public class MainController {//I need a new name
         actions.put("GoFight", new GoFightAction());
         actions.put("Meditation", new MeditationAction());
         actions.put("Sleep", new SleepAction());
-        actions.put("Socialize", new SocializeAction());
         actions.put("ToStock", new ToStockAction());
         actions.put("Workout", new WorkoutAction());
     }
