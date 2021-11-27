@@ -14,11 +14,13 @@ public class ExecutionAdmin extends Thread{
     private Player player;
     private Date injuryStarted;
     private MementoAdmin mementoAdmin = new MementoAdmin();
-    private Storage storage = new Storage();
-    private Garden garden = new Garden();
+    private Storage storage;
+    private Garden garden;
 
-    public ExecutionAdmin(Player player){
+    public ExecutionAdmin(Player player, Garden garden, Storage storage){
         this.player = player;
+        this.storage = storage;
+        this.garden = garden;
     }
 
     @Override

@@ -41,7 +41,6 @@ public class GameScreen extends BaseScreen{
     private final MainController myController = new MainController();
     private Player player1 = myController.getPlayer();
     private Storage storage = myController.getStorage();
-    private ExecutionAdmin myExecutionAdmin = new ExecutionAdmin(player1);
     private MementoAdmin myMementoAdmin = new MementoAdmin();
     private boolean AcceptFight = false;
     private boolean AcceptFriend = false;
@@ -366,7 +365,6 @@ public class GameScreen extends BaseScreen{
                 AcceptSleep = (boolean)object;
                 System.out.printf(object.toString());
                 if((boolean)object){
-                    myController.setGarden(myExecutionAdmin.getGarden());
                     myController.executeAction("Gather");//GatherAction!
                     float speedMove = 0.5f;
                     MoveToAction mba = new MoveToAction();

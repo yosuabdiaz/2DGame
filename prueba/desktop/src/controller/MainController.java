@@ -25,7 +25,7 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
-        Thread timingThread = new Thread(new ExecutionAdmin(player));
+        Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
         timingThread.start();
     }
 
