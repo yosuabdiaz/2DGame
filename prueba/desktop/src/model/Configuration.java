@@ -1,6 +1,55 @@
 package model;
 
+import Utils.ConfigurationReader;
+
 public class Configuration {
+
+    //rutas
+    private String diseasePath = "./diseases/";
+    private String foodPath = "./food/";
+    private String medicinePath = "./medicine/";
+    private String friendsPath = "./friends/";
+    private String enemyPath = "./enemy/";
+
+    public String getDiseasePath() {
+        return diseasePath;
+    }
+
+    public void setDiseasePath(String diseasePath) {
+        this.diseasePath = diseasePath;
+    }
+
+    public String getFoodPath() {
+        return foodPath;
+    }
+
+    public void setFoodPath(String foodPath) {
+        this.foodPath = foodPath;
+    }
+
+    public String getMedicinePath() {
+        return medicinePath;
+    }
+
+    public void setMedicinePath(String medicinePath) {
+        this.medicinePath = medicinePath;
+    }
+
+    public String getFriendsPath() {
+        return friendsPath;
+    }
+
+    public void setFriendsPath(String friendsPath) {
+        this.friendsPath = friendsPath;
+    }
+
+    public String getEnemyPath() {
+        return enemyPath;
+    }
+
+    public void setEnemyPath(String enemyPath) {
+        this.enemyPath = enemyPath;
+    }
 
     private static Configuration instance;
     private int hourDuration = 5;  //5
@@ -81,11 +130,17 @@ public class Configuration {
     }
 
     private Configuration(){
-
     }
 
     public static Configuration getInstance(){
-        return (instance == null)? new Configuration(): instance;
+        ConfigurationReader reader = new ConfigurationReader();
+        instance = reader.read("./"); //RUTA DEL ARCHIVO DE CONFIGURACION
+        if(instance == null){
+            instance = new Configuration();
+            reader.write(instance,"./");
+            return instance;
+        }
+        else return instance;
     }
 
     public int getHourDuration() {

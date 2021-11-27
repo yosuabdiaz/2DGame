@@ -1,17 +1,26 @@
 package controller;
 
-import model.Disease;
-import model.DiseaseInfo;
-import model.Player;
-import model.Stats;
+import model.*;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
 public class DiseaseAdmin {
+    public static Date getDiseaseStarted() {
+        return diseaseStarted;
+    }
+
+    public static void setDiseaseStarted(Date diseaseStarted) {
+        DiseaseAdmin.diseaseStarted = diseaseStarted;
+    }
+
+    public static ArrayList<Disease> getDiseaseList() {
+        return diseaseList;
+    }
 
     private static Date diseaseStarted;
     private static ArrayList<Disease> diseaseList;
@@ -28,7 +37,8 @@ public class DiseaseAdmin {
 
         for (Disease disease : diseaseList){
             if(checkDisease(disease.getTriggers(), player)){
-
+                setDiseaseToPlayer(disease, player);
+                return;
             }
         }
     }
@@ -69,5 +79,9 @@ public class DiseaseAdmin {
         return false;
     }
 
+    private ArrayList<Disease> chargeData(){
+        File folder = new File(Configuration.getInstance().getDiseasePath());
+        return null;
+    }
 
 }

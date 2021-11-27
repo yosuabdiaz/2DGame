@@ -2,37 +2,41 @@ package Utils;
 
 import com.google.gson.*;
 import model.Disease;
-import model.actions.Reader;
+import model.JSONReadWrite;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class DiseaseReader implements Reader<Disease> {
+public class DiseaseReader implements JSONReadWrite<Disease> {
     @Override
     public Disease read(String path) {
         try {
-            File file = new File(path);
+            File file = new File(path  + ".json");
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
-
-
             Gson gson = new Gson();
-            Disease Disease = gson.fromJson(br, Disease.class);
+            return  gson.fromJson(br, Disease.class);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void write(Disease data, String path) {
+
+        File file = new File(path + data.getName() + ".json");
+        if(!file.exists()){
+            File f = new File(file.getParentFile().getAbsolutePath());
+            f.mkdirs();
+        }
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(data);
+        try {
+            BufferedWriter br
+                    = new BufferedWriter(new FileWriter(file));
+            br.write(json);
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    @Override
-    public void write(Disease data, String path) {
-        File file = new File(path);
-        Gson gson = new Gson();
-        BufferedWriter br
-                = new BufferedWriter(new FileReader(file));
 
     }
 }

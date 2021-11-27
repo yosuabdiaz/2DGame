@@ -42,7 +42,8 @@ project(":desktop") {
 
 
     dependencies {
-        implementation files('libs\\SportLib.main.jar')
+        implementation files('libs\\gson-2.8.2.jar')
+        implementation 'com.google.code.gson:gson:2.8.5'
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"

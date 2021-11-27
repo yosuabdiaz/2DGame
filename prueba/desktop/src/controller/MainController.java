@@ -1,9 +1,11 @@
 package controller;
 
+import Utils.DiseaseReader;
 import model.*;
 import model.actions.*;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import com.badlogic.gdx.utils.Array;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class MainController {//I need a new name
 
     public MainController() {
         //All init stuff
+        Configuration config = Configuration.getInstance();
         player = new Player();
         storage = new Storage();
         garden = new Garden();
@@ -27,6 +30,31 @@ public class MainController {//I need a new name
         addSports();
         Thread timingThread = new Thread(new ExecutionAdmin(player));
         timingThread.start();
+        Disease d = new Disease();
+        //Pruevas
+        DiseaseInfo info1 = new DiseaseInfo(3,true);
+        DiseaseInfo info2 = new DiseaseInfo(2,false);
+        DiseaseInfo info3 = new DiseaseInfo(6,true);
+        DiseaseInfo info4 = new DiseaseInfo(34,true);
+        d.setName("Gripe");
+
+        HashMap<Stats, DiseaseInfo> h1 = new HashMap();
+        HashMap<Stats, DiseaseInfo> h2 = new HashMap();
+        h1.put(Stats.FATNESS, info1);
+        h1.put(Stats.STRENGTH, info2);
+        h1.put(Stats.HUNGER, info3);
+        h1.put(Stats.PHYSICAL_HEALTH, info4);
+
+        d.setEffects(h1);
+        d.setTriggers(h2);
+
+        d.setSprite("Sprite.png");
+        ArrayList<Cure> cures = new ArrayList<>();
+        cures.add(new Medicine("Paracetamol", 2, null));
+        d.setCures(cures);
+
+        DiseaseReader r = new DiseaseReader();
+        //r.write(d, config.getDiseasePath());
     }
 
     public void executeAction(String nameAction) {
@@ -113,5 +141,9 @@ public class MainController {//I need a new name
 
     public String getSportSprite(String name){
         return sports.get(name).getSprite();
+    }
+
+    private void readFromDisk(){
+
     }
 }

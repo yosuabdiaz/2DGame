@@ -7,6 +7,11 @@ DiseaseInfo {
     int point;
     boolean up;
 
+    public DiseaseInfo(int point, boolean up) {
+        this.point = point;
+        this.up = up;
+    }
+
     public int getPoint() {
         return point;
     }
