@@ -3,7 +3,9 @@ package model.actions;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
+import model.Garden;
 import model.Player;
+import model.Storage;
 
 import java.util.HashMap;
 
@@ -13,6 +15,8 @@ public class GatherAction extends Action{
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        Garden garden = (Garden) contex.get("garden");
+        Storage storage = (Storage) contex.get("storage");
         render();
     }
 

@@ -62,6 +62,7 @@ public class MainController {//I need a new name
         switch (nameAction) {
             case "Gather":
                 context.put("garden", (GameContex) garden);
+                context.put("storage", (GameContex) storage);
                 return context;
             default:
                 return context;
