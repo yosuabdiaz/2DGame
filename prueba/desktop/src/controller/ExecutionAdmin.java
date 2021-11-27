@@ -38,6 +38,8 @@ public class ExecutionAdmin extends Thread{
                 hours++;
                 if(player.getEnergy() > 1) {
                     player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
+                    player.setSleep(player.getSleep() + 1);
+                    player.setHunger(player.getHunger() + 1);
                 }
                 if (hours == config.getHoursPerDay()) {
                     dayOfYear++;
