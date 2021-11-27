@@ -37,7 +37,7 @@ public class WorkoutAction extends Action{
         player.setSpeed(newSpeed);
         int newEnergy = player.getEnergy() - 10;
         player.setEnergy(newEnergy);
-        int newSleep = player.getSleep() > 80 ? player.getSleep() + 20 : 100;
+        int newSleep = player.getSleep() < 80 ? player.getSleep() + 20 : 100;
         player.setSleep(newSleep);
     }
 
