@@ -1,6 +1,8 @@
 package model;
 
-public class FriendPlayer {
+import model.actions.GameContex;
+
+public class FriendPlayer implements GameContex {
     private String name;
     private String sprite;
 
