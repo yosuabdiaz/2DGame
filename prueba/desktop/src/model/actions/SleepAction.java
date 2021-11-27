@@ -13,6 +13,7 @@ public class SleepAction extends Action{
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        player.setSleep(0);
         render();
     }
 
