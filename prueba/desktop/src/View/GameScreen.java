@@ -17,6 +17,7 @@ import controller.ExecutionAdmin;
 import controller.MainController;
 import controller.MementoAdmin;
 import controller.NPCAdmin;
+import model.Food;
 import model.Player;
 import model.Storage;
 import com.badlogic.gdx.utils.Array;
@@ -57,6 +58,12 @@ public class GameScreen extends BaseScreen{
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
+        myController.getStorage().addFood(new Food("comida1",1,true));
+        myController.getStorage().addFood(new Food("comida2",1,true));
+        myController.getStorage().addFood(new Food("comida3",1,true));
+        myController.getStorage().addFood(new Food("comida4",1,true));
+        myController.getStorage().addFood(new Food("comida5",10,true));
+        myController.getStorage().addFood(new Food("comida5",10,true));
     }
 
     @Override
@@ -174,7 +181,6 @@ public class GameScreen extends BaseScreen{
         myText.draw(localBatch,"6.Socialize",100,90);
         myText.draw(localBatch,"7.Train",100,75);
         myText.draw(localBatch,"8.Gather",100,60);
-        myText.draw(localBatch,"9.Eat",100,45);
 
     }
     public Player getPlayer(){
@@ -215,11 +221,7 @@ public class GameScreen extends BaseScreen{
     }
     public void FoodSelected(){
         Array<String> food = new Array<>();
-        //food = myController.getStorageNames();
-        food.add("food:a:2");
-        food.add("food:b:2");
-        food.add("medicine:a:2");
-        food.add("medicine:b:2");
+        food = myController.getStorageNames();
         final SelectBox<String> selectBox=new SelectBox<String>(skin);
         final Array<String> finalFood = food;
         Dialog d = new Dialog("Select food", skin) {
