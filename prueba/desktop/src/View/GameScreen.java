@@ -56,12 +56,7 @@ public class GameScreen extends BaseScreen{
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
-        myController.getStorage().addFood(new Food("comida1",1,true));
-        myController.getStorage().addFood(new Food("comida2",1,true));
-        myController.getStorage().addFood(new Food("comida3",1,true));
-        myController.getStorage().addFood(new Food("comida4",1,true));
-        myController.getStorage().addFood(new Food("comida5",10,true));
-        myController.getStorage().addFood(new Food("comida5",10,true));
+
     }
 
     @Override
@@ -280,6 +275,37 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
+
+    public void selectAttack(){
+        player1.cleanSelectedAttacks();
+        Array<String> attacks = new Array<>();
+        attacks = myController.attacksNames();
+        final Array<String> finalAttacks = attacks;
+
+        for (String x :attacks) {
+            final SelectBox<String> selectBox1=new SelectBox<String>(skin);
+            new Dialog("Select attack:", skin){
+                {
+                    text("");
+                    button("Yes",true);
+                    button("No",false);
+                    selectBox1.setItems(finalAttacks);
+                    getContentTable().defaults().pad(10);
+                    getContentTable().add(selectBox1);
+                }
+
+                @Override
+                protected void result(final Object object){
+                    if((boolean) object){
+                        player1.addSelectedAttacks(selectBox1.getSelected());
+                        System.out.printf(player1.getSelectedAttacks()+"");
+                    }
+                }
+            }.show(stage);
+        }
+
+    }
+
     public boolean AcceptFigth(){
         if (AcceptFight == false){
             new Dialog("Confirm Figth", skin) {
@@ -298,6 +324,9 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptFight;
     }
+
+
+
     public boolean AcceptFriend(){
         if (AcceptFriend == false){
             new Dialog("Confirm Friend", skin) {

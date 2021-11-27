@@ -22,11 +22,23 @@ public class Player extends Fighter implements GameContex {
     protected int fatness = 0;//0 - 100%
     protected int mentalHealth = 0;//0 - 100%
     protected ArrayList<FriendPlayer> friends= new ArrayList();
+    protected ArrayList<String> selectedAttacks = new ArrayList();
     protected int physicalHealth = 0;//0 - 100%
     protected Injury injury = null;
     protected int meditation = 0; //number of meditations in a day, top is 3
     protected int x = 0;
     protected int y = 0;
+
+    public ArrayList<String> getSelectedAttacks(){
+        return this.selectedAttacks;
+    }
+    public void addSelectedAttacks(String attack) {
+        this.selectedAttacks.add(attack);
+    }
+
+    public void cleanSelectedAttacks(){
+        this.selectedAttacks.clear();
+    }
 
     public int getAge() {
         return age;

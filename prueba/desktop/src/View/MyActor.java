@@ -57,7 +57,8 @@ public class MyActor extends Image {
                     case Input.Keys.NUM_4:// fight Room
                         mba.setPosition(10f,350f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction("GoFight");//GoFightAction
+                        //controller.executeAction("GoFight");//GoFightAction
+                        x.selectAttack();
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_5: // Meditation
