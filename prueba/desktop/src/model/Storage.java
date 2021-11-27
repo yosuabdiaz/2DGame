@@ -62,7 +62,7 @@ public class Storage implements GameContex {
         } else {
             amountFood.put(name, amountFood.get(name) - 1);
         }
-        return popped;
+        return food.get(name);
     }
 
     public Medicine getMedicine(String name){
@@ -73,6 +73,6 @@ public class Storage implements GameContex {
         } else {
             amountMedicine.put(name, amountMedicine.get(name) - 1);
         }
-        return popped;
+        return medicine.get(name);
     }
 }

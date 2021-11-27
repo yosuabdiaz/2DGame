@@ -81,7 +81,8 @@ public class MyActor extends Image {
                     case Input.Keys.NUM_8: // Gather
                         mba.setPosition(10f,200f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction("Gather");//GatherAction![](../../../../../Downloads/swing.png)
+                        controller.executeAction("Gather");
+                        x.AcceptGather();
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_9: // Eat

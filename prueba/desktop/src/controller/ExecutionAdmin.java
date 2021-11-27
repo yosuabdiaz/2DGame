@@ -130,4 +130,8 @@ public class ExecutionAdmin extends Thread{
     public void setGarden(Garden garden) {
         this.garden = garden;
     }
+
+    public Garden getGarden(){
+        return this.garden;
+    }
 }

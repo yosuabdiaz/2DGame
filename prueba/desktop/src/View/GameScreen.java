@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin; // yes
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import controller.ExecutionAdmin;
 import controller.MainController;
 import controller.MementoAdmin;
@@ -20,10 +20,9 @@ import controller.NPCAdmin;
 import model.Food;
 import model.Player;
 import model.Storage;
-import com.badlogic.gdx.utils.Array;
-import java.util.ArrayList;
 
-
+// 22/11/2021
+// @autor: Yosua Andres Blanco Diaz
 public class GameScreen extends BaseScreen{
     //Interface variables
     private final SpriteBatch localBatch;
@@ -353,5 +352,29 @@ public class GameScreen extends BaseScreen{
             }.show(stage);
         }
         return AcceptSleep;
+    }
+    public void AcceptGather(){
+        new Dialog("Confirm Gather", skin) {
+            {
+                text("Yes/No");
+                button("Yes", true);
+                button("No", false);
+            }
+
+            @Override
+            protected void result(final Object object) {
+                AcceptSleep = (boolean)object;
+                System.out.printf(object.toString());
+                if((boolean)object){
+                    myController.setGarden(myExecutionAdmin.getGarden());
+                    myController.executeAction("Gather");//GatherAction!
+                    float speedMove = 0.5f;
+                    MoveToAction mba = new MoveToAction();
+                    mba.setPosition(290f,210f);
+                    mba.setDuration(speedMove);
+                    actor.addAction(mba);
+                }
+            }
+        }.show(stage);
     }
 }
