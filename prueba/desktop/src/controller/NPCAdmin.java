@@ -5,7 +5,10 @@ import model.Attack;
 import model.EnemyPlayer;
 import model.FriendPlayer;
 import model.Player;
+import model.actions.GameContex;
+import model.actions.SocializeAction;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -17,18 +20,23 @@ public class NPCAdmin {
     public static void generateNPC(Player player){
         Random rand = new Random();
         if(rand.nextInt(2) == 1 && !visited){
-            NPCAdmin.generateFriend();
+            NPCAdmin.generateFriend(player);
         }
         else if(attacksToDay < 3){
             generateEnemy(player.getAttackSkills().size(), player.getEnergy());
         }
     }
 
-    private static void generateFriend(){
+    private static void generateFriend(Player player){
         boolean response  = mainView.getInstance().getMyGameScreen().AcceptFriend();
         if(response) {
             FriendPlayer friend = new FriendPlayer("Player", "");
             //mainView.getInstance().getMyGameScreen()
+            HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+            context.put("player", (GameContex) player);
+            context.put("friend", (GameContex) friend);
+            SocializeAction socializeAction = new SocializeAction();
+            socializeAction.execute(context);
         }
         visited = true;
     }
