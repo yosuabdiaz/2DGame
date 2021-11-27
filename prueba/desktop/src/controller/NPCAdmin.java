@@ -6,6 +6,7 @@ import model.EnemyPlayer;
 import model.FriendPlayer;
 import model.Player;
 import model.actions.GameContex;
+import model.actions.GoFightAction;
 import model.actions.SocializeAction;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class NPCAdmin {
             NPCAdmin.generateFriend(player);
         }
         else if(attacksToDay < 3){
-            generateEnemy(player.getAttackSkills().size(), player.getEnergy());
+            generateEnemy(player.getAttackSkills().size(), player.getEnergy(), player);
         }
     }
 
@@ -41,7 +42,7 @@ public class NPCAdmin {
         visited = true;
     }
 
-    private static void generateEnemy(int playerSkills, int playerEnergy){
+    private static void generateEnemy(int playerSkills, int playerEnergy, Player player){
         boolean response  = mainView.getInstance().getMyGameScreen().AcceptFigth();
         if(response) {
             Random rand = new Random();
@@ -54,6 +55,11 @@ public class NPCAdmin {
             enemy.setAttackSkills(enemySkills);
             enemy.setEnergy(rand.nextInt(playerEnergy));
             //enviar el enemy al mainView
+            HashMap<String, GameContex> context = new HashMap<String, GameContex>();
+            context.put("player", (GameContex) player);
+            context.put("enemy", (GameContex) enemy);
+            GoFightAction goFightAction = new GoFightAction();
+            goFightAction.execute(context);
         }
     }
 
