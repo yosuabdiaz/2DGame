@@ -46,7 +46,7 @@ public class MyActor extends Image {
                         mba.setPosition(290f,210f);
                         mba.setDuration(speedMove); // this change the speed
                         MyActor.this.addAction(mba);
-                        controller.executeAction("ToStock");//ToStockAction->Select Food
+                        x.FoodSelected();
                         break;
                     case Input.Keys.NUM_3:// bedroom
                         mba.setPosition(310f,390f);

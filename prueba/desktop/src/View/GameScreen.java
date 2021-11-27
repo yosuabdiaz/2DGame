@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin; // yes
@@ -33,6 +35,7 @@ public class GameScreen extends BaseScreen{
     private	float elapsedTime;
     private Stage stage;
     private Skin skin;
+    private MyActor actor;
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
@@ -96,7 +99,7 @@ public class GameScreen extends BaseScreen{
         Gdx.input.setInputProcessor(stage = new Stage());
         Texture img = new Texture("moving1.png");
         TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
-        MyActor actor = new MyActor(moveTextureRegion[0][2]);
+        actor = new MyActor(moveTextureRegion[0][2]);
         stage.addActor(actor);
         stage.setKeyboardFocus(actor);
     }
@@ -235,10 +238,16 @@ public class GameScreen extends BaseScreen{
                 System.out.printf(object.toString());
                 if((boolean)object){
                     //set food
-                    System.out.printf(selectBox.getSelected().split(":")[1]);
-                    //myController.eatAction(selectBox.getSelected().split(":")[1]);
+
+                    float speedMove = 0.5f;
+                    MoveToAction mba = new MoveToAction();
+                    mba.setPosition(130f,350f);
+                    mba.setDuration(speedMove);
+                    actor.addAction(mba);
+
+                    myController.executeAction("ToStock");
+                    myController.eatAction(selectBox.getSelected().split(":")[1]);
                 }
-                //System.out.printf(selectBox.getSelected());
             }
 
 
