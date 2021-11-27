@@ -25,7 +25,6 @@ public class ExecutionAdmin extends Thread{
 
     @Override
     public void run() {
-        System.out.println(player);
         Random rand = new Random();
         while (true) {
             try {

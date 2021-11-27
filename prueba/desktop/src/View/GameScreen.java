@@ -21,6 +21,8 @@ import model.Food;
 import model.Player;
 import model.Storage;
 
+import java.util.HashMap;
+
 // 22/11/2021
 // @autor: Yosua Andres Blanco Diaz
 public class GameScreen extends BaseScreen{
@@ -52,10 +54,17 @@ public class GameScreen extends BaseScreen{
 
     public GameScreen(mainView myView) {
         super(myView);
-        System.out.println(player1);
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
+
+        //Dummy Data
+        HashMap<Integer,String> sprites = new HashMap<>();
+        sprites.put(0,"main1.png");
+        sprites.put(1,"main2.png");
+        sprites.put(2,"main3.png");
+        myController.getPlayer().setSprites(sprites);
+        /////////////////////////////
     }
 
     @Override
@@ -68,7 +77,10 @@ public class GameScreen extends BaseScreen{
 
         localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
         localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
-        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,50);
+
+        evolutionCharacter();
+        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
+
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
         drawPlayerInfo();
         drawIndications();
@@ -76,6 +88,21 @@ public class GameScreen extends BaseScreen{
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+    public void evolutionCharacter(){
+        if (player1.getAge()<=1){
+            String nameFile = player1.getSprites().get(0);
+            Texture moveTexture2 = new Texture(nameFile);
+            makeAnimationC(moveTexture2,11);
+        }else if (2 < player1.getAge() && player1.getAge() <= 4){
+            String nameFile = player1.getSprites().get(1);
+            Texture moveTexture2 = new Texture(nameFile);
+            makeAnimationC(moveTexture2,11);
+        }else if(player1.getAge() > 5) {
+            String nameFile = player1.getSprites().get(2);
+            Texture moveTexture2 = new Texture(nameFile);
+            makeAnimationC(moveTexture2,11);
+        }
     }
     public void loadImages(){
         houseMap = new Texture("map.jpeg");
@@ -86,7 +113,9 @@ public class GameScreen extends BaseScreen{
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
         makeAnimationB(attackTexture,6);
-        makeAnimationC(moveTexture2,9);
+
+        //makeAnimationC(moveTexture2,9);
+
         makeAnimationD(sleepTexture,3);
         weight = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
