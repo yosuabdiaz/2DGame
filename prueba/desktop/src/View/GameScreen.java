@@ -56,7 +56,6 @@ public class GameScreen extends BaseScreen{
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
-
     }
 
     @Override
@@ -318,7 +317,12 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object) {
                     AcceptFight = (boolean)object;
-                    System.out.printf(object.toString());
+                    if(AcceptFight){
+                        selectAttack();
+                        //llamar a pelear
+
+                        //
+                    }
                 }
             }.show(stage);
         }

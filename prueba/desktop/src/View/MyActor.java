@@ -58,7 +58,7 @@ public class MyActor extends Image {
                         mba.setPosition(10f,350f);
                         mba.setDuration(speedMove); // this change the speed
                         //controller.executeAction("GoFight");//GoFightAction
-                        x.selectAttack();
+                        boolean y = x.AcceptFigth();//x.selectAttack();
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_5: // Meditation
@@ -76,6 +76,7 @@ public class MyActor extends Image {
                     case Input.Keys.NUM_7: // train
                         mba.setPosition(10,100);
                         mba.setDuration(speedMove); // this change the speed
+
                         x.SportSelected();
                         MyActor.this.addAction(mba);
                         break;
