@@ -133,7 +133,20 @@ public class MainController {//I need a new name
         return sports.get(name).getSprite();
     }
 
-    private void readFromDisk(){
+    public String getSeletedAtacks() {
+        String result = "";
+        for(Attack attack:player.getSelectedAttacks()){
+            result += attack.getName() + "\n";
+        }
+        return result;
+    }
 
+    public void addSelectedAttack(String selectedAttack) {
+        String nameSelected = selectedAttack.split(":")[0];
+        for(Attack attack:player.getAttackSkills()){
+            if(attack.getName().equals(nameSelected)){
+                player.addSelectedAttacks(attack);
+            }
+        }
     }
 }
