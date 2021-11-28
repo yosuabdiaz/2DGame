@@ -7,14 +7,14 @@ import java.util.HashMap;
 public class Medicine implements Cure, GameContex {
     String name;
     int energy;
-    HashMap<Stats, Integer> effects;
+    HashMap<Stats, DiseaseInfo> effects;
 
     public Medicine(String name, int energy){
        this.name = name;
        this.energy = energy;
     }
 
-    public Medicine(String name, int energy, HashMap<Stats, Integer> effects){
+    public Medicine(String name, int energy, HashMap<Stats, DiseaseInfo> effects){
         this.name = name;
         this.energy = energy;
         this.effects = effects;
@@ -36,11 +36,11 @@ public class Medicine implements Cure, GameContex {
         this.energy = energy;
     }
 
-    public HashMap<Stats, Integer> getEffects() {
+    public HashMap<Stats, DiseaseInfo> getEffects() {
         return effects;
     }
 
-    public void setEffects(HashMap<Stats, Integer> effects) {
+    public void setEffects(HashMap<Stats, DiseaseInfo> effects) {
         this.effects = effects;
     }
 }

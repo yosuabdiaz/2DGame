@@ -1,13 +1,11 @@
 {
-  "name": "Gripe",
-  "sprite": "Sprite.png",
-  "cures": [
-    {
-      "name": "Paracetamol",
-      "energy": 2
-    }
-  ],
+  "name": "Paracetamol",
+  "energy": 2,
   "effects": {
+    "HUNGER": {
+      "point": 6,
+      "up": true
+    },
     "STRENGTH": {
       "point": 2,
       "up": false
@@ -16,14 +14,9 @@
       "point": 34,
       "up": true
     },
-    "HUNGER": {
-      "point": 6,
-      "up": true
-    },
     "FATNESS": {
       "point": 3,
       "up": true
     }
-  },
-  "triggers": {}
+  }
 }

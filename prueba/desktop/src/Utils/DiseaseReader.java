@@ -2,11 +2,11 @@ package Utils;
 
 import com.google.gson.*;
 import model.Disease;
-import model.JSONReadWrite;
+import model.ReadWrite;
 
 import java.io.*;
 
-public class DiseaseReader implements JSONReadWrite<Disease> {
+public class DiseaseReader implements ReadWrite<Disease> {
     @Override
     public Disease read(String path) {
         try {

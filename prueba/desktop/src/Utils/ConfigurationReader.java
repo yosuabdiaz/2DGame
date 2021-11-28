@@ -3,12 +3,11 @@ package Utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Configuration;
-import model.JSONReadWrite;
+import model.ReadWrite;
 
 import java.io.*;
-import java.util.ArrayList;
 
-public class ConfigurationReader implements JSONReadWrite<Configuration> {
+public class ConfigurationReader implements ReadWrite<Configuration> {
 
     @Override
     public Configuration read(String path) {
