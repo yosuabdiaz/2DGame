@@ -61,10 +61,6 @@ public class ExecutionAdmin extends Thread{
             }
 
 
-            //NPCAdmin
-            //DiseaseAdmin
-
-
             if (player.getInjury() != null) {
                 injuryStarted = new Date(System.currentTimeMillis());
             }

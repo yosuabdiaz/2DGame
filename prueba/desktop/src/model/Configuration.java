@@ -10,6 +10,7 @@ public class Configuration {
     private String medicinePath = "./medicine/";
     private String friendsPath = "./friends/";
     private String enemyPath = "./enemy/";
+    private String logPath = "./logs/";
     private static Configuration instance;
     private int hourDuration = 5;
     private int hoursPerDay = 24;
