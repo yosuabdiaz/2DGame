@@ -17,7 +17,7 @@ public class Player extends Fighter implements GameContex {
     protected int eatenFood = 0; //poop //0 - 100%
     protected int happiness = 0;//0 - 100%
     protected int muscles = 0;//0 - 100%
-    protected int speed = 0;//0 - 100%
+    protected float speed = 0f;//0 - 100%
     protected int strength = 0;//0 - 100%
     protected int fatness = 0;//0 - 100%
     protected int mentalHealth = 0;//0 - 100%
@@ -120,11 +120,11 @@ public class Player extends Fighter implements GameContex {
         this.muscles = muscles;
     }
 
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 
@@ -232,7 +232,7 @@ public class Player extends Fighter implements GameContex {
             case STRENGTH:
                 return strength;
             case SPEED:
-                return speed;
+                return (int) speed * 100;
             case TRAINING_CHARGE:
                 return trainingCharge;
             case MEDITATION:
@@ -271,9 +271,6 @@ public class Player extends Fighter implements GameContex {
                 return;
             case STRENGTH:
                 strength = value ;
-                return;
-            case SPEED:
-                speed = value;
                 return;
             case TRAINING_CHARGE:
                 trainingCharge = value;

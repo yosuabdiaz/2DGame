@@ -33,7 +33,7 @@ public class WorkoutAction extends Action{
         player.setFatness(newFatness);
         int newStrength = player.getStrength() < 95 ? player.getStrength() + 5 : 100;
         player.setStrength(newStrength);
-        int newSpeed = player.getSpeed() < 95 ? player.getSpeed() + 5 : 100;
+        float newSpeed = player.getSpeed() < 0.95f ? player.getSpeed() + 0.05f : 1f;
         player.setSpeed(newSpeed);
         int newEnergy = player.getEnergy() - 10;
         player.setEnergy(newEnergy);
