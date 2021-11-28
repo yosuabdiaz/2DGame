@@ -3,10 +3,12 @@ package model.actions;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
+import model.Attack;
 import model.EnemyPlayer;
 import model.Player;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class GoFightAction extends Action  {
     public GoFightAction() {}
@@ -41,16 +43,45 @@ public class GoFightAction extends Action  {
                     enemy.getAttackSkills().get(count).getName() + " (" + enemyPoints + "/100)";
         }
         if(playerPoints > enemyPoints){
-            winPlayer(player, enemy);
+            winPlayer(player, enemy, enemyPoints);
         } else {
             losePlayer(player);
         }
     }
 
-    private void winPlayer(Player player, EnemyPlayer enemy) {
+    private void winPlayer(Player player, EnemyPlayer enemy, int enemyPoints) {
+        if(enemyPoints >= player.getEnergy()){
+            player.setEnergy(1);
+        } else {
+            int newEnergy = player.getEnergy() - enemyPoints;
+            player.setEnergy(newEnergy);
+        }
+        getLoot(player,enemy);
+    }
+
+    private void getLoot(Player player, EnemyPlayer enemy) {
+        Random rand = new Random();
+        int indexLoot = rand.nextInt(enemy.getAttackSkills().size());
+        Attack loot = enemy.getAttackSkills().get(indexLoot);
+        if(isRepeated(player, loot)){
+            String lootMessage = "Te ha tocado " + loot.getName() + " pero ya tienes este ataque";
+        } else {
+            String lootMessage = "Te ha tocado " + loot.getName() + ", felicidades";
+            player.addAttack(loot);
+        }
+    }
+
+    private boolean isRepeated(Player player, Attack loot) {
+        for(Attack attack: player.getAttackSkills()){
+            if(attack.getName().equals(loot.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void losePlayer(Player player) {
+        player.setEnergy(1);
     }
 
     @Override
