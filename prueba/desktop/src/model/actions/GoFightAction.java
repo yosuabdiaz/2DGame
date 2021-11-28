@@ -25,8 +25,16 @@ public class GoFightAction extends Action  {
     private void figth(Player player, EnemyPlayer enemy) {
         int playerPoints = 0;
         int enemyPoints = 0;
+        int maxIndexAttacks = player.getSelectedAttacks().size() - 1;
+        int count = 0;
         while(playerPoints < 100 || enemyPoints < 100){
-
+            playerPoints += player.getSelectedAttacks().get(count).getDamage();
+            enemyPoints += enemy.getAttackSkills().get(count).getDamage();
+            if(count == maxIndexAttacks){
+                count = 0;
+            } else {
+                count += 1;
+            }
         }
         if(playerPoints > enemyPoints){
             winPlayer(player, enemy);
