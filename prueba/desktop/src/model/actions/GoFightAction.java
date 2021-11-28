@@ -17,10 +17,10 @@ public class GoFightAction extends Action  {
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         EnemyPlayer enemy = (EnemyPlayer) contex.get("enemy");
-        figth(player,enemy);
         //Dialogo para seleccionar
         mainView.getInstance().getMyGameScreen().selectAttack();
         //Automatizar
+        figth(player,enemy);
         render();
     }
 
