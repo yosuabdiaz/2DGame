@@ -1,5 +1,6 @@
 package model;
 
+import View.mainView;
 import com.badlogic.gdx.Game;
 import model.actions.GameContex;
 
@@ -22,8 +23,7 @@ public class Garden implements GameContex {
         existentCures.add(new Medicine("Acetaminofen", 2 ));
         existentCures.add(new Medicine("Zepol", 2 ));
         existentCures.add(new Medicine("Té", 2 ));
-        //**** DATOS DUMMY ****/
-        growGarden();
+        //**** DATOS DUMMY ****/growGarden();
 
         harvestGardenFood();
         harvestGardenFood();
@@ -33,6 +33,8 @@ public class Garden implements GameContex {
         Random rand = new Random();
         Configuration config = Configuration.getInstance();
         if(food.isEmpty()) {
+            System.out.println(mainView.getInstance().getMyGameScreen());
+            mainView.getInstance().getMyGameScreen().setShowGarden(true);
             for (int i = 0; i < config.getFoodInGarden(); i++) {
                 int randIndex = rand.nextInt(existentFood.size());
                 food.add(existentFood.get(randIndex));
