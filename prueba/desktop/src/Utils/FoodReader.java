@@ -13,7 +13,7 @@ public class FoodReader implements ReadWrite<Food> {
     @Override
     public Food read(String path) {
         try {
-            File file = new File(path  + ".json");
+            File file = new File(path);
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
             Gson gson = new Gson();

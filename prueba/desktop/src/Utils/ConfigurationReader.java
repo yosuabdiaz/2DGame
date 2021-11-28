@@ -12,7 +12,7 @@ public class ConfigurationReader implements ReadWrite<Configuration> {
     @Override
     public Configuration read(String path) {
         try {
-            File file = new File(path+ path +  "game.config");
+            File file = new File( path +  "game.config");
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
             Gson gson = new Gson();

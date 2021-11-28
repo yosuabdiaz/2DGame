@@ -1,9 +1,12 @@
 package model;
 
+import Utils.FoodReader;
+import Utils.MedicineReader;
 import View.mainView;
 import com.badlogic.gdx.Game;
 import model.actions.GameContex;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,17 +17,8 @@ public class Garden implements GameContex {
     private ArrayList<Cure> cures = new ArrayList<Cure>();
 
     public Garden() {
-        //**** DATOS DUMMY ****/
-        existentFood.add(new Food("Galleta Soda",5,true));
-        existentFood.add(new Food("Pollo de Pollo landia",20,true));
-        existentFood.add(new Food("Horpacha",90,false));
-        existentFood.add(new Food("Agua",1,false));
-
-        existentCures.add(new Medicine("Acetaminofen", 2 ));
-        existentCures.add(new Medicine("Zepol", 2 ));
-        existentCures.add(new Medicine("Té", 2 ));
-        //**** DATOS DUMMY ****/growGarden();
-
+        loadData();
+        //growGarden();
         harvestGardenFood();
         harvestGardenFood();
     }
@@ -63,5 +57,27 @@ public class Garden implements GameContex {
         ArrayList<Cure> harvestedCures = (ArrayList<Cure>)cures.clone();
         cures.clear();
         return harvestedCures;
+    }
+
+    private void loadData(){
+        File folder = new File(Configuration.getInstance().getFoodPath());
+        File[] files = folder.listFiles();
+        FoodReader r = new FoodReader();
+        for(File f : files){
+            System.out.println(f);
+                Food food = r.read(f.getPath());
+                if(food != null){
+                    existentFood.add(food);
+                }
+        }
+        folder = new File(Configuration.getInstance().getMedicinePath());
+        files = folder.listFiles();
+        MedicineReader mr = new MedicineReader();
+        for(File f : files){
+            Medicine medicine = mr.read(f.getPath());
+            if(medicine != null){
+                existentCures.add(medicine);
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ public class MedicineReader implements ReadWrite<Medicine> {
     @Override
     public Medicine read(String path) {
         try {
-            File file = new File(path  + ".json");
+            File file = new File(path);
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
             Gson gson = new Gson();

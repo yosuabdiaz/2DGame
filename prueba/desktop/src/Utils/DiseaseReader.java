@@ -10,7 +10,7 @@ public class DiseaseReader implements ReadWrite<Disease> {
     @Override
     public Disease read(String path) {
         try {
-            File file = new File(path  + ".json");
+            File file = new File(path);
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
             Gson gson = new Gson();
