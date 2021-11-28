@@ -3,6 +3,7 @@ package model.actions;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
+import model.EnemyPlayer;
 import model.Player;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class GoFightAction extends Action  {
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        EnemyPlayer enemy = (EnemyPlayer) contex.get("enemy");
         //Dialogo para seleccionar
         mainView.getInstance().getMyGameScreen().selectAttack();
         //Automatizar
