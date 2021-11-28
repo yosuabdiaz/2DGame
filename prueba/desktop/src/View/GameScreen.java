@@ -90,10 +90,10 @@ public class GameScreen extends BaseScreen{
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
 
         loadGarden();
-        if(showGarden){
+
+        if(showGarden){System.out.printf(showGarden+"");
             localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
         }
-
 
         drawPlayerInfo();
         drawIndications();
@@ -131,7 +131,6 @@ public class GameScreen extends BaseScreen{
     public void loadGarden() {
 
         if (showGarden){
-            showGarden = false;
             nameFile = "food.png";
             Texture Localmove = new Texture(nameFile);
             makeGarden(Localmove, 6);
