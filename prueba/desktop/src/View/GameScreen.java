@@ -56,7 +56,7 @@ public class GameScreen extends BaseScreen{
     private int control=0;
     protected Texture moveTexture2 = new Texture("main1.png");
     protected String nameFile;
-    protected boolean showGarden = true;
+    protected boolean showGarden = false;
     public GameScreen(mainView myView) {
         super(myView);
         localBatch = myView.getBatch();
@@ -88,8 +88,12 @@ public class GameScreen extends BaseScreen{
         localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
 
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
+
         loadGarden();
-        localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
+        if(showGarden){
+            localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
+        }
+
 
         drawPlayerInfo();
         drawIndications();
@@ -98,6 +102,14 @@ public class GameScreen extends BaseScreen{
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    public void setShowGarden(boolean x){
+        this.showGarden = x;
+    }
+
+    public boolean getShowGarden(){
+        return showGarden;
     }
     public void evolutionCharacter(){
 
@@ -467,14 +479,13 @@ public class GameScreen extends BaseScreen{
         new Dialog("Confirm Gather", skin) {
             {
                 text("Yes/No");
-                button("Yes", true);
-                button("No", false);
+                button("Yes", false);
+                button("No", true);
             }
 
             @Override
             protected void result(final Object object) {
-                AcceptSleep = (boolean)object;
-                System.out.printf(object.toString());
+                showGarden = (boolean)object;
                 if((boolean)object){
                     myController.executeAction("Gather");//GatherAction!
                     float speedMove = myController.getPlayer().getSpeed();//0.5f;
