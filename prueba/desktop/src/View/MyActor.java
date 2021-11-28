@@ -68,12 +68,10 @@ public class MyActor extends Image {
                         controller.executeAction("Meditation");//MeditationAction
                         MyActor.this.addAction(mba);
                         break;
-                    case Input.Keys.NUM_6: //
-                        float randonPosX = (float) (Math.random()*x.getWeight());
-                        float randonPosY = (float) (Math.random()*x.getHeight());
-                        mba.setPosition(randonPosX,randonPosY);
+                    case Input.Keys.NUM_6: // Socialize
+                        mba.setPosition(350f,100f);
                         mba.setDuration(speedMove); // this change the speed
-                        controller.executeAction("DoNothing");
+                        controller.executeAction("Socialize");//SocializeAction
                         MyActor.this.addAction(mba);
                         break;
                     case Input.Keys.NUM_7: // train

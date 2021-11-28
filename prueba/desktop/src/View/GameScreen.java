@@ -506,12 +506,4 @@ public class GameScreen extends BaseScreen{
 
     }
 
-    public int getWeight(){
-        return weight;
-    }
-
-    public int getHeight(){
-        return height;
-    }
-
 }
