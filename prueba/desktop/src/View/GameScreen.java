@@ -89,7 +89,7 @@ public class GameScreen extends BaseScreen{
 
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
         loadGarden();
-        localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),10,220,60,60);
+        localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
 
         drawPlayerInfo();
         drawIndications();
@@ -392,19 +392,17 @@ public class GameScreen extends BaseScreen{
         return AcceptFight;
     }
     public void resume(final String message){
-        if (AcceptFight == false){
-            new Dialog("Confirm Figth", skin) {
-                {
-                    text(message);
-                    button("OK", true);
+        new Dialog("Confirm Figth", skin) {
+            {
+                text(message);
+                button("OK", true);
 
-                }
+            }
 
-                @Override
-                protected void result(final Object object) {
-                }
-            }.show(stage);
-        }
+            @Override
+            protected void result(final Object object) {
+            }
+        }.show(stage);
     }
 
 
