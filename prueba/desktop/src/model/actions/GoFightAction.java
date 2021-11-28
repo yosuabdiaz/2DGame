@@ -13,6 +13,9 @@ public class GoFightAction extends Action  {
     @Override
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
+        //Dialogo para seleccionar
+        mainView.getInstance().getMyGameScreen().selectAttack();
+        //Automatizar
         render();
     }
 
