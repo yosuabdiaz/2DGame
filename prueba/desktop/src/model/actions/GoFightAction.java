@@ -24,7 +24,7 @@ public class GoFightAction extends Action  {
 
     private void figth(Player player, EnemyPlayer enemy) {
         int playerPoints = 0;
-        int enemyPoints = 0;
+        int enemyPoints = player.getEnergy() < 100 ? 100 - player.getEnergy() : 0;
         int maxIndexAttacks = player.getSelectedAttacks().size() - 1;
         int count = 0;
         while(playerPoints < 100 || enemyPoints < 100){
@@ -35,6 +35,10 @@ public class GoFightAction extends Action  {
             } else {
                 count += 1;
             }
+            String playerAttack = "Jugador usó " +
+                    player.getSelectedAttacks().get(count).getName() + " (" + playerPoints + "/100)";
+            String enemyAttack = "Enemigo usó " +
+                    enemy.getAttackSkills().get(count).getName() + " (" + enemyPoints + "/100)";
         }
         if(playerPoints > enemyPoints){
             winPlayer(player, enemy);
