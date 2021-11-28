@@ -27,7 +27,7 @@ import java.util.HashMap;
 // @autor: Yosua Andres Blanco Diaz
 public class GameScreen extends BaseScreen{
     //Interface variables
-    private final SpriteBatch localBatch;
+    private SpriteBatch localBatch;
     private  Texture houseMap;
     private int weight;
     private int height;
@@ -51,6 +51,8 @@ public class GameScreen extends BaseScreen{
     private boolean FoodSelected = false;
     private NPCAdmin myNPCAdmin = new NPCAdmin();
     private int control=0;
+    protected Texture moveTexture2 = new Texture("main1.png");
+    protected String nameFile;
 
     public GameScreen(mainView myView) {
         super(myView);
@@ -67,10 +69,11 @@ public class GameScreen extends BaseScreen{
         /////////////////////////////
     }
 
+
     @Override
     public void render(float delta) {
         player1 = myController.getPlayer();
-        //player1.setAge(player1.getAge()+1);
+
         elapsedTime += Gdx.graphics.getDeltaTime();
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);
@@ -84,24 +87,32 @@ public class GameScreen extends BaseScreen{
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
         drawPlayerInfo();
         drawIndications();
+        moveTexture2.dispose();
         localBatch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
     public void evolutionCharacter(){
-        if (player1.getAge()<=1){
-            String nameFile = player1.getSprites().get(0);
-            Texture moveTexture2 = new Texture(nameFile);
-            makeAnimationC(moveTexture2,11);
-        }else if (2 < player1.getAge() && player1.getAge() <= 4){
-            String nameFile = player1.getSprites().get(1);
-            Texture moveTexture2 = new Texture(nameFile);
-            makeAnimationC(moveTexture2,11);
-        }else if(player1.getAge() > 5) {
-            String nameFile = player1.getSprites().get(2);
-            Texture moveTexture2 = new Texture(nameFile);
-            makeAnimationC(moveTexture2,11);
+
+        if (player1.getAge()==0){
+            nameFile = player1.getSprites().get(0);
+            Texture Localmove = new Texture(nameFile);
+
+            makeAnimationC(Localmove,11);
+
+        }else if (player1.getAge()==1){
+            nameFile = player1.getSprites().get(1);
+            Texture Localmove = new Texture(nameFile);
+
+            makeAnimationC(Localmove,11);
+
+        }else if(player1.getAge()==2) {
+            nameFile = player1.getSprites().get(2);
+            Texture Localmove = new Texture(nameFile);
+
+            makeAnimationC(Localmove,11);
+
         }
     }
     public void loadImages(){
@@ -437,4 +448,14 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
+    @Override
+    public void dispose(){
+        if (localBatch!=null){
+            localBatch.dispose();
+            localBatch = null;
+        }
+        stage.dispose();
+
+    }
+
 }
