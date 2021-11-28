@@ -325,8 +325,8 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object){
                     if((boolean) object){
-                        player1.addSelectedAttacks(selectBox1.getSelected());
-                        System.out.printf(player1.getSelectedAttacks()+"");
+                        myController.addSelectedAttack(selectBox1.getSelected());
+                        System.out.printf(myController.getSeletedAtacks());
                     }
                 }
             }.show(stage);
