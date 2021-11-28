@@ -20,6 +20,7 @@ import controller.NPCAdmin;
 import model.Food;
 import model.Player;
 import model.Storage;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -33,6 +34,8 @@ public class GameScreen extends BaseScreen{
     private int height;
     private Animation animationTopRight, animationTopLeft,
             animationDownRight, animationDownLeft;
+
+    private Animation gardenAnimation;
     private BitmapFont  myText;
     private	float elapsedTime;
     private Stage stage;
@@ -53,7 +56,7 @@ public class GameScreen extends BaseScreen{
     private int control=0;
     protected Texture moveTexture2 = new Texture("main1.png");
     protected String nameFile;
-
+    protected boolean showGarden = true;
     public GameScreen(mainView myView) {
         super(myView);
         localBatch = myView.getBatch();
@@ -85,6 +88,9 @@ public class GameScreen extends BaseScreen{
         localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
 
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
+        loadGarden();
+        localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),10,220,60,60);
+
         drawPlayerInfo();
         drawIndications();
         moveTexture2.dispose();
@@ -98,21 +104,25 @@ public class GameScreen extends BaseScreen{
         if (player1.getAge()==0){
             nameFile = player1.getSprites().get(0);
             Texture Localmove = new Texture(nameFile);
-
             makeAnimationC(Localmove,11);
-
         }else if (player1.getAge()==1){
             nameFile = player1.getSprites().get(1);
             Texture Localmove = new Texture(nameFile);
-
             makeAnimationC(Localmove,11);
-
         }else if(player1.getAge()==2) {
             nameFile = player1.getSprites().get(2);
             Texture Localmove = new Texture(nameFile);
-
             makeAnimationC(Localmove,11);
+        }
+    }
 
+    public void loadGarden() {
+
+        if (showGarden){
+            showGarden = false;
+            nameFile = "food.png";
+            Texture Localmove = new Texture(nameFile);
+            makeGarden(Localmove, 6);
         }
     }
     public void loadImages(){
@@ -142,6 +152,17 @@ public class GameScreen extends BaseScreen{
         stage.addActor(actor);
         stage.setKeyboardFocus(actor);
     }
+
+    public void makeGarden(Texture tmpTexture, int numberOfSplits){
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
+        TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
+        int index = 0;
+        for(int i= 0; i< numberOfSplits; i++){
+            animationArray[index++] = moveTextureRegion[0][i];
+        }
+        gardenAnimation = new Animation(0.7f, animationArray);
+    }
+
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
 
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -150,7 +171,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray[index++] = moveTextureRegion[0][i];
         }
-        animationTopRight = new Animation(1f/4f, animationArray);
+        animationTopRight = new Animation(1f/8f, animationArray);
     }
     public void makeAnimationB(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -159,7 +180,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray2[index++] = moveTextureRegion[0][i];
         }
-        animationTopLeft = new Animation(1f/4f, animationArray2);
+        animationTopLeft = new Animation(1f/8f, animationArray2);
     }
     public void makeAnimationC(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -168,7 +189,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray3[index++] = moveTextureRegion[0][i];
         }
-        animationDownRight = new Animation(1f/4f, animationArray3);
+        animationDownRight = new Animation(1f/8f, animationArray3);
     }
     public void makeAnimationD(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -179,6 +200,8 @@ public class GameScreen extends BaseScreen{
         }
         animationDownLeft = new Animation(1f/8f, animationArray4);
     }
+
+
     public void drawPlayerInfo(){
         // titles : value
         myText.setColor(Color.BLACK);
@@ -273,7 +296,7 @@ public class GameScreen extends BaseScreen{
                 if((boolean)object){
                     //set food
 
-                    float speedMove = 0.5f;
+                    float speedMove = myController.getPlayer().getSpeed();;
                     MoveToAction mba = new MoveToAction();
                     mba.setPosition(130f,350f);
                     mba.setDuration(speedMove);
@@ -368,7 +391,21 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptFight;
     }
+    public void resume(final String message){
+        if (AcceptFight == false){
+            new Dialog("Confirm Figth", skin) {
+                {
+                    text(message);
+                    button("OK", true);
 
+                }
+
+                @Override
+                protected void result(final Object object) {
+                }
+            }.show(stage);
+        }
+    }
 
 
     public boolean AcceptFriend(){
@@ -389,6 +426,8 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptFriend;
     }
+
+
     public boolean AcceptDisease(){
         if (AcceptDisease == false){
             new Dialog("Confirm Disease", skin) {
@@ -426,6 +465,7 @@ public class GameScreen extends BaseScreen{
         return AcceptSleep;
     }
     public void AcceptGather(){
+        showGarden = true;
         new Dialog("Confirm Gather", skin) {
             {
                 text("Yes/No");
@@ -439,7 +479,7 @@ public class GameScreen extends BaseScreen{
                 System.out.printf(object.toString());
                 if((boolean)object){
                     myController.executeAction("Gather");//GatherAction!
-                    float speedMove = 0.5f;
+                    float speedMove = myController.getPlayer().getSpeed();//0.5f;
                     MoveToAction mba = new MoveToAction();
                     mba.setPosition(290f,210f);
                     mba.setDuration(speedMove);

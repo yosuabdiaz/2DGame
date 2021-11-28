@@ -23,21 +23,22 @@ public class MyActor extends Image {
         addListener(new InputListener(){
             @Override
             public boolean keyDown(InputEvent event, int keycode){
-                float speedMove = 0.5f;
+
                 MoveToAction mba = new MoveToAction();
                 GameScreen x =myMainview.getMyGameScreen();
                 Player player = x.getPlayer();
-                if (player.getEnergy() < 20){
-                    speedMove = 0.05f;
+                float speedMove = x.getMyController().getPlayer().getSpeed();
+                if (player.getEnergy() < 50){
+                    speedMove = x.getMyController().getPlayer().getSpeed()+0.2f;
                 }
                 MainController controller = x.getMyController();
                 switch (keycode){
                     case Input.Keys.NUM_1: // bathroom
                         mba.setPosition(130f,200f);
-                        if(player.getRetainedLiquids() > 50 || player.getEatenFood() > 50 ){
-                            mba.setDuration(speedMove/2); // this change the speed
+                        if(player.getRetainedLiquids() > 10 || player.getEatenFood() > 10 ){
+                            mba.setDuration(x.getMyController().getPlayer().getSpeed()/2); // this change the speed
                         }else{
-                            mba.setDuration(speedMove); // this change the speed
+                            mba.setDuration(x.getMyController().getPlayer().getSpeed()); // this change the speed
                         }
                         MyActor.this.addAction(mba);
                         controller.executeAction("GoBathroom");//GoBathroomAction
