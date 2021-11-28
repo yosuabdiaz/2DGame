@@ -75,4 +75,14 @@ public class Storage implements GameContex {
         }
         return medicine.get(name);
     }
+
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "\nfood=" + food +
+                "\nmedicine=" + medicine +
+                "\namountFood=" + amountFood +
+                "\namountMedicine=" + amountMedicine +
+                '}';
+    }
 }

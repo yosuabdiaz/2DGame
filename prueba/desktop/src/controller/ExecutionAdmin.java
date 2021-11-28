@@ -14,16 +14,17 @@ public class ExecutionAdmin extends Thread{
     private Player player;
     private Date injuryStarted;
     private MementoAdmin mementoAdmin = new MementoAdmin();
-    private Storage storage = new Storage();
-    private Garden garden = new Garden();
+    private Storage storage;
+    private Garden garden;
 
-    public ExecutionAdmin(Player player){
+    public ExecutionAdmin(Player player, Garden garden, Storage storage){
         this.player = player;
+        this.storage = storage;
+        this.garden = garden;
     }
 
     @Override
     public void run() {
-        System.out.println(player);
         Random rand = new Random();
         while (true) {
             try {
@@ -37,6 +38,8 @@ public class ExecutionAdmin extends Thread{
                 hours++;
                 if(player.getEnergy() > 1) {
                     player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
+                    player.setSleep(player.getSleep() + 1);
+                    player.setHunger(player.getHunger() + 1);
                 }
                 if (hours == config.getHoursPerDay()) {
                     dayOfYear++;
@@ -129,5 +132,9 @@ public class ExecutionAdmin extends Thread{
 
     public void setGarden(Garden garden) {
         this.garden = garden;
+    }
+
+    public Garden getGarden(){
+        return this.garden;
     }
 }

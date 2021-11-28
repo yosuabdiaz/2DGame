@@ -31,8 +31,8 @@ public class GoBathroomAction extends Action{
      * @param player
      */
     private void piss(Player player){
-        if(player.getRetainedLiquids() > 100){
-            int newRetainedLiquids = player.getRetainedLiquids() - 100;
+        if(player.getRetainedLiquids() > 50){
+            int newRetainedLiquids = player.getRetainedLiquids() - 50;
             player.setRetainedLiquids(newRetainedLiquids);
         }
     }
@@ -42,8 +42,8 @@ public class GoBathroomAction extends Action{
      * @param player
      */
     private void poop(Player player){
-        if(player.getEatenFood() > 100){
-            int newEatenFood = player.getEatenFood() - 100;
+        if(player.getEatenFood() > 50){
+            int newEatenFood = player.getEatenFood() - 50;
             player.setEatenFood(newEatenFood);
         }
     }

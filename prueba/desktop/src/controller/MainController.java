@@ -30,7 +30,7 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
-        Thread timingThread = new Thread(new ExecutionAdmin(player));
+        Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
         timingThread.start();
     }
 
@@ -67,6 +67,7 @@ public class MainController {//I need a new name
         switch (nameAction) {
             case "Gather":
                 context.put("garden", (GameContex) garden);
+                context.put("storage", (GameContex) storage);
                 return context;
             default:
                 return context;
@@ -81,7 +82,6 @@ public class MainController {//I need a new name
         actions.put("GoFight", new GoFightAction());
         actions.put("Meditation", new MeditationAction());
         actions.put("Sleep", new SleepAction());
-        actions.put("Socialize", new SocializeAction());
         actions.put("ToStock", new ToStockAction());
         actions.put("Workout", new WorkoutAction());
     }
@@ -103,11 +103,24 @@ public class MainController {//I need a new name
         return garden;
     }
 
+    public void setGarden(Garden garden){
+        this.garden = garden;
+    }
+
     public Array<String> SportsNames(){
         Array<String> array = new Array<String>();
         ArrayList<String> keySet = new ArrayList<>(sports.keySet());
         for(String key:keySet){
             array.add(key);
+        }
+        return array;
+    }
+
+    public Array<String> attacksNames(){
+        Array<String> array = new Array<String>();
+        ArrayList<Attack> list = player.getAttackSkills();
+        for(Attack attack:list){
+            array.add(attack.getName() + ": " + attack.getDamage());
         }
         return array;
     }

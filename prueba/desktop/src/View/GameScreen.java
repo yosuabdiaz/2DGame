@@ -8,37 +8,44 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin; // yes
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import controller.ExecutionAdmin;
 import controller.MainController;
 import controller.MementoAdmin;
 import controller.NPCAdmin;
+import model.Food;
 import model.Player;
 import model.Storage;
-import com.badlogic.gdx.utils.Array;
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
+import java.util.HashMap;
 
+// 22/11/2021
+// @autor: Yosua Andres Blanco Diaz
 public class GameScreen extends BaseScreen{
     //Interface variables
-    private final SpriteBatch localBatch;
+    private SpriteBatch localBatch;
     private  Texture houseMap;
     private int weight;
     private int height;
     private Animation animationTopRight, animationTopLeft,
             animationDownRight, animationDownLeft;
+
+    private Animation gardenAnimation;
     private BitmapFont  myText;
     private	float elapsedTime;
     private Stage stage;
     private Skin skin;
+    private MyActor actor;
     //Interface variables end
     //Game variables
     private final MainController myController = new MainController();
     private Player player1 = myController.getPlayer();
     private Storage storage = myController.getStorage();
-    private ExecutionAdmin myExecutionAdmin = new ExecutionAdmin(player1);
     private MementoAdmin myMementoAdmin = new MementoAdmin();
     private boolean AcceptFight = false;
     private boolean AcceptFriend = false;
@@ -47,33 +54,87 @@ public class GameScreen extends BaseScreen{
     private boolean FoodSelected = false;
     private NPCAdmin myNPCAdmin = new NPCAdmin();
     private int control=0;
-
+    protected Texture moveTexture2 = new Texture("main1.png");
+    protected String nameFile;
+    protected boolean showGarden = false;
     public GameScreen(mainView myView) {
         super(myView);
-        System.out.println(player1);
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
+
+        //Dummy Data
+        HashMap<Integer,String> sprites = new HashMap<>();
+        sprites.put(0,"main1.png");
+        sprites.put(1,"main2.png");
+        sprites.put(2,"main3.png");
+        myController.getPlayer().setSprites(sprites);
+        /////////////////////////////
     }
+
 
     @Override
     public void render(float delta) {
         player1 = myController.getPlayer();
-        //player1.setAge(player1.getAge()+1);
+
         elapsedTime += Gdx.graphics.getDeltaTime();
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);
 
         localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
         localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
-        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,50);
+
+        evolutionCharacter();
+        localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
+
         localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
+
+        loadGarden();
+
+        if(showGarden){System.out.printf(showGarden+"");
+            localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
+        }
+
         drawPlayerInfo();
         drawIndications();
+        moveTexture2.dispose();
         localBatch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+    }
+
+    public void setShowGarden(boolean x){
+        this.showGarden = x;
+    }
+
+    public boolean getShowGarden(){
+        return showGarden;
+    }
+    public void evolutionCharacter(){
+
+        if (player1.getAge()==0){
+            nameFile = player1.getSprites().get(0);
+            Texture Localmove = new Texture(nameFile);
+            makeAnimationC(Localmove,11);
+        }else if (player1.getAge()==1){
+            nameFile = player1.getSprites().get(1);
+            Texture Localmove = new Texture(nameFile);
+            makeAnimationC(Localmove,11);
+        }else if(player1.getAge()==2) {
+            nameFile = player1.getSprites().get(2);
+            Texture Localmove = new Texture(nameFile);
+            makeAnimationC(Localmove,11);
+        }
+    }
+
+    public void loadGarden() {
+
+        if (showGarden){
+            nameFile = "food.png";
+            Texture Localmove = new Texture(nameFile);
+            makeGarden(Localmove, 6);
+        }
     }
     public void loadImages(){
         houseMap = new Texture("map.jpeg");
@@ -84,7 +145,9 @@ public class GameScreen extends BaseScreen{
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
         makeAnimationB(attackTexture,6);
-        makeAnimationC(moveTexture2,9);
+
+        //makeAnimationC(moveTexture2,9);
+
         makeAnimationD(sleepTexture,3);
         weight = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
@@ -96,10 +159,21 @@ public class GameScreen extends BaseScreen{
         Gdx.input.setInputProcessor(stage = new Stage());
         Texture img = new Texture("moving1.png");
         TextureRegion[][] moveTextureRegion = TextureRegion.split(img,img.getWidth()/6,img.getHeight());
-        MyActor actor = new MyActor(moveTextureRegion[0][2]);
+        actor = new MyActor(moveTextureRegion[0][2]);
         stage.addActor(actor);
         stage.setKeyboardFocus(actor);
     }
+
+    public void makeGarden(Texture tmpTexture, int numberOfSplits){
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
+        TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
+        int index = 0;
+        for(int i= 0; i< numberOfSplits; i++){
+            animationArray[index++] = moveTextureRegion[0][i];
+        }
+        gardenAnimation = new Animation(0.7f, animationArray);
+    }
+
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
 
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -108,7 +182,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray[index++] = moveTextureRegion[0][i];
         }
-        animationTopRight = new Animation(1f/4f, animationArray);
+        animationTopRight = new Animation(1f/8f, animationArray);
     }
     public void makeAnimationB(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -117,7 +191,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray2[index++] = moveTextureRegion[0][i];
         }
-        animationTopLeft = new Animation(1f/4f, animationArray2);
+        animationTopLeft = new Animation(1f/8f, animationArray2);
     }
     public void makeAnimationC(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -126,7 +200,7 @@ public class GameScreen extends BaseScreen{
         for(int i= 0; i< numberOfSplits; i++){
             animationArray3[index++] = moveTextureRegion[0][i];
         }
-        animationDownRight = new Animation(1f/4f, animationArray3);
+        animationDownRight = new Animation(1f/8f, animationArray3);
     }
     public void makeAnimationD(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -137,6 +211,8 @@ public class GameScreen extends BaseScreen{
         }
         animationDownLeft = new Animation(1f/8f, animationArray4);
     }
+
+
     public void drawPlayerInfo(){
         // titles : value
         myText.setColor(Color.BLACK);
@@ -171,7 +247,6 @@ public class GameScreen extends BaseScreen{
         myText.draw(localBatch,"6.Socialize",100,90);
         myText.draw(localBatch,"7.Train",100,75);
         myText.draw(localBatch,"8.Gather",100,60);
-        myText.draw(localBatch,"9.Eat",100,45);
 
     }
     public Player getPlayer(){
@@ -212,11 +287,7 @@ public class GameScreen extends BaseScreen{
     }
     public void FoodSelected(){
         Array<String> food = new Array<>();
-        //food = myController.getStorageNames();
-        food.add("food:a:2");
-        food.add("food:b:2");
-        food.add("medicine:a:2");
-        food.add("medicine:b:2");
+        food = myController.getStorageNames();
         final SelectBox<String> selectBox=new SelectBox<String>(skin);
         final Array<String> finalFood = food;
         Dialog d = new Dialog("Select food", skin) {
@@ -235,10 +306,16 @@ public class GameScreen extends BaseScreen{
                 System.out.printf(object.toString());
                 if((boolean)object){
                     //set food
-                    System.out.printf(selectBox.getSelected().split(":")[1]);
-                    //myController.eatAction(selectBox.getSelected().split(":")[1]);
+
+                    float speedMove = myController.getPlayer().getSpeed();;
+                    MoveToAction mba = new MoveToAction();
+                    mba.setPosition(130f,350f);
+                    mba.setDuration(speedMove);
+                    actor.addAction(mba);
+
+                    myController.executeAction("ToStock");
+                    myController.eatAction(selectBox.getSelected().split(":")[1]);
                 }
-                //System.out.printf(selectBox.getSelected());
             }
 
 
@@ -271,6 +348,37 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
+
+    public void selectAttack(){
+        player1.cleanSelectedAttacks();
+        Array<String> attacks = new Array<>();
+        attacks = myController.attacksNames();
+        final Array<String> finalAttacks = attacks;
+
+        for (String x :attacks) {
+            final SelectBox<String> selectBox1=new SelectBox<String>(skin);
+            new Dialog("Select attack:", skin){
+                {
+                    text("");
+                    button("Yes",true);
+                    button("No",false);
+                    selectBox1.setItems(finalAttacks);
+                    getContentTable().defaults().pad(10);
+                    getContentTable().add(selectBox1);
+                }
+
+                @Override
+                protected void result(final Object object){
+                    if((boolean) object){
+                        player1.addSelectedAttacks(selectBox1.getSelected());
+                        System.out.printf(player1.getSelectedAttacks()+"");
+                    }
+                }
+            }.show(stage);
+        }
+
+    }
+
     public boolean AcceptFigth(){
         if (AcceptFight == false){
             new Dialog("Confirm Figth", skin) {
@@ -283,12 +391,32 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object) {
                     AcceptFight = (boolean)object;
-                    System.out.printf(object.toString());
+                    if(AcceptFight){
+                        selectAttack();
+                        //llamar a pelear
+
+                        //
+                    }
                 }
             }.show(stage);
         }
         return AcceptFight;
     }
+    public void resume(final String message){
+        new Dialog("Confirm Figth", skin) {
+            {
+                text(message);
+                button("OK", true);
+
+            }
+
+            @Override
+            protected void result(final Object object) {
+            }
+        }.show(stage);
+    }
+
+
     public boolean AcceptFriend(){
         if (AcceptFriend == false){
             new Dialog("Confirm Friend", skin) {
@@ -307,6 +435,8 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptFriend;
     }
+
+
     public boolean AcceptDisease(){
         if (AcceptDisease == false){
             new Dialog("Confirm Disease", skin) {
@@ -343,4 +473,37 @@ public class GameScreen extends BaseScreen{
         }
         return AcceptSleep;
     }
+    public void AcceptGather(){
+        showGarden = true;
+        new Dialog("Confirm Gather", skin) {
+            {
+                text("Yes/No");
+                button("Yes", false);
+                button("No", true);
+            }
+
+            @Override
+            protected void result(final Object object) {
+                showGarden = (boolean)object;
+                if((boolean)object){
+                    myController.executeAction("Gather");//GatherAction!
+                    float speedMove = myController.getPlayer().getSpeed();//0.5f;
+                    MoveToAction mba = new MoveToAction();
+                    mba.setPosition(290f,210f);
+                    mba.setDuration(speedMove);
+                    actor.addAction(mba);
+                }
+            }
+        }.show(stage);
+    }
+    @Override
+    public void dispose(){
+        if (localBatch!=null){
+            localBatch.dispose();
+            localBatch = null;
+        }
+        stage.dispose();
+
+    }
+
 }
