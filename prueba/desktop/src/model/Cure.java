@@ -1,5 +1,7 @@
 package model;
 
-public interface Cure {
+import java.io.Serializable;
+
+public interface Cure extends Serializable {
     public String getName();
 }

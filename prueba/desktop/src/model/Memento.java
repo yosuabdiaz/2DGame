@@ -1,6 +1,8 @@
 package model;
 
-public class Memento {
+import java.io.Serializable;
+
+public class Memento implements Serializable {
     Player player;
     Storage storage;
 
