@@ -46,7 +46,7 @@ public class mainView extends Game {
     public void create() {
         batch = new SpriteBatch();
         myStorageScreen = new StorageScreen(this);
-        myGameScreen = new GameScreen(this);
+        myGameScreen = new GameScreen(this, myController);
 
         setScreen(myGameScreen);
     }

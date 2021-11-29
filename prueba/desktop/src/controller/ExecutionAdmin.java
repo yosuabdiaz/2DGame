@@ -24,17 +24,22 @@ public class ExecutionAdmin extends Thread{
         this.player = player;
         this.storage = storage;
         this.garden = garden;
+
     }
 
     @Override
     public void run() {
         Random rand = new Random();
+        System.out.println(currentThread());
         while (true) {
+
             try {
-                Thread.sleep((config.getHourDuration() * 1000)/4);
+                currentThread().sleep((config.getHourDuration() * 1000)/4);
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             minutes++;
             if(minutes > 3){
                 minutes = 0;
@@ -64,8 +69,10 @@ public class ExecutionAdmin extends Thread{
                         }
                     }
                 }
-                if(hours >= config.getHoursPerDay()*0.75 && sleepRecomended == false){
+                float actualTime = hours + (minutes/10);
+                if(hours >= (int)(config.getHoursPerDay() * 0.75) && sleepRecomended == false){
                     System.out.println("Accept Sleep");
+
                     mainView.getInstance().getMyGameScreen().AcceptSleep();
                     sleepRecomended = true;
                 }

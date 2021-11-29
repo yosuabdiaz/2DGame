@@ -45,10 +45,10 @@ public class GameScreen extends BaseScreen{
     private MyActor actor;
     //Interface variables end
     //Game variables
-    private final MainController myController = new MainController();
-    private Player player1 = myController.getPlayer();
-    private Storage storage = myController.getStorage();
-    private MementoAdmin myMementoAdmin = new MementoAdmin();
+    private MainController myController;
+    private Player player1;
+    private Storage storage;
+    //private MementoAdmin myMementoAdmin = new MementoAdmin();
     private boolean AcceptFight = false;
     private boolean AcceptFriend = false;
     private boolean AcceptDisease = false;
@@ -61,8 +61,11 @@ public class GameScreen extends BaseScreen{
     protected boolean showGarden = false;
     private boolean showFriend = false;
     private  boolean showEnemy = false;
-    public GameScreen(mainView myView) {
+    public GameScreen(mainView myView, MainController mainController) {
         super(myView);
+        myController = mainController;
+        player1 = myController.getPlayer();
+        storage = myController.getStorage();
         localBatch = myView.getBatch();
         loadImages();
         loadCharacter();
