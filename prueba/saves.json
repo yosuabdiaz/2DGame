@@ -1,0 +1,142 @@
+[
+  {
+    "player": {
+      "age": 5,
+      "sleep": 12,
+      "sprites": {
+        "0": "main1.png",
+        "1": "main2.png",
+        "2": "main3.png"
+      },
+      "hunger": 12,
+      "trainingCharge": 0,
+      "retainedLiquids": 0,
+      "eatenFood": 0,
+      "happiness": 0,
+      "muscles": 0,
+      "speed": 0.0,
+      "strength": 0,
+      "fatness": 0,
+      "mentalHealth": 0,
+      "friends": [],
+      "selectedAttacks": [],
+      "physicalHealth": 0,
+      "meditation": 0,
+      "x": 0,
+      "y": 0,
+      "energy": 88,
+      "attackSkills": []
+    },
+    "storage": {
+      "food": {},
+      "medicine": {},
+      "amountFood": {},
+      "amountMedicine": {}
+    }
+  },
+  {
+    "player": {
+      "age": 5,
+      "sleep": 12,
+      "sprites": {
+        "0": "main1.png",
+        "1": "main2.png",
+        "2": "main3.png"
+      },
+      "hunger": 12,
+      "trainingCharge": 0,
+      "retainedLiquids": 0,
+      "eatenFood": 0,
+      "happiness": 0,
+      "muscles": 0,
+      "speed": 0.0,
+      "strength": 0,
+      "fatness": 0,
+      "mentalHealth": 0,
+      "friends": [],
+      "selectedAttacks": [],
+      "physicalHealth": 0,
+      "meditation": 0,
+      "x": 0,
+      "y": 0,
+      "energy": 88,
+      "attackSkills": []
+    },
+    "storage": {
+      "food": {},
+      "medicine": {},
+      "amountFood": {},
+      "amountMedicine": {}
+    }
+  },
+  {
+    "player": {
+      "age": 5,
+      "sleep": 12,
+      "sprites": {
+        "0": "main1.png",
+        "1": "main2.png",
+        "2": "main3.png"
+      },
+      "hunger": 12,
+      "trainingCharge": 0,
+      "retainedLiquids": 0,
+      "eatenFood": 0,
+      "happiness": 0,
+      "muscles": 0,
+      "speed": 0.0,
+      "strength": 0,
+      "fatness": 0,
+      "mentalHealth": 0,
+      "friends": [],
+      "selectedAttacks": [],
+      "physicalHealth": 0,
+      "meditation": 0,
+      "x": 0,
+      "y": 0,
+      "energy": 88,
+      "attackSkills": []
+    },
+    "storage": {
+      "food": {},
+      "medicine": {},
+      "amountFood": {},
+      "amountMedicine": {}
+    }
+  },
+  {
+    "player": {
+      "age": 5,
+      "sleep": 12,
+      "sprites": {
+        "0": "main1.png",
+        "1": "main2.png",
+        "2": "main3.png"
+      },
+      "hunger": 12,
+      "trainingCharge": 0,
+      "retainedLiquids": 0,
+      "eatenFood": 0,
+      "happiness": 0,
+      "muscles": 0,
+      "speed": 0.0,
+      "strength": 0,
+      "fatness": 0,
+      "mentalHealth": 0,
+      "friends": [],
+      "selectedAttacks": [],
+      "physicalHealth": 0,
+      "meditation": 0,
+      "x": 0,
+      "y": 0,
+      "energy": 88,
+      "attackSkills": []
+    },
+    "storage": {
+      "food": {},
+      "medicine": {},
+      "amountFood": {},
+      "amountMedicine": {}
+    }
+  }
+]

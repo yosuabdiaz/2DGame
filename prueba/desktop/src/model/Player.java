@@ -286,4 +286,21 @@ public class Player extends Fighter implements GameContex {
     public void attack(Fighter fighter) {
         //TO-DO
     }
+
+    public Player clone(){
+        Player clone = new Player();
+        clone.setSleep(sleep);
+        clone.setDisease(disease);
+        clone.setAge(age);
+        clone.setMeditation(meditation);
+        clone.setInjury(injury);
+        clone.setEatenFood(eatenFood);
+        clone.setFatness(fatness);
+        clone.setFriends(friends);
+        clone.setHappiness(happiness);
+        clone.setHunger(hunger);
+        clone.setMentalHealth(mentalHealth);
+        clone.setMuscles(muscles);
+
+    }
 }
