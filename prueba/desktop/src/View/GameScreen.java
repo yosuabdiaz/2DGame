@@ -61,6 +61,7 @@ public class GameScreen extends BaseScreen{
     protected boolean showGarden = false;
     private boolean showFriend = false;
     private  boolean showEnemy = false;
+    private boolean maxLevel = true;
     public GameScreen(mainView myView, MainController mainController) {
         super(myView);
         myController = mainController;
@@ -128,7 +129,8 @@ public class GameScreen extends BaseScreen{
             nameFile = "main2.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if(player1.getAge()>=9) {
+        }else if(player1.getAge()>=9 && maxLevel) {
+            maxLevel = false;
             nameFile = "main3.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
