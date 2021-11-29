@@ -16,7 +16,7 @@ import View.mainView;
 
 public class DiseaseAdmin {
 
-    private static Date diseaseStarted = new Date(System.currentTimeMillis());
+    private static Date diseaseStarted;
     private static ArrayList<Disease> diseaseList = new ArrayList<>();
 
     public static Date getDiseaseStarted() {

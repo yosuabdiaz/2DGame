@@ -537,6 +537,9 @@ public class GameScreen extends BaseScreen{
                         System.out.printf("selectBox1.getSelected() -1 ="+selectBox1.getSelected());
                         myController.dead(Integer.parseInt( selectBox1.getSelected()) -1);
                     }
+                    else {
+                        myController.dead();
+                    }
                 }
             }.show(stage);
     }

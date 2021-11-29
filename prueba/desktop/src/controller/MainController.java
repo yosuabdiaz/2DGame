@@ -54,14 +54,17 @@ public class MainController {//I need a new name
     }
 
     public void dead(){
-        executionAdmin.restart();
+        executionAdmin.pause();
+        timingThread.interrupt();
         executionAdmin.getMementoAdmin().clearMemento();
         player = new Player();
         executionAdmin.setPlayer(player);
         garden.harvestGardenFood();
         garden.harvestGardenCures();
+        DiseaseAdmin.setDiseaseStarted(null);
         storage.clear();
-
+        timingThread = new Thread(executionAdmin);
+        timingThread.start();
     }
 
     public void dead(int day){
