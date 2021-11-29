@@ -60,6 +60,7 @@ public class MainController {//I need a new name
         garden.harvestGardenFood();
         garden.harvestGardenCures();
         storage.clear();
+
     }
 
     public void dead(int day){
@@ -72,8 +73,8 @@ public class MainController {//I need a new name
             executionAdmin.setPlayer(player);
             garden.harvestGardenFood();
             garden.harvestGardenCures();
-            storage = storage;
             executionAdmin.setStorage(storage);
+            executionAdmin.run();
         }
     }
 

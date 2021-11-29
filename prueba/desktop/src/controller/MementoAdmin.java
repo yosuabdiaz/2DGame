@@ -53,5 +53,6 @@ public class MementoAdmin {
 
     public void clearMemento(){
         states.clear();
+        reader.write(states, path);
     }
 }

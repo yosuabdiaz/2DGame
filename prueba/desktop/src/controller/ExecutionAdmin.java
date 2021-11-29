@@ -105,7 +105,7 @@ public class ExecutionAdmin extends Thread{
         }
     }
 
-    public void restart(){
+    public void pause(){
         dayOfYear = 0;
         hours = 0;
         minutes = 0;
@@ -170,6 +170,9 @@ public class ExecutionAdmin extends Thread{
 
     public MementoAdmin getMementoAdmin() {
         return mementoAdmin;
+    }
+    public void restart(){
+        run();
     }
 
 }
