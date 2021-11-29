@@ -120,12 +120,12 @@ public class GameScreen extends BaseScreen{
     }
     public void evolutionCharacter(){
 
-        if (player1.getAge()<5){
+        if (player1.getAge() == 0 || player1.getAge() == 1 || player1.getAge() == 2 || player1.getAge() == 3 || player1.getAge() == 4 ){
             //System.out.println("evolution");
             nameFile = "main1.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if (player1.getAge()<9 && player1.getAge() > 4){
+        }else if (player1.getAge() == 5 || player1.getAge() == 6 || player1.getAge() == 7 || player1.getAge() == 8 ){
             nameFile = "main2.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
@@ -411,7 +411,11 @@ public class GameScreen extends BaseScreen{
 
                     if((boolean)object){
                         selectAttack();
-
+                        float speedMove = myController.getPlayer().getSpeed();;
+                        MoveToAction mba = new MoveToAction();
+                        mba.setPosition(10,350f);
+                        mba.setDuration(speedMove);
+                        actor.addAction(mba);
                         AcceptFight = (boolean)object;
                         //llamar a pelear
 
@@ -437,6 +441,11 @@ public class GameScreen extends BaseScreen{
                     showFriend = false;
                     AcceptFriend = (boolean)object;
                     System.out.printf(object.toString());
+                    float speedMove = myController.getPlayer().getSpeed();;
+                    MoveToAction mba = new MoveToAction();
+                    mba.setPosition(130f,350f);
+                    mba.setDuration(speedMove);
+                    actor.addAction(mba);
                 }
             }.show(stage);
         }
@@ -473,6 +482,13 @@ public class GameScreen extends BaseScreen{
                     AcceptSleep = (boolean)object;
                     if(AcceptSleep){
                         myController.executeAction("Sleep");
+
+                        float speedMove = myController.getPlayer().getSpeed();;
+                        MoveToAction mba = new MoveToAction();
+                        mba.setPosition(310,390);
+                        mba.setDuration(speedMove);
+                        actor.addAction(mba);
+
                     }
                 }
             }.show(stage);
