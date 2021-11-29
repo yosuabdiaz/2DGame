@@ -28,6 +28,11 @@ public class GoBathroomAction extends Action{
 
     }
 
+    @Override
+    public String getName() {
+        return "GoBathroomAction";
+    }
+
     /**
      * Check if retained liquids is over 100%, bathroom actions just minus 100%
      * @param player

@@ -12,4 +12,5 @@ public abstract class Action implements Cure {
      */
     public abstract void execute(HashMap<String,GameContex> contex);
     public abstract void render();
+    public abstract String getName();
 }
