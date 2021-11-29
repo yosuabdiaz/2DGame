@@ -1,5 +1,6 @@
 package View;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +21,8 @@ import controller.NPCAdmin;
 import model.Food;
 import model.Player;
 import model.Storage;
+import model.actions.GameContex;
+import model.actions.SocializeAction;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
@@ -422,27 +425,30 @@ public class GameScreen extends BaseScreen{
     }
     public boolean AcceptFriend(){
         showFriend = true;
-        if (AcceptFriend == false){
-            new Dialog("Confirm Friend", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
 
-                @Override
-                protected void result(final Object object) {
-                    showFriend = false;
-                    AcceptFriend = (boolean)object;
-                    System.out.printf(object.toString());
-                    float speedMove = myController.getPlayer().getSpeed();;
-                    MoveToAction mba = new MoveToAction();
-                    mba.setPosition(130f,350f);
-                    mba.setDuration(speedMove);
-                    actor.addAction(mba);
-                }
-            }.show(stage);
-        }
+        new Dialog("Confirm Friend", skin) {
+            {
+                text("Yes/No");
+                button("Yes", true);
+                button("No", false);
+            }
+
+            @Override
+            protected void result(final Object object) {
+                showFriend = false;
+                AcceptFriend = (boolean)object;
+                float speedMove = myController.getPlayer().getSpeed();;
+                MoveToAction mba = new MoveToAction();
+                mba.setPosition(130f,350f);
+                mba.setDuration(speedMove);
+                actor.addAction(mba);
+                SocializeAction x = new SocializeAction();
+                HashMap<String, GameContex> h = new HashMap<>();
+                h.put("player", (GameContex) myController.getPlayer());
+                x.execute(h);
+            }
+        }.show(stage);
+
         return AcceptFriend;
     }
     public boolean AcceptDisease(){

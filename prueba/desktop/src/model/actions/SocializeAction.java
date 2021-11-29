@@ -20,6 +20,7 @@ public class SocializeAction extends Action{
     }
 
     private void updateStats(Player player) {
+
         int newMentalHealth = player.getMentalHealth() < 80 ? player.getMentalHealth() + 20 : 100;
         player.setMentalHealth(newMentalHealth);
         int newEnergy = player.getEnergy() > 5 ? player.getEnergy() - 5 : 1;
