@@ -30,7 +30,6 @@ public class ExecutionAdmin extends Thread{
     @Override
     public void run() {
         Random rand = new Random();
-        System.out.println(currentThread());
         while (true) {
 
             try {
@@ -40,68 +39,83 @@ public class ExecutionAdmin extends Thread{
                 e.printStackTrace();
             }
 
-            minutes++;
-            if(minutes > 3){
-                minutes = 0;
-                hours++;
-                if(player.getEnergy() > 1) {
-                    player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
-                    player.setSleep(player.getSleep() + 1);
-                    player.setHunger(player.getHunger() + 1);
-                }
-                if (hours == config.getHoursPerDay()) {
-                    dayOfYear++;
-                    hours = 0;
-                    sleepRecomended = false;
-                    garden.growGarden();
-                    if (dayOfYear == config.getDaysPerYear()) {
-                        //Loger.getInstance().log("Day: " + dayOfYear);
-                        player.setAge(player.getAge() + 1);
-                        dayOfYear = 0;
-                    }
-                    mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
-                    NPCAdmin.setAttacksToDay(0);
-                    NPCAdmin.setVisited(false);
-                    if(player.getDisease() == null) {
-                        DiseaseAdmin.evaluateHealth(player, new Date(System.currentTimeMillis()));
-                    }
-                    player.setMeditation(0);
-                    Date disease = DiseaseAdmin.getDiseaseStarted();
-                    if( disease != null){
-                        Date now = new Date(System.currentTimeMillis());
-                        int daysSinceStarted = (int)((now.getTime() - disease.getTime())/1000 /
-                                                    (config.getHourDuration() * config.getHoursPerDay()));
-                        if(daysSinceStarted >= 3){
-                            mainView.getInstance().getMyGameScreen().acceptDead();
-                            return;
-                        }
-                    }
-                }
-                float actualTime = hours + (minutes/10);
-                if(hours >= (int)(config.getHoursPerDay() * 0.75) && sleepRecomended == false){
+            addMinute();
+            manageInjury();
 
-                    mainView.getInstance().getMyGameScreen().AcceptSleep();
-                    sleepRecomended = true;
-                }
-
-                NPCAdmin.generateNPC(player);
+        }
+    }
+    public void addMinute(){
+        minutes++;
+        if(minutes > 3){
+            minutes = 0;
+            hours++;
+            if(player.getEnergy() > 1) {
+                player.setEnergy(player.getEnergy() - config.getEnergyDecrease());
+                player.setSleep(player.getSleep() + 1);
+                player.setHunger(player.getHunger() + 1);
             }
-
-
-            if (player.getInjury() != null) {
-                injuryStarted = new Date(System.currentTimeMillis());
+            if (hours == config.getHoursPerDay()) {
+                newDay();
             }
-            if (injuryStarted != null) {
-                Date currTime = new Date(System.currentTimeMillis());
-                int difference = (int) (currTime.getTime() - injuryStarted.getTime() / 1000);
-                if (difference >= player.getInjury().getRecuperationTime()) {
-                    injuryStarted = null;
-                    player.setSpeed(player.getSpeed() + player.getInjury().getRecuperationTime());
-                    player.setInjury(null);
-                }
+            recomendSleep();
+
+            NPCAdmin.generateNPC(player);
+        }
+    }
+    public void recomendSleep(){
+        float actualTime = hours + (minutes/10);
+        if(hours >= (int)(config.getHoursPerDay() * 0.75) && sleepRecomended == false){
+
+            mainView.getInstance().getMyGameScreen().AcceptSleep();
+            sleepRecomended = true;
+        }
+    }
+
+    public void newDay(){
+        dayOfYear++;
+        hours = 0;
+        sleepRecomended = false;
+        garden.growGarden();
+        if (dayOfYear == config.getDaysPerYear()) {
+            //Loger.getInstance().log("Day: " + dayOfYear);
+            player.setAge(player.getAge() + 1);
+            dayOfYear = 0;
+        }
+        mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
+        NPCAdmin.setAttacksToDay(0);
+        NPCAdmin.setVisited(false);
+        if(player.getDisease() == null) {
+            DiseaseAdmin.evaluateHealth(player, new Date(System.currentTimeMillis()));
+        }
+        player.setMeditation(0);
+        manageDisease();
+    }
+
+    public void manageDisease(){
+        Date disease = DiseaseAdmin.getDiseaseStarted();
+        if( disease != null){
+            Date now = new Date(System.currentTimeMillis());
+            int daysSinceStarted = (int)((now.getTime() - disease.getTime())/1000 /
+                                        (config.getHourDuration() * config.getHoursPerDay()));
+            if(daysSinceStarted >= 3){
+                mainView.getInstance().getMyGameScreen().acceptDead();
+                return;
             }
+        }
+    }
 
-
+    public void manageInjury(){
+        if (player.getInjury() != null) {
+            injuryStarted = new Date(System.currentTimeMillis());
+        }
+        if (injuryStarted != null) {
+            Date currTime = new Date(System.currentTimeMillis());
+            int difference = (int) (currTime.getTime() - injuryStarted.getTime() / 1000);
+            if (difference >= player.getInjury().getRecuperationTime()) {
+                injuryStarted = null;
+                player.setSpeed(player.getSpeed() + player.getInjury().getRecuperationTime());
+                player.setInjury(null);
+            }
         }
     }
 
