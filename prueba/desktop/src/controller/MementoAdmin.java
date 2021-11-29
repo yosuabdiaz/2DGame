@@ -41,5 +41,6 @@ public class MementoAdmin {
 
         Queue<Memento> temp = reader.read(path);
         states = (temp != null)? temp: states;
+        System.out.println(((LinkedList<Memento>)states).get(2).getPlayer().getAge());
     }
 }

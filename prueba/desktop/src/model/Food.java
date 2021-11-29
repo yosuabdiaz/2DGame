@@ -2,7 +2,9 @@ package model;
 
 import model.actions.GameContex;
 
-public class Food implements GameContex {
+import java.io.Serializable;
+
+public class Food implements GameContex, Serializable {
     private String name;
     private int energy;
     private boolean isSolid;

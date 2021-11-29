@@ -14,32 +14,30 @@ public class MementoReader implements ReadWrite {
     @Override
     public LinkedList<Memento> read(String path) {
         try {
-            File file = new File(path);
-            BufferedReader br
-                    = new BufferedReader(new FileReader(file));
-            Gson gson = new Gson();
-            return  gson.fromJson(br ,new TypeToken<LinkedList<Memento>>(){}.getType());
-        } catch (FileNotFoundException e) {
+            FileInputStream fileIn = new FileInputStream(path);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            LinkedList<Memento> data = (LinkedList<Memento>)objectIn.readObject();
+            objectIn.close();
+            return data;
+
+        } catch (Exception ex) {
+            System.out.println("ERROR DEL MEMENTO");
             return null;
         }
     }
 
     @Override
     public void write(Object data, String path) {
-        File file = new File(path);
-        if(!file.exists()){
-            File f = new File(file.getParentFile().getAbsolutePath());
-            f.mkdirs();
-        }
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(data);
         try {
-            BufferedWriter br
-                    = new BufferedWriter(new FileWriter(file));
-            br.write(json);
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            FileOutputStream fileOut = new FileOutputStream(path);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(data);
+            objectOut.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+
     }
 }

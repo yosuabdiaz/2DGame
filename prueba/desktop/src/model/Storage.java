@@ -3,10 +3,11 @@ package model;
 import model.actions.GameContex;
 import com.badlogic.gdx.utils.Array;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Storage implements GameContex {
+public class Storage implements GameContex, Serializable {
     private HashMap<String, Food> food;
     private HashMap<String, Medicine> medicine;
     private HashMap<String, Integer> amountFood;

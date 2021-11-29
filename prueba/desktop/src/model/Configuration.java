@@ -10,7 +10,7 @@ public class Configuration {
     private String medicinePath = "./medicine/";
     private String friendsPath = "./friends/";
     private String enemyPath = "./enemy/";
-    private String mementoPath = "./saves.json";
+    private String mementoPath = "./saves.sv";
     private String attacksPath = "./attacks/";
     private String logPath = "./";
     private static Configuration instance;
