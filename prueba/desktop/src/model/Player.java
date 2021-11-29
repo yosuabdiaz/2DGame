@@ -41,6 +41,11 @@ public class Player extends Fighter implements GameContex {
     public ArrayList<Attack> getSelectedAttacks(){
         return this.selectedAttacks;
     }
+
+    public void clearSelectedAttacks() {
+        this.selectedAttacks.clear();
+    }
+
     public void addSelectedAttacks(Attack attack) {
         this.selectedAttacks.add(attack);
     }

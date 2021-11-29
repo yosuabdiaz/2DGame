@@ -24,6 +24,7 @@ public class GoFightAction extends Action  {
             figth(player,enemy);
             Loger.getInstance().log("Player Fighting");
         }
+        player.clearSelectedAttacks();
         render();
 
     }
@@ -33,7 +34,8 @@ public class GoFightAction extends Action  {
         int enemyPoints = player.getEnergy() < 100 ? 100 - player.getEnergy() : 0;
         int maxIndexAttacks = player.getSelectedAttacks().size() - 1;
         int count = 0;
-        while(playerPoints < 100 || enemyPoints < 100){
+        boolean anyWinner = false;
+        while(!anyWinner){
             playerPoints += player.getSelectedAttacks().get(count).getDamage();
             enemyPoints += enemy.getAttackSkills().get(count).getDamage();
             if(count == maxIndexAttacks){
@@ -56,6 +58,9 @@ public class GoFightAction extends Action  {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if(playerPoints > 100 || enemyPoints > 100){
+                anyWinner = true;
             }
         }
         if(playerPoints > enemyPoints){
@@ -100,6 +105,7 @@ public class GoFightAction extends Action  {
 
     private void losePlayer(Player player) {
         player.setEnergy(1);
+        mainView.getInstance().getMyGameScreen().resume("Perdiste la pelea");
     }
 
     @Override
