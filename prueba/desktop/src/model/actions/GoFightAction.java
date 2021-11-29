@@ -18,9 +18,8 @@ public class GoFightAction extends Action  {
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         EnemyPlayer enemy = (EnemyPlayer) contex.get("enemy");
-        //Dialogo para seleccionar
-        mainView.getInstance().getMyGameScreen().selectAttack();
-        //Automatizar
+        System.out.println("player.getAttackSkills().size().size()="+player.getAttackSkills().size());
+        System.out.println("player.getSelectedAttacks().size()="+player.getSelectedAttacks().size());
         if(player.getSelectedAttacks().size() > 0){
             figth(player,enemy);
             Loger.getInstance().log("Player Fighting");
@@ -47,7 +46,17 @@ public class GoFightAction extends Action  {
             String enemyAttack = "Enemigo usó " +
                     enemy.getAttackSkills().get(count).getName() + " (" + enemyPoints + "/100)";
             mainView.getInstance().getMyGameScreen().resume(playerAttack);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             mainView.getInstance().getMyGameScreen().resume(enemyAttack);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         if(playerPoints > enemyPoints){
             winPlayer(player, enemy, enemyPoints);
@@ -95,9 +104,9 @@ public class GoFightAction extends Action  {
 
     @Override
     public void render() {
-        mainView m = mainView.getInstance();
-        GameScreen g = m.getMyGameScreen();
-        g.makeAnimationA(new Texture("attack.png"),5);
+        //mainView m = mainView.getInstance();
+        //GameScreen g = m.getMyGameScreen();
+        //g.makeAnimationA(new Texture("attack.png"),5);
     }
 
     @Override

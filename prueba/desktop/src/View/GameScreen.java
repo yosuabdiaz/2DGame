@@ -395,10 +395,16 @@ public class GameScreen extends BaseScreen{
                 protected void result(final Object object){
                     if((boolean) object){
                         myController.addSelectedAttack(selectBox1.getSelected());
-                        System.out.printf(myController.getSeletedAtacks());
+
+                        System.out.printf("selectBox1.getSelected()="+myController.getSeletedAtacks());
                     }
                 }
             }.show(stage);
+        }
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }
@@ -420,6 +426,7 @@ public class GameScreen extends BaseScreen{
 
                     if((boolean)object){
                         selectAttack();
+
                         AcceptFight = (boolean)object;
                         //llamar a pelear
 
