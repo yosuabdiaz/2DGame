@@ -26,6 +26,9 @@ public class MainController {//I need a new name
         //All init stuff
         Configuration config = Configuration.getInstance();
         player = new Player();
+        //Dummy Data
+
+
         storage = new Storage();
         garden = new Garden();
         actions = new HashMap<String, Action>();
@@ -34,6 +37,15 @@ public class MainController {//I need a new name
         addSports();
         DiseaseAdmin.chargeData();
         executionAdmin = new ExecutionAdmin(player, garden, storage);
+        MementoAdmin saves = new MementoAdmin();
+        if(saves.getMemento(saves.getMementoSize()-1) != null){
+            Memento save = saves.getMemento(saves.getMementoSize()-1);
+            //System.out.println(save.getPlayer().getSprites() + "memento");
+            //System.out.println(save.getStorage() + "memento");
+            player = save.getPlayer();
+            executionAdmin.setPlayer(player);
+            storage = save.getStorage();
+        }
         Thread timingThread = new Thread(executionAdmin);
         NPCAdmin.loadData();
         timingThread.start();

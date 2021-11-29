@@ -54,6 +54,11 @@ public class ExecutionAdmin extends Thread{
                     hours = 0;
                     sleepRecomended = false;
                     garden.growGarden();
+                    if (dayOfYear == config.getDaysPerYear()) {
+                        //Loger.getInstance().log("Day: " + dayOfYear);
+                        player.setAge(player.getAge() + 1);
+                        dayOfYear = 0;
+                    }
                     mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
@@ -78,11 +83,7 @@ public class ExecutionAdmin extends Thread{
                     mainView.getInstance().getMyGameScreen().AcceptSleep();
                     sleepRecomended = true;
                 }
-                if (dayOfYear == config.getDaysPerYear()) {
-                    //Loger.getInstance().log("Day: " + dayOfYear);
-                    player.setAge(player.getAge() + 1);
-                    dayOfYear = 0;
-                }
+
                 NPCAdmin.generateNPC(player);
             }
 

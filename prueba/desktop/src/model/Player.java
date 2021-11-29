@@ -33,6 +33,8 @@ public class Player extends Fighter implements GameContex, Serializable {
     public Player() {
         Attack attack1 = new Attack("default1",0,"deafult1.png");
         Attack attack2 = new Attack("default2",0,"deafult2.png");
+
+
         ArrayList<Attack> defaultAttacks = new ArrayList<>();
         defaultAttacks.add(attack1);
         defaultAttacks.add(attack2);
@@ -318,6 +320,7 @@ public class Player extends Fighter implements GameContex, Serializable {
         clone.setMuscles(muscles);
         clone.setEnergy(getEnergy());
         clone.setName(getName());
+        clone.setSprites(sprites);
         return clone;
     }
 }

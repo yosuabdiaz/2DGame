@@ -42,11 +42,12 @@ public class DiseaseAdmin {
     public static void evaluateHealth(Player player, Date now){
 
         for (Disease disease : diseaseList){
-            System.out.println(disease.getName());
-            System.out.println(disease.getTriggers());
             if(checkDisease(disease.getTriggers(), player)){
                 if(mainView.getInstance().getMyGameScreen().AcceptDisease()) {
+                    diseaseStarted = now;
                     setDiseaseToPlayer(disease, player);
+
+
                 }
                 return;
             }

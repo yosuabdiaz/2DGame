@@ -70,12 +70,12 @@ public class GameScreen extends BaseScreen{
         loadImages();
         loadCharacter();
 
-        //Dummy Data
+        /*Dummy Data
         HashMap<Integer,String> sprites = new HashMap<>();
         sprites.put(0,"main1.png");
         sprites.put(1,"main2.png");
         sprites.put(2,"main3.png");
-        myController.getPlayer().setSprites(sprites);
+        myController.getPlayer().setSprites(sprites);*/
         makeAnimationB(new Texture("dead.png"),11);
         loadGarden();
         loadFriend();
@@ -118,16 +118,18 @@ public class GameScreen extends BaseScreen{
         this.showGarden = x;
     }
     public void evolutionCharacter(){
-        if (player1.getAge()==0){
-            nameFile = player1.getSprites().get(0);
+
+        if (player1.getAge()<5){
+            //System.out.println("evolution");
+            nameFile = "main1.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if (player1.getAge()==5){
-            nameFile = player1.getSprites().get(1);
+        }else if (player1.getAge()<9 && player1.getAge() > 4){
+            nameFile = "main2.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if(player1.getAge()==9) {
-            nameFile = player1.getSprites().get(2);
+        }else if(player1.getAge()>=9) {
+            nameFile = "main3.png";
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
         }
@@ -439,21 +441,20 @@ public class GameScreen extends BaseScreen{
         return AcceptFriend;
     }
     public boolean AcceptDisease(){
-        if (AcceptDisease == false){
-            new Dialog("Confirm Disease", skin) {
-                {
-                    text("Yes/No");
-                    button("Yes", true);
-                    button("No", false);
-                }
+        new Dialog("Confirm Disease", skin) {
+            {
+                text("Yes/No");
+                button("Yes", true);
+                button("No", false);
+            }
 
-                @Override
-                protected void result(final Object object) {
-                    AcceptDisease = (boolean)object;
-                    System.out.printf(object.toString());
-                }
-            }.show(stage);
-        }
+            @Override
+            protected void result(final Object object) {
+                AcceptDisease = (boolean)object;
+                System.out.printf(object.toString());
+            }
+        }.show(stage);
+
         return AcceptDisease;
     }
     public boolean AcceptSleep(){

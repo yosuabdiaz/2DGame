@@ -22,7 +22,8 @@ public class MementoAdmin {
     }
 
     public void addMemento(Memento memento){
-        if(states.size() -1 == maxSavedStates){
+        System.out.println(memento.getPlayer().getSprites() + " Sprites print");
+        if(states.size() > maxSavedStates -2){
             states.remove();
         }
         System.out.println( memento.getPlayer().getAge());
@@ -31,7 +32,9 @@ public class MementoAdmin {
     }
 
     public Memento getMemento(int index){
-        if(index > 0 && index < maxSavedStates ){
+        System.out.println(states.size());
+        if(index >= 0 && index < maxSavedStates ){
+
             return (Memento) ((LinkedList)states).get(index);
         }
         return null;
@@ -41,7 +44,11 @@ public class MementoAdmin {
 
         Queue<Memento> temp = reader.read(path);
         states = (temp != null)? temp: states;
-        //System.out.println(((LinkedList<Memento>)states).get(2).getPlayer().getAge());
+        //System.out.println(((LinkedList<Memento>)states).get(0).getPlayer().getAge() + "Print dentro del memento");
+    }
+
+    public int getMementoSize(){
+        return states.size();
     }
 
     public void clearMemento(){

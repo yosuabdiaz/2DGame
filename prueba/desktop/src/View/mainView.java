@@ -19,8 +19,6 @@ public class mainView extends Game {
     private Player player1 = myController.getPlayer();
     private Storage storage = myController.getStorage();
 
-    private MementoAdmin myMementoAdmin = new MementoAdmin();
-    private NPCAdmin myNPCAdmin = new NPCAdmin();
 
     private static mainView instance;
 
