@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 public class
 
 
-DiseaseInfo {
+DiseaseInfo implements Serializable {
     int point;
     boolean up;
 

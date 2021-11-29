@@ -2,10 +2,11 @@ package model;
 
 import model.actions.GameContex;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Disease implements GameContex {
+public class Disease implements GameContex, Serializable {
         private String name;
         private String sprite;
         private ArrayList<Cure> cures;

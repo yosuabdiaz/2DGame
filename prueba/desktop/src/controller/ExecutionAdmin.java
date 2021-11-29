@@ -47,6 +47,7 @@ public class ExecutionAdmin extends Thread{
                 if (hours == config.getHoursPerDay()) {
                     dayOfYear++;
                     hours = 0;
+                    sleepRecomended = false;
                     garden.growGarden();
                     mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
                     NPCAdmin.setAttacksToDay(0);
@@ -64,7 +65,9 @@ public class ExecutionAdmin extends Thread{
                     }
                 }
                 if(hours >= config.getHoursPerDay()*0.75 && sleepRecomended == false){
-                    //mainView.getInstance().getMyGameScreen().getAcceptSleep();
+                    System.out.println("Accept Sleep");
+                    mainView.getInstance().getMyGameScreen().AcceptSleep();
+                    sleepRecomended = true;
                 }
                 if (dayOfYear == config.getDaysPerYear()) {
                     //Loger.getInstance().log("Day: " + dayOfYear);
@@ -93,7 +96,10 @@ public class ExecutionAdmin extends Thread{
     }
 
     public void restart(){
-
+        dayOfYear = 0;
+        hours = 0;
+        minutes = 0;
+        injuryStarted = null;
     }
 
     public int getDayOfYear() {
