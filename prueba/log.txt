@@ -19,3 +19,13 @@
 28-16-2021 07:16:59 -Player in the bathroom
 28-17-2021 07:17:02 -Player in the bathroom
 28-17-2021 07:17:06 -Player meditating
+28-05-2021 09:05:18 -Garden gathered
+28-05-2021 09:05:25 -Player in the kitchen
+28-05-2021 09:05:25 -Eaten food: Galleta Soda
+28-06-2021 09:06:28 -Garden gathered
+28-06-2021 09:06:39 -Player in the kitchen
+28-06-2021 09:06:39 -Eaten food: Galleta Soda
+28-07-2021 09:07:02 -Player sleeping
+28-08-2021 09:08:13 -Player in the bathroom
+28-08-2021 09:08:28 -Player in the kitchen
+28-08-2021 09:08:28 -Eaten food: Pollo de Pollo landia
