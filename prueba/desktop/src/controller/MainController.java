@@ -32,6 +32,23 @@ public class MainController {//I need a new name
         addSports();
         Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
         timingThread.start();
+
+        DiseaseReader r = new DiseaseReader();
+        Disease disease = new Disease();
+        disease.setName("Demencia");
+        disease.setSprite("demencia.png");
+        ArrayList<Cure> cures = new ArrayList<>();
+        cures.add(new MeditationAction());
+        disease.setCures(cures);
+        System.out.println( disease.getCures());
+        HashMap<Stats, DiseaseInfo> effects = new HashMap<>();
+        effects.put(Stats.MENTAL_HEALTH, new DiseaseInfo(300,false));
+        effects.put(Stats.FATNESS, new DiseaseInfo(80,true));
+        disease.setEffects(effects);
+        HashMap<Stats, DiseaseInfo> triggers = new HashMap<>();
+        triggers.put(Stats.FATNESS,new DiseaseInfo(30,true));
+        disease.setTriggers(triggers);
+        r.write(disease, "/");
     }
 
     public void executeAction(String nameAction) {
