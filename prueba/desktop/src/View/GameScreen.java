@@ -417,9 +417,10 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object) {
                     showEnemy = false;
-                    AcceptFight = (boolean)object;
-                    if(AcceptFight){
+
+                    if((boolean)object){
                         selectAttack();
+                        AcceptFight = (boolean)object;
                         //llamar a pelear
 
                         //
