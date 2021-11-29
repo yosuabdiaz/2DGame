@@ -153,7 +153,7 @@ public class GameScreen extends BaseScreen{
             nameFile = "enemy2.png";
             Texture Localmove = new Texture(nameFile);
             makeEnemy(Localmove,11);
-        }else if (player1.getAge()==5){
+        }else{
             nameFile = "enemy1.png";
             Texture Localmove = new Texture(nameFile);
             makeEnemy(Localmove,11);
@@ -396,10 +396,10 @@ public class GameScreen extends BaseScreen{
     }
     public boolean AcceptFigth(){
 
-        showEnemy = true;
-        if (AcceptFight == false){
+
             new Dialog("Confirm Figth", skin) {
                 {
+                    showEnemy = true;
                     text("Yes/No");
                     button("Yes", true);
                     button("No", false);
@@ -423,7 +423,7 @@ public class GameScreen extends BaseScreen{
                     }
                 }
             }.show(stage);
-        }
+
         return AcceptFight;
     }
     public boolean AcceptFriend(){
