@@ -20,9 +20,8 @@ public class ConfigurationReader implements ReadWrite<Configuration> {
 
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
     @Override
     public void write(Configuration data, String path) {
