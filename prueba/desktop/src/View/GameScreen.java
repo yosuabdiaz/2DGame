@@ -395,8 +395,7 @@ public class GameScreen extends BaseScreen{
 
     }
     public boolean AcceptFigth(){
-
-
+        AcceptFight = false;
             new Dialog("Confirm Figth", skin) {
                 {
                     showEnemy = true;
@@ -408,7 +407,6 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object) {
                     showEnemy = false;
-
                     if((boolean)object){
                         float speedMove = myController.getPlayer().getSpeed();;
                         MoveToAction mba = new MoveToAction();
