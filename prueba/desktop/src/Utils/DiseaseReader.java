@@ -22,7 +22,7 @@ public class DiseaseReader implements ReadWrite<Disease> {
 
     public void write(Disease data, String path) {
 
-        File file = new File(path + data.getName() + ".json");
+        File file = new File(path);
         if(!file.exists()){
             File f = new File(file.getParentFile().getAbsolutePath());
             f.mkdirs();
