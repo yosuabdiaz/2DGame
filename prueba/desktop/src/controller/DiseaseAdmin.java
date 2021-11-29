@@ -67,6 +67,7 @@ public class DiseaseAdmin {
         for(Stats stat:toUpperStats){
             updateState(player,stat);
         }
+        player.setDisease(null);
         diseaseStarted = null;
     }
 
