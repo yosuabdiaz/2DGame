@@ -73,34 +73,29 @@ public class GameScreen extends BaseScreen{
         sprites.put(1,"main2.png");
         sprites.put(2,"main3.png");
         myController.getPlayer().setSprites(sprites);
+        makeAnimationB(new Texture("dead.png"),11);
         loadGarden();
         loadFriend();
-
         /////////////////////////////
     }
-
-
     @Override
     public void render(float delta) {
         player1 = myController.getPlayer();
-
         elapsedTime += Gdx.graphics.getDeltaTime();
         localBatch.begin();
         localBatch.draw(houseMap, 0, 0, weight, height);
-
         localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
-        //localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
+
+        if(player1.getDisease() != null){
+            localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,65,50,50);
+        }
 
         evolutionCharacter();
         localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
-
         //localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
-
-
         if(showGarden){
             localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
         }
-
         if(showFriend){
             localBatch.draw((TextureRegion) friendAnimation.getKeyFrame(elapsedTime,true), 350,100,60,60);
         }
@@ -109,25 +104,17 @@ public class GameScreen extends BaseScreen{
 
             localBatch.draw((TextureRegion) enemyAnimation.getKeyFrame(elapsedTime,true), 10,360,60,60);
         }
-
-
         drawPlayerInfo();
         drawIndications();
-
         moveTexture2.dispose();
-
         localBatch.end();
-
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
-
     public void setShowGarden(boolean x){
         this.showGarden = x;
     }
-
     public void evolutionCharacter(){
-
         if (player1.getAge()==0){
             nameFile = player1.getSprites().get(0);
             Texture Localmove = new Texture(nameFile);
@@ -142,21 +129,17 @@ public class GameScreen extends BaseScreen{
             makeAnimationC(Localmove,11);
         }
     }
-
     public void loadGarden() {
-
         if (true){
             nameFile = "food.png";
             Texture Localmove = new Texture(nameFile);
             makeGarden(Localmove, 6);
-
         }
     }
     public void loadFriend() {
             nameFile = "enemy3.png";
             Texture Localmove = new Texture(nameFile);
             makefriend(Localmove, 11);
-
     }
     public void loadEnemy() {
         if (player1.getAge()==0){
@@ -191,17 +174,13 @@ public class GameScreen extends BaseScreen{
         houseMap = new Texture("map.jpeg");
         Texture moveTexture = new Texture("moving1.png");
 
-
         Texture sleepTexture = new Texture("sleep.png");
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
 
-
         makeAnimationD(sleepTexture,3);
         weight = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
-
-
     }
     public void loadCharacter(){
         skin = new Skin(Gdx.files.internal("default_skin/uiskin.json"));
@@ -212,7 +191,6 @@ public class GameScreen extends BaseScreen{
         stage.addActor(actor);
         stage.setKeyboardFocus(actor);
     }
-
     public void makeGarden(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
 
@@ -224,7 +202,6 @@ public class GameScreen extends BaseScreen{
         gardenAnimation = new Animation(0.7f, animationArray);
 
     }
-
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
 
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
@@ -262,33 +239,37 @@ public class GameScreen extends BaseScreen{
         }
         animationDownLeft = new Animation(1f/8f, animationArray4);
     }
-
-
     public void drawPlayerInfo(){
         // titles : value
         myText.setColor(Color.BLACK);
         myText.draw(localBatch,"Stats: ",555,460 );
         myText.draw(localBatch,"Age: "+ player1.getAge(),515,440 );
         myText.draw(localBatch,"Sleep: "+ player1.getSleep(),515,420 );
-        myText.draw(localBatch,"hunger: "+ player1.getHunger(),515,400 );
+        myText.draw(localBatch,"Hunger: "+ player1.getHunger(),515,400 );
         if (player1.getDisease() != null){
-            myText.draw(localBatch,"disease: "+ player1.getDisease().getName(),515,380 );
+            myText.draw(localBatch,"Disease: "+ player1.getDisease().getName(),515,380 );
         }else{
-            myText.draw(localBatch,"disease: healthy",515,380 );
+            myText.draw(localBatch,"Disease:good",515,380 );
         }
-        myText.draw(localBatch,"trainingCharge: "+ player1.getTrainingCharge(),515,360 );
-        myText.draw(localBatch,"retainedLiquids: "+ player1.getRetainedLiquids(),515,340 );
-        myText.draw(localBatch,"eatenFood: "+ player1.getEatenFood(),515,320 );
-        myText.draw(localBatch,"happiness: "+ player1.getHappiness(),515,300 );
-        myText.draw(localBatch,"muscles: "+ player1.getMuscles(),515,280 );
-        myText.draw(localBatch,"speed: "+ player1.getSpeed(),515,260 );
-        myText.draw(localBatch,"strength: "+ player1.getStrength(),515,240 );
-        myText.draw(localBatch,"fatness: "+ player1.getFatness(),515,220 );
-        myText.draw(localBatch,"mentalHealth: "+ player1.getMentalHealth(),515,200 );
-        myText.draw(localBatch,"physicalHealth: "+ player1.getPhysicalHealth(),515,180 );
-        myText.draw(localBatch,"meditation: "+ player1.getMeditation(),515,160 );
-        myText.draw(localBatch,"energy: "+ player1.getEnergy(),515,140 );
+        myText.draw(localBatch,"Train Charge: "+ player1.getTrainingCharge(),515,360 );
+        myText.draw(localBatch,"Liquids: "+ player1.getRetainedLiquids(),515,340 );
+        myText.draw(localBatch,"Pop: "+ player1.getEatenFood(),515,320 );
+        myText.draw(localBatch,"Happiness: "+ player1.getHappiness(),515,300 );
+        myText.draw(localBatch,"Muscles: "+ player1.getMuscles(),515,280 );
+        myText.draw(localBatch,"Speed: "+ player1.getSpeed(),515,260 );
+        myText.draw(localBatch,"Strength: "+ player1.getStrength(),515,240 );
+        myText.draw(localBatch,"Fatness: "+ player1.getFatness(),515,220 );
+        myText.draw(localBatch,"MentalHealth: "+ player1.getMentalHealth(),515,200 );
+        myText.draw(localBatch,"PhysicalHealth: "+ player1.getPhysicalHealth(),515,180 );
+        myText.draw(localBatch,"Meditation: "+ player1.getMeditation(),515,160 );
+        myText.draw(localBatch,"Energy: "+ player1.getEnergy(),515,140 );
         myText.draw(localBatch, myController.getExecutionAdmin().getHours()+":"+myController.getExecutionAdmin().getMinutes(),300,90);
+        if (player1.getInjury() != null){
+            myText.draw(localBatch, "Injury:"+player1.getInjury().getName(),300,75);
+        }else{
+            myText.draw(localBatch, "Injury: none",300,75);
+        }
+
     }
     public void drawIndications(){
         myText.draw(localBatch,"1.Bathroom",10,90);
@@ -307,7 +288,6 @@ public class GameScreen extends BaseScreen{
     public MainController getMyController(){
         return this.myController;
     }
-
     public void FoodSelected(){
         Array<String> food = new Array<>();
         food = myController.getStorageNames();
@@ -372,7 +352,6 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
-
     public void selectAttack(){
         player1.cleanSelectedAttacks();
         Array<String> attacks = new Array<>();
@@ -408,7 +387,6 @@ public class GameScreen extends BaseScreen{
         }
 
     }
-
     public boolean AcceptFigth(){
 
         showEnemy = true;
@@ -518,8 +496,27 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
+    public void acceptDead(){
+            final SelectBox<String> selectBox1=new SelectBox<String>(skin);
 
+            new Dialog("Select day:", skin){
+                {
+                    text("");
+                    button("Yes",true);
+                    button("No",false);
+                    selectBox1.setItems("1","2","3");
+                    getContentTable().defaults().pad(10);
+                    getContentTable().add(selectBox1);
+                }
 
+                @Override
+                protected void result(final Object object){
+                    if((boolean) object){
+                        System.out.printf("selectBox1.getSelected() -1 ="+selectBox1.getSelected());
+                    }
+                }
+            }.show(stage);
+    }
     public void resume(final String message){
         new Dialog("Confirm Figth", skin) {
             {
@@ -533,17 +530,6 @@ public class GameScreen extends BaseScreen{
             }
         }.show(stage);
     }
-    @Override
-    public void dispose(){
-        if (localBatch!=null){
-            localBatch.dispose();
-            localBatch = null;
-        }
-        stage.dispose();
-        myText.dispose();
-    }
-
-
     public Skin getSkin(){
         return this.skin;
     }
@@ -573,5 +559,20 @@ public class GameScreen extends BaseScreen{
     }
     public void setAcceptDisease(boolean x){
         this.AcceptDisease = x;
+    }
+    public int getWeight(){
+        return weight;
+    }
+    public int getHeight(){
+        return height;
+    }
+    @Override
+    public void dispose(){
+        if (localBatch!=null){
+            localBatch.dispose();
+            localBatch = null;
+        }
+        stage.dispose();
+        myText.dispose();
     }
 }
