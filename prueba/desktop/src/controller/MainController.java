@@ -19,6 +19,7 @@ public class MainController {//I need a new name
     private Garden garden;
     private HashMap<String, Action> actions;
     private HashMap<String, Sport> sports;
+    private ExecutionAdmin executionAdmin;
 
 
     public MainController() {
@@ -31,7 +32,8 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
-        Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
+        executionAdmin = new ExecutionAdmin(player, garden, storage);
+        Thread timingThread = new Thread(executionAdmin);
         NPCAdmin.loadData();
         timingThread.start();
 
@@ -157,5 +159,9 @@ public class MainController {//I need a new name
                 player.addSelectedAttacks(attack);
             }
         }
+    }
+
+    public ExecutionAdmin getExecutionAdmin() {
+        return executionAdmin;
     }
 }
