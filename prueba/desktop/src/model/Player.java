@@ -29,6 +29,15 @@ public class Player extends Fighter implements GameContex {
     protected int x = 0;
     protected int y = 0;
 
+    public Player() {
+        Attack attack1 = new Attack("default1",0,"deafult1.png");
+        Attack attack2 = new Attack("default2",0,"deafult2.png");
+        ArrayList<Attack> defaultAttacks = new ArrayList<>();
+        defaultAttacks.add(attack1);
+        defaultAttacks.add(attack2);
+        setAttackSkills(defaultAttacks);
+    }
+
     public ArrayList<Attack> getSelectedAttacks(){
         return this.selectedAttacks;
     }
