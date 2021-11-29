@@ -41,7 +41,10 @@ public class DiseaseAdmin {
     public static void evaluateHealth(Player player, Date now){
 
         for (Disease disease : diseaseList){
+            System.out.println(disease.getName());
+            System.out.println(disease.getTriggers());
             if(checkDisease(disease.getTriggers(), player)){
+
                 setDiseaseToPlayer(disease, player);
                 return;
             }
@@ -138,7 +141,7 @@ public class DiseaseAdmin {
     }
 
     public static void chargeData(){
-        File folder = new File(Configuration.getInstance().getFoodPath());
+        /*File folder = new File(Configuration.getInstance().getDiseasePath());
         File[] files = folder.listFiles();
         DiseaseReader r = new DiseaseReader();
         if(files != null){
@@ -149,7 +152,7 @@ public class DiseaseAdmin {
                     diseaseList.add(disease);
                 }
             }
-        }
+        }*/
         addDummyDisease();
     }
 
