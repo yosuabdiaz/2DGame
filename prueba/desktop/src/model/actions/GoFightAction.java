@@ -18,8 +18,7 @@ public class GoFightAction extends Action  {
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         EnemyPlayer enemy = (EnemyPlayer) contex.get("enemy");
-        System.out.println("player.getAttackSkills().size().size()="+player.getAttackSkills().size());
-        System.out.println("player.getSelectedAttacks().size()="+player.getSelectedAttacks().size());
+        selectAttacks(enemy,player);
         if(player.getSelectedAttacks().size() > 0){
             figth(player,enemy);
             Loger.getInstance().log("Player Fighting");
@@ -27,6 +26,15 @@ public class GoFightAction extends Action  {
         player.clearSelectedAttacks();
         render();
 
+    }
+
+    private void selectAttacks(EnemyPlayer enemy, Player player) {
+        int numberAttacksEnemy = enemy.getAttackSkills().size();
+        int numberAttacksPlayer = player.getAttackSkills().size();
+        Random random = new Random();
+        for(int i = 0; i < numberAttacksEnemy; i++){
+            player.addSelectedAttacks(player.getAttackSkills().get(random.nextInt(numberAttacksPlayer)));
+        }
     }
 
     private void figth(Player player, EnemyPlayer enemy) {

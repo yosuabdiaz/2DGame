@@ -410,16 +410,12 @@ public class GameScreen extends BaseScreen{
                     showEnemy = false;
 
                     if((boolean)object){
-                        selectAttack();
                         float speedMove = myController.getPlayer().getSpeed();;
                         MoveToAction mba = new MoveToAction();
                         mba.setPosition(10,350f);
                         mba.setDuration(speedMove);
                         actor.addAction(mba);
                         AcceptFight = (boolean)object;
-                        //llamar a pelear
-
-                        //
                     }
                 }
             }.show(stage);
