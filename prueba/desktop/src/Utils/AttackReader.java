@@ -1,27 +1,30 @@
 package Utils;
 
-import com.google.gson.*;
-import model.Disease;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import model.Attack;
+import model.Medicine;
 import model.ReadWrite;
 
 import java.io.*;
 
-public class DiseaseReader implements ReadWrite<Disease> {
+public class AttackReader implements ReadWrite<Attack> {
+
     @Override
-    public Disease read(String path) {
+    public Attack read(String path) {
         try {
             File file = new File(path);
             BufferedReader br
                     = new BufferedReader(new FileReader(file));
             Gson gson = new Gson();
-            return  gson.fromJson(br, Disease.class);
+            return  gson.fromJson(br, Attack.class);
         } catch (FileNotFoundException e) {
             return null;
         }
     }
 
-    public void write(Disease data, String path) {
-
+    @Override
+    public void write(Attack data, String path) {
         File file = new File(path + data.getName() + ".json");
         if(!file.exists()){
             File f = new File(file.getParentFile().getAbsolutePath());
@@ -37,6 +40,5 @@ public class DiseaseReader implements ReadWrite<Disease> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

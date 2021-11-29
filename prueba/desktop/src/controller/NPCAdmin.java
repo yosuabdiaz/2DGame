@@ -1,14 +1,13 @@
 package controller;
 
+import Utils.AttackReader;
 import View.mainView;
-import model.Attack;
-import model.EnemyPlayer;
-import model.FriendPlayer;
-import model.Player;
+import model.*;
 import model.actions.GameContex;
 import model.actions.GoFightAction;
 import model.actions.SocializeAction;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.ArrayList;
@@ -77,5 +76,21 @@ public class NPCAdmin {
 
     public static void setAttacksToDay(int attacksToDay) {
         NPCAdmin.attacksToDay = attacksToDay;
+    }
+
+
+    public static void loadData() {
+        File folder = new File(Configuration.getInstance().getAttacksPath());
+        File[] files = folder.listFiles();
+        AttackReader r = new AttackReader();
+        if (files != null) {
+            for (File f : files) {
+                System.out.println(f);
+                Attack skill = r.read(f.getPath());
+                if (skill != null) {
+                    skills.add(skill);
+                }
+            }
+        }
     }
 }

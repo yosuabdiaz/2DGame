@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.AttackReader;
 import Utils.DiseaseReader;
 import Utils.FoodReader;
 import Utils.MedicineReader;
@@ -31,7 +32,9 @@ public class MainController {//I need a new name
         sports = new HashMap<String, Sport>();
         addSports();
         Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
+        NPCAdmin.loadData();
         timingThread.start();
+
     }
 
     public void executeAction(String nameAction) {
