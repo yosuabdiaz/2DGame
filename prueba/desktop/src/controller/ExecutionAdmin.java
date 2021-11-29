@@ -1,6 +1,7 @@
 package controller;
 
 import Utils.Loger;
+import View.mainView;
 import model.*;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ public class ExecutionAdmin extends Thread{
     private MementoAdmin mementoAdmin = new MementoAdmin();
     private Storage storage;
     private Garden garden;
+    private boolean sleepRecomended = false;
 
     public ExecutionAdmin(Player player, Garden garden, Storage storage){
         this.player = player;
@@ -50,6 +52,9 @@ public class ExecutionAdmin extends Thread{
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
                     player.setMeditation(0);
+                }
+                if(hours >= config.getHoursPerDay()*0.75 && sleepRecomended == false){
+                    //mainView.getInstance().getMyGameScreen().getAcceptSleep();
                 }
                 if (dayOfYear == config.getDaysPerYear()) {
                     //Loger.getInstance().log("Day: " + dayOfYear);
