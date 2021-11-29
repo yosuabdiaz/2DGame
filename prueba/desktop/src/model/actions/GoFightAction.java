@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +23,7 @@ public class GoFightAction extends Action  {
         //Automatizar
         figth(player,enemy);
         render();
+        Loger.getInstance().log("Player Fighting");
     }
 
     private void figth(Player player, EnemyPlayer enemy) {

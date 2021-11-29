@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.Loger;
 import model.*;
 
 import java.util.Date;
@@ -51,6 +52,7 @@ public class ExecutionAdmin extends Thread{
                     player.setMeditation(0);
                 }
                 if (dayOfYear == config.getDaysPerYear()) {
+                    //Loger.getInstance().log("Day: " + dayOfYear);
                     player.setAge(player.getAge() + 1);
                     dayOfYear = 0;
                 }

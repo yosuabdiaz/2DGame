@@ -1,0 +1,21 @@
+28-16-2021 07:16:02 -Player exercising
+28-16-2021 07:16:09 -Player in the bathroom
+28-16-2021 07:16:16 -Player sleeping
+28-16-2021 07:16:29 -Garden gathered
+28-16-2021 07:16:32 -Player sleeping
+28-16-2021 07:16:37 -Player in the kitchen
+28-16-2021 07:16:37 -Eaten food: Horpacha
+28-16-2021 07:16:42 -Player in the bathroom
+28-16-2021 07:16:47 -Player in the kitchen
+28-16-2021 07:16:47 -Eaten food: Galleta Soda
+28-16-2021 07:16:49 -Player in the kitchen
+28-16-2021 07:16:49 -Eaten food: Galleta Soda
+28-16-2021 07:16:50 -Player in the kitchen
+28-16-2021 07:16:50 -Eaten food: Galleta Soda
+28-16-2021 07:16:54 -Player in the kitchen
+28-16-2021 07:16:54 -Eaten food: Horpacha
+28-16-2021 07:16:56 -Player in the bathroom
+28-16-2021 07:16:58 -Player in the bathroom
+28-16-2021 07:16:59 -Player in the bathroom
+28-17-2021 07:17:02 -Player in the bathroom
+28-17-2021 07:17:06 -Player meditating

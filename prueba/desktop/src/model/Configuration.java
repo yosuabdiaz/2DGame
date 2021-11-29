@@ -10,7 +10,7 @@ public class Configuration {
     private String medicinePath = "./medicine/";
     private String friendsPath = "./friends/";
     private String enemyPath = "./enemy/";
-    private String logPath = "./logs/";
+    private String logPath = "./";
     private static Configuration instance;
     private int hourDuration = 5;
     private int hoursPerDay = 24;
@@ -95,6 +95,14 @@ public class Configuration {
 
     public void setDiseasePath(String diseasePath) {
         this.diseasePath = diseasePath;
+    }
+
+    public String getLogPath() {
+        return logPath;
+    }
+
+    public void setLogPath(String logPath) {
+        this.logPath = logPath;
     }
 
     public String getFoodPath() {

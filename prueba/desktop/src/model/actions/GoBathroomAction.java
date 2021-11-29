@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,7 @@ public class GoBathroomAction extends Action{
         render();
         piss(player);
         poop(player);
+        Loger.getInstance().log("Player in the bathroom");
     }
 
     @Override

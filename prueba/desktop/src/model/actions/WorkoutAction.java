@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import model.Attack;
 import model.Injury;
 import model.Player;
@@ -21,6 +22,7 @@ public class WorkoutAction extends Action{
             getInjury(sport,player);
             updateStats(player);
             render();
+            Loger.getInstance().log("Player exercising");
         }
     }
 

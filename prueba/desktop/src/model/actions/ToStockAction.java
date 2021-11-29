@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,7 @@ public class ToStockAction extends Action{ //select food to eat
     public void execute(HashMap<String, GameContex> contex) {
         Player player = (Player) contex.get("player");
         render();
+        Loger.getInstance().log("Player in the kitchen");
     }
 
     @Override

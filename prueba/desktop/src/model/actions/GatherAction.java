@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +20,7 @@ public class GatherAction extends Action{
         collectFood(garden, storage);
         collectMedicine(garden, storage);
         render();
+        Loger.getInstance().log("Garden gathered");
     }
 
     private void collectMedicine(Garden garden, Storage storage) {

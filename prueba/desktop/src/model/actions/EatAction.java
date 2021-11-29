@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,13 +18,16 @@ public class EatAction extends Action{
     @Override
     public void execute(HashMap<String,GameContex> contex) {
         render();
+        Loger l = Loger.getInstance();
         Player player = (Player) contex.get("player");
         if(isFood(contex.keySet())){
             Food selectedFood = (Food) contex.get("food");
             eat(player,selectedFood);
             fatCalc(player,selectedFood);
+            l.log("Eaten food: " + selectedFood.getName());
         } else {
             Medicine selectedMedicine = (Medicine) contex.get("medicine");
+            l.log("Eaten medicine: " + selectedMedicine.getName());
             //DiseaseAdmin stuff
         }
     }

@@ -1,5 +1,6 @@
 package model.actions;
 
+import Utils.Loger;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,6 +16,7 @@ public class MeditationAction extends Action{
         Player player = (Player) contex.get("player");
         relax(player);
         render();
+        Loger.getInstance().log("Player meditating");
     }
 
     private void relax(Player player) {
