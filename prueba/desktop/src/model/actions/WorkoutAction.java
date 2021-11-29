@@ -66,4 +66,9 @@ public class WorkoutAction extends Action{
     public void render() {
 
     }
+
+    @Override
+    public String getName() {
+        return "WorkoutAction";
+    }
 }

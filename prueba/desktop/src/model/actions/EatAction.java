@@ -45,6 +45,11 @@ public class EatAction extends Action{
         g.makeAnimationA(new Texture("sleep.png"),3);
     }
 
+    @Override
+    public String getName() {
+        return "EatAction";
+    }
+
     /**
      * Decide what stat of food fill in player, piss or shit
      * @param food just eated

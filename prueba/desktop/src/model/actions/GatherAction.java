@@ -42,4 +42,9 @@ public class GatherAction extends Action{
         GameScreen g = m.getMyGameScreen();
         g.makeAnimationA(new Texture("sleep.png"),3);
     }
+
+    @Override
+    public String getName() {
+        return "GatherAction";
+    }
 }

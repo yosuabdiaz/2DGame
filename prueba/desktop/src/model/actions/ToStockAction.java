@@ -22,4 +22,9 @@ public class ToStockAction extends Action{ //select food to eat
         GameScreen g = m.getMyGameScreen();
         g.makeAnimationA(new Texture("chest.png"),3);
     }
+
+    @Override
+    public String getName() {
+        return "ToStockAction";
+    }
 }
