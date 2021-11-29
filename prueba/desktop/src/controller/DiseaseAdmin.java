@@ -47,8 +47,61 @@ public class DiseaseAdmin {
         }
     }
 
-    public static void cure(){
+    public static void cure(Player player, Cure cure){
+        ArrayList<Cure> cures = player.getDisease().getCures();
+        for(Cure bombastic:cures){
+            if(bombastic.getName().equals(cure.getName())){
+                cleanStatusPlayer(player);
+            }
+        }
+    }
+
+    private static void cleanStatusPlayer(Player player) {
+        ArrayList<Stats> toUpperStats = new ArrayList<Stats>(player.getDisease().getEffects().keySet());
+        for(Stats stat:toUpperStats){
+            updateState(player,stat);
+        }
         diseaseStarted = null;
+    }
+
+    private static void updateState(Player player, Stats stats){
+        switch (stats){
+            case SLEEP:
+                player.setSleep(0);
+                break;
+            case HUNGER:
+                player.setHunger(0);
+                break;
+            case RETAINED_LIQUIDS:
+                player.setRetainedLiquids(0);
+                break;
+            case EATEN_FOOD:
+                player.setEatenFood(0);
+                break;
+            case HAPPINESS:
+                player.setMentalHealth(50);
+                break;
+            case MUSCLES:
+                player.setMuscles(0);
+                break;
+            case SPEED:
+                player.setSpeed(1f);
+                break;
+            case STRENGTH:
+                player.setStrength(0);
+                break;
+            case FATNESS:
+                player.setFatness(0);
+                break;
+            case MENTAL_HEALTH:
+                player.setMentalHealth(50);
+                break;
+            case PHYSICAL_HEALTH:
+                player.setPhysicalHealth(50);
+                break;
+            case MEDITATION:
+                break;
+        }
     }
 
     public static void setDiseaseToPlayer(Disease disease, Player player) {
@@ -83,7 +136,7 @@ public class DiseaseAdmin {
         return false;
     }
 
-    private ArrayList<Disease> chargeData(){
+    private void chargeData(){
         File folder = new File(Configuration.getInstance().getFoodPath());
         File[] files = folder.listFiles();
         DiseaseReader r = new DiseaseReader();
@@ -97,7 +150,6 @@ public class DiseaseAdmin {
             }
         }
         addDummyDisease();
-        return null;
     }
 
     private void addDummyDisease() {
