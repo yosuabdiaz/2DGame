@@ -16,7 +16,7 @@ import View.mainView;
 
 public class DiseaseAdmin {
 
-    private static Date diseaseStarted;
+    private static Date diseaseStarted ;
     private static ArrayList<Disease> diseaseList = new ArrayList<>();
 
     public static Date getDiseaseStarted() {
@@ -54,6 +54,9 @@ public class DiseaseAdmin {
     }
 
     public static void cure(Player player, Cure cure){
+        if(player.getDisease() == null){
+            return;
+        }
         ArrayList<Cure> cures = player.getDisease().getCures();
         for(Cure bombastic:cures){
             if(bombastic.getName().equals(cure.getName())){
