@@ -16,7 +16,7 @@ import org.lwjgl.Sys;
 public class DiseaseAdmin {
 
     private static Date diseaseStarted;
-    private static ArrayList<Disease> diseaseList;
+    private static ArrayList<Disease> diseaseList = new ArrayList<>();
 
     public static Date getDiseaseStarted() {
         return diseaseStarted;
@@ -137,7 +137,7 @@ public class DiseaseAdmin {
         return false;
     }
 
-    private void chargeData(){
+    public static void chargeData(){
         File folder = new File(Configuration.getInstance().getFoodPath());
         File[] files = folder.listFiles();
         DiseaseReader r = new DiseaseReader();
@@ -153,7 +153,7 @@ public class DiseaseAdmin {
         addDummyDisease();
     }
 
-    private void addDummyDisease() {
+    private static void addDummyDisease() {
         Disease disease = new Disease();
         disease.setName("Demencia");
         disease.setSprite("demencia.png");
