@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Set;
 import model.actions.Action;
 import model.actions.MeditationAction;
+import org.lwjgl.Sys;
 
 public class DiseaseAdmin {
 

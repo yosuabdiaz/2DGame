@@ -51,7 +51,17 @@ public class ExecutionAdmin extends Thread{
                     mementoAdmin.addMemento(new Memento(player, storage));
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
+                    DiseaseAdmin.evaluateHealth( player, new Date(System.currentTimeMillis()) );
                     player.setMeditation(0);
+                    Date disease = DiseaseAdmin.getDiseaseStarted();
+                    if( disease != null){
+                        Date now = new Date(System.currentTimeMillis());
+                        int daysSinceStarted = (int)((now.getTime() - disease.getTime())/1000 /
+                                                    (config.getHourDuration() * config.getHoursPerDay()));
+                        if(daysSinceStarted >= 3){
+                            System.out.println("HA MUERTO");
+                        }
+                    }
                 }
                 if(hours >= config.getHoursPerDay()*0.75 && sleepRecomended == false){
                     //mainView.getInstance().getMyGameScreen().getAcceptSleep();
