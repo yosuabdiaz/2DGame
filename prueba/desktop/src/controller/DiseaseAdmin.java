@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.DiseaseReader;
 import model.*;
 
 import javax.swing.*;
@@ -8,8 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
+import model.actions.Action;
+import model.actions.MeditationAction;
 
 public class DiseaseAdmin {
+
+    private static Date diseaseStarted;
+    private static ArrayList<Disease> diseaseList;
+
     public static Date getDiseaseStarted() {
         return diseaseStarted;
     }
@@ -21,9 +28,6 @@ public class DiseaseAdmin {
     public static ArrayList<Disease> getDiseaseList() {
         return diseaseList;
     }
-
-    private static Date diseaseStarted;
-    private static ArrayList<Disease> diseaseList;
 
     private static void setDiseaseList(ArrayList<Disease> list){
         diseaseList = list;
@@ -80,8 +84,50 @@ public class DiseaseAdmin {
     }
 
     private ArrayList<Disease> chargeData(){
-        File folder = new File(Configuration.getInstance().getDiseasePath());
+        File folder = new File(Configuration.getInstance().getFoodPath());
+        File[] files = folder.listFiles();
+        DiseaseReader r = new DiseaseReader();
+        if(files != null){
+            for(File f : files) {
+                System.out.println(f);
+                Disease disease = r.read(f.getPath());
+                if (disease != null) {
+                    diseaseList.add(disease);
+                }
+            }
+        }
+        addDummyDisease();
         return null;
+    }
+
+    private void addDummyDisease() {
+        Disease disease = new Disease();
+        disease.setName("Demencia");
+        disease.setSprite("demencia.png");
+        ArrayList<Cure> cures = new ArrayList<>();
+        cures.add(new MeditationAction());
+        disease.setCures(cures);
+        HashMap<Stats, DiseaseInfo> effects = new HashMap<>();
+        effects.put(Stats.MENTAL_HEALTH, new DiseaseInfo(300,false));
+        effects.put(Stats.FATNESS, new DiseaseInfo(80,true));
+        disease.setEffects(effects);
+        HashMap<Stats, DiseaseInfo> triggers = new HashMap<>();
+        triggers.put(Stats.FATNESS,new DiseaseInfo(30,true));
+        disease.setTriggers(triggers);
+        diseaseList.add(disease);
+        Disease disease2 = new Disease();
+        disease2.setName("Vertigo");
+        disease2.setSprite("vertigo.png");
+        ArrayList<Cure> cures2 = new ArrayList<>();
+        cures2.add(new Medicine("Acetaminofen",2));
+        disease2.setCures(cures2);
+        HashMap<Stats, DiseaseInfo> effects2 = new HashMap<>();
+        effects2.put(Stats.MENTAL_HEALTH, new DiseaseInfo(300,false));
+        disease2.setEffects(effects2);
+        HashMap<Stats, DiseaseInfo> triggers2 = new HashMap<>();
+        triggers2.put(Stats.FATNESS,new DiseaseInfo(15,true));
+        disease2.setTriggers(triggers2);
+        diseaseList.add(disease2);
     }
 
 }
