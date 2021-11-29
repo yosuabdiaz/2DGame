@@ -19,10 +19,10 @@ public class NPCAdmin {
 
     public static void generateNPC(Player player){
         Random rand = new Random();
-        if(rand.nextInt(2) == 1 && !visited){
+        if(rand.nextInt(100) < Configuration.getInstance().getFriendProbability() && !visited){
             NPCAdmin.generateFriend(player);
         }
-        else if(attacksToDay < 3){
+        else if(rand.nextInt(100) < Configuration.getInstance().getEnemyProbability() && attacksToDay < 3){
             generateEnemy(player.getAttackSkills().size(), player.getEnergy(), player);
         }
     }

@@ -56,10 +56,7 @@ public class ExecutionAdmin extends Thread{
                     player.setAge(player.getAge() + 1);
                     dayOfYear = 0;
                 }
-                int npcProbability = rand.nextInt(100);
-                if (npcProbability < 2) {
-                    NPCAdmin.generateNPC(player);
-                }
+                NPCAdmin.generateNPC(player);
             }
 
 
