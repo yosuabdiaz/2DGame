@@ -4,10 +4,7 @@ import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
 import controller.DiseaseAdmin;
-import model.Cure;
-import model.Food;
-import model.Medicine;
-import model.Player;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +31,56 @@ public class EatAction extends Action{
     }
 
     private void updateStats(Player player, Medicine selectedMedicine) {
-        
+        ArrayList<Stats> toUpdate = new ArrayList<>(selectedMedicine.getEffects().keySet());
+        for(Stats stat:toUpdate){
+            updateStat(player,stat,selectedMedicine.getEffects().get(stat));
+        }
+    }
+
+    private void updateStat(Player player, Stats stat, DiseaseInfo diseaseInfo) {
+        switch (stat){
+            case SLEEP:
+                player.setSleep(player.getSleep() + putSign(diseaseInfo));
+                break;
+            case HUNGER:
+                player.setHunger(player.getHunger() + putSign(diseaseInfo));
+                break;
+            case RETAINED_LIQUIDS:
+                player.setRetainedLiquids(player.getRetainedLiquids() + putSign(diseaseInfo));
+                break;
+            case EATEN_FOOD:
+                player.setEatenFood(player.getEatenFood() + putSign(diseaseInfo));
+                break;
+            case HAPPINESS:
+                player.setMentalHealth(player.getMentalHealth() + putSign(diseaseInfo));
+                break;
+            case MUSCLES:
+                player.setMuscles(player.getMuscles() + putSign(diseaseInfo));
+                break;
+            case SPEED:
+                player.setSpeed(player.getSpeed() + (float) putSign(diseaseInfo));
+                break;
+            case STRENGTH:
+                player.setStrength(player.getStrength() + putSign(diseaseInfo));
+                break;
+            case FATNESS:
+                player.setFatness(player.getFatness() + putSign(diseaseInfo));
+                break;
+            case MENTAL_HEALTH:
+                player.setMentalHealth(player.getMentalHealth() + putSign(diseaseInfo));
+                break;
+            case PHYSICAL_HEALTH:
+                player.setPhysicalHealth(player.getPhysicalHealth() + putSign(diseaseInfo));
+                break;
+        }
+    }
+
+    private int putSign(DiseaseInfo diseaseInfo){
+        if(diseaseInfo.isUp()){
+            return diseaseInfo.getPoint();
+        } else {
+            return -diseaseInfo.getPoint();
+        }
     }
 
     private boolean isFood(Set<String> keySet) {
