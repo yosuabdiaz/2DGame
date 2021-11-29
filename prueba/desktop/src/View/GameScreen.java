@@ -29,13 +29,14 @@ import java.util.HashMap;
 public class GameScreen extends BaseScreen{
     //Interface variables
     private SpriteBatch localBatch;
-    private  Texture houseMap;
+    private Texture houseMap;
     private int weight;
     private int height;
     private Animation animationTopRight, animationTopLeft,
             animationDownRight, animationDownLeft;
 
     private Animation gardenAnimation;
+    private Animation friendAnimation;
     private BitmapFont  myText;
     private	float elapsedTime;
     private Stage stage;
@@ -56,7 +57,8 @@ public class GameScreen extends BaseScreen{
     private int control=0;
     protected Texture moveTexture2 = new Texture("main1.png");
     protected String nameFile;
-    protected boolean showGarden = false;
+    protected boolean showGarden = true;
+    private boolean showFriend = false;
     public GameScreen(mainView myView) {
         super(myView);
         localBatch = myView.getBatch();
@@ -69,6 +71,8 @@ public class GameScreen extends BaseScreen{
         sprites.put(1,"main2.png");
         sprites.put(2,"main3.png");
         myController.getPlayer().setSprites(sprites);
+        loadGarden();
+        loadFriend();
         /////////////////////////////
     }
 
@@ -82,22 +86,27 @@ public class GameScreen extends BaseScreen{
         localBatch.draw(houseMap, 0, 0, weight, height);
 
         localBatch.draw((TextureRegion) animationTopRight.getKeyFrame(elapsedTime,true),515,60,50,50);
-        localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
+        //localBatch.draw((TextureRegion) animationTopLeft.getKeyFrame(elapsedTime,true),575,58,50,50);
 
         evolutionCharacter();
         localBatch.draw((TextureRegion) animationDownRight.getKeyFrame(elapsedTime,true),575,5,50,65);
 
-        localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
+        //localBatch.draw((TextureRegion) animationDownLeft.getKeyFrame(elapsedTime,true),515,0,50,50);
 
-        loadGarden();
 
         if(showGarden){
             localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
         }
 
+        if(showFriend){
+            localBatch.draw((TextureRegion) friendAnimation.getKeyFrame(elapsedTime,true), 350,100,60,60);
+        }
+
         drawPlayerInfo();
         drawIndications();
+
         moveTexture2.dispose();
+
         localBatch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -108,20 +117,17 @@ public class GameScreen extends BaseScreen{
         this.showGarden = x;
     }
 
-    public boolean getShowGarden(){
-        return showGarden;
-    }
     public void evolutionCharacter(){
 
         if (player1.getAge()==0){
             nameFile = player1.getSprites().get(0);
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if (player1.getAge()==1){
+        }else if (player1.getAge()==5){
             nameFile = player1.getSprites().get(1);
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
-        }else if(player1.getAge()==2) {
+        }else if(player1.getAge()==9) {
             nameFile = player1.getSprites().get(2);
             Texture Localmove = new Texture(nameFile);
             makeAnimationC(Localmove,11);
@@ -130,23 +136,37 @@ public class GameScreen extends BaseScreen{
 
     public void loadGarden() {
 
-        if (showGarden){
+        if (true){
             nameFile = "food.png";
             Texture Localmove = new Texture(nameFile);
             makeGarden(Localmove, 6);
+
         }
+    }
+    public void loadFriend() {
+            nameFile = "enemy3.png";
+            Texture Localmove = new Texture(nameFile);
+            makefriend(Localmove, 11);
+
+    }
+    public void makefriend(Texture tmpTexture, int numberOfSplits){
+        TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
+        TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
+        int index = 0;
+        for(int i= 0; i< numberOfSplits; i++){
+            animationArray[index++] = moveTextureRegion[0][i];
+        }
+        friendAnimation = new Animation(0.1f, animationArray);
     }
     public void loadImages(){
         houseMap = new Texture("map.jpeg");
         Texture moveTexture = new Texture("moving1.png");
-        Texture moveTexture2 = new Texture("moving2.png");
-        Texture attackTexture = new Texture("attack.png");
+
+
         Texture sleepTexture = new Texture("sleep.png");
         myText = new BitmapFont();
         makeAnimationA(moveTexture,6);
-        makeAnimationB(attackTexture,6);
 
-        //makeAnimationC(moveTexture2,9);
 
         makeAnimationD(sleepTexture,3);
         weight = Gdx.graphics.getWidth();
@@ -166,12 +186,14 @@ public class GameScreen extends BaseScreen{
 
     public void makeGarden(Texture tmpTexture, int numberOfSplits){
         TextureRegion[][] moveTextureRegion = TextureRegion.split(tmpTexture,tmpTexture.getWidth()/numberOfSplits,tmpTexture.getHeight());
+
         TextureRegion[] animationArray = new TextureRegion[numberOfSplits];
         int index = 0;
         for(int i= 0; i< numberOfSplits; i++){
             animationArray[index++] = moveTextureRegion[0][i];
         }
         gardenAnimation = new Animation(0.7f, animationArray);
+
     }
 
     public void makeAnimationA(Texture tmpTexture, int numberOfSplits){
@@ -237,6 +259,7 @@ public class GameScreen extends BaseScreen{
         myText.draw(localBatch,"physicalHealth: "+ player1.getPhysicalHealth(),515,180 );
         myText.draw(localBatch,"meditation: "+ player1.getMeditation(),515,160 );
         myText.draw(localBatch,"energy: "+ player1.getEnergy(),515,140 );
+        myText.draw(localBatch, myController.getExecutionAdmin().getHours()+":"+myController.getExecutionAdmin().getMinutes(),300,90);
     }
     public void drawIndications(){
         myText.draw(localBatch,"1.Bathroom",10,90);
@@ -290,6 +313,7 @@ public class GameScreen extends BaseScreen{
         food = myController.getStorageNames();
         final SelectBox<String> selectBox=new SelectBox<String>(skin);
         final Array<String> finalFood = food;
+        makeAnimationA(new Texture("chest.png"),3);
         Dialog d = new Dialog("Select food", skin) {
             {
                 text("Select:");
@@ -418,6 +442,7 @@ public class GameScreen extends BaseScreen{
 
 
     public boolean AcceptFriend(){
+        showFriend = true;
         if (AcceptFriend == false){
             new Dialog("Confirm Friend", skin) {
                 {
@@ -428,6 +453,7 @@ public class GameScreen extends BaseScreen{
 
                 @Override
                 protected void result(final Object object) {
+                    showFriend = false;
                     AcceptFriend = (boolean)object;
                     System.out.printf(object.toString());
                 }
@@ -467,7 +493,9 @@ public class GameScreen extends BaseScreen{
                 @Override
                 protected void result(final Object object) {
                     AcceptSleep = (boolean)object;
-                    System.out.printf(object.toString());
+                    if(AcceptSleep){
+                        myController.executeAction("Sleep");
+                    }
                 }
             }.show(stage);
         }
