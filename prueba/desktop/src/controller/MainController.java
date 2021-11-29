@@ -20,6 +20,7 @@ public class MainController {//I need a new name
     private HashMap<String, Action> actions;
     private HashMap<String, Sport> sports;
     private ExecutionAdmin executionAdmin;
+    Thread timingThread;
 
 
     public MainController() {
@@ -46,7 +47,7 @@ public class MainController {//I need a new name
             executionAdmin.setPlayer(player);
             storage = save.getStorage();
         }
-        Thread timingThread = new Thread(executionAdmin);
+        timingThread = new Thread(executionAdmin);
         NPCAdmin.loadData();
         timingThread.start();
 
@@ -65,16 +66,21 @@ public class MainController {//I need a new name
 
     public void dead(int day){
         if(day < Configuration.getInstance().getSavedDays()) {
-            executionAdmin.restart();
+            executionAdmin.pause();
             Memento memento = executionAdmin.getMementoAdmin().getMemento(day);
-            executionAdmin.getMementoAdmin().clearMemento();
+            //executionAdmin.getMementoAdmin().clearMemento();
+            timingThread.interrupt();
             player = memento.getPlayer();
+            System.out.println(player.getAge() + "Death");
             storage = memento.getStorage();
             executionAdmin.setPlayer(player);
             garden.harvestGardenFood();
             garden.harvestGardenCures();
+            DiseaseAdmin.setDiseaseStarted(null);
+            player.setDisease(null);
             executionAdmin.setStorage(storage);
-            executionAdmin.run();
+            timingThread = new Thread(executionAdmin);
+            timingThread.start();
         }
     }
 

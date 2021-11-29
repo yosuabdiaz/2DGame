@@ -23,7 +23,7 @@ public class MementoAdmin {
 
     public void addMemento(Memento memento){
         System.out.println(memento.getPlayer().getSprites() + " Sprites print");
-        if(states.size() > maxSavedStates -2){
+        if(states.size() > maxSavedStates -1){
             states.remove();
         }
         System.out.println( memento.getPlayer().getAge());
@@ -33,7 +33,7 @@ public class MementoAdmin {
 
     public Memento getMemento(int index){
         System.out.println(states.size());
-        if(index >= 0 && index < maxSavedStates ){
+        if(index >= 0 && index < states.size() ){
 
             return (Memento) ((LinkedList)states).get(index);
         }
