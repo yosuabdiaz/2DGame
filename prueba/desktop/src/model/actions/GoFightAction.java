@@ -21,9 +21,12 @@ public class GoFightAction extends Action  {
         //Dialogo para seleccionar
         mainView.getInstance().getMyGameScreen().selectAttack();
         //Automatizar
-        figth(player,enemy);
+        if(player.getSelectedAttacks().size() > 0){
+            figth(player,enemy);
+            Loger.getInstance().log("Player Fighting");
+        }
         render();
-        Loger.getInstance().log("Player Fighting");
+
     }
 
     private void figth(Player player, EnemyPlayer enemy) {
