@@ -301,6 +301,8 @@ public class Player extends Fighter implements GameContex {
         clone.setHunger(hunger);
         clone.setMentalHealth(mentalHealth);
         clone.setMuscles(muscles);
-
+        clone.setEnergy(getEnergy());
+        clone.setName(getName());
+        return clone;
     }
 }

@@ -76,6 +76,8 @@ public class Storage implements GameContex {
         return medicine.get(name);
     }
 
+
+
     @Override
     public String toString() {
         return "Storage{" +
@@ -84,5 +86,14 @@ public class Storage implements GameContex {
                 "\namountFood=" + amountFood +
                 "\namountMedicine=" + amountMedicine +
                 '}';
+    }
+
+    public Storage clone(){
+        Storage clone = new Storage();
+        clone.amountFood = amountFood;
+        clone.amountMedicine = amountMedicine;
+        clone.food = food;
+        clone.medicine = medicine;
+        return clone;
     }
 }

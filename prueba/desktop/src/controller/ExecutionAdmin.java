@@ -46,7 +46,7 @@ public class ExecutionAdmin extends Thread{
                     dayOfYear++;
                     hours = 0;
                     garden.growGarden();
-                    mementoAdmin.addMemento(new Memento(player, storage));
+                    mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
                     player.setMeditation(0);
