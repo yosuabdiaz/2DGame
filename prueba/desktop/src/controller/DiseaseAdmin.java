@@ -1,6 +1,7 @@
 package controller;
 
 import Utils.DiseaseReader;
+import View.mainView;
 import model.*;
 
 import javax.swing.*;
@@ -44,8 +45,9 @@ public class DiseaseAdmin {
             System.out.println(disease.getName());
             System.out.println(disease.getTriggers());
             if(checkDisease(disease.getTriggers(), player)){
-
-                setDiseaseToPlayer(disease, player);
+                if(mainView.getInstance().getMyGameScreen().AcceptDisease()) {
+                    setDiseaseToPlayer(disease, player);
+                }
                 return;
             }
         }
