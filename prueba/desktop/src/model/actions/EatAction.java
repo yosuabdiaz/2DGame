@@ -3,6 +3,8 @@ package model.actions;
 import View.GameScreen;
 import View.mainView;
 import com.badlogic.gdx.graphics.Texture;
+import controller.DiseaseAdmin;
+import model.Cure;
 import model.Food;
 import model.Medicine;
 import model.Player;
@@ -24,8 +26,15 @@ public class EatAction extends Action{
             fatCalc(player,selectedFood);
         } else {
             Medicine selectedMedicine = (Medicine) contex.get("medicine");
-            //DiseaseAdmin stuff
+            if(DiseaseAdmin.getDiseaseStarted() != null){
+                DiseaseAdmin.cure(player, (Cure) selectedMedicine);
+            }
+            updateStats(player,selectedMedicine);
         }
+    }
+
+    private void updateStats(Player player, Medicine selectedMedicine) {
+        
     }
 
     private boolean isFood(Set<String> keySet) {

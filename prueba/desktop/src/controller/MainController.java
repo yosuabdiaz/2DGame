@@ -37,10 +37,16 @@ public class MainController {//I need a new name
     public void executeAction(String nameAction) {
         HashMap<String, GameContex> context = makeContext(nameAction);
         actions.get(nameAction).execute(context);
+        if(DiseaseAdmin.getDiseaseStarted() != null){
+            DiseaseAdmin.cure(player,(Cure) actions.get(nameAction));
+        }
     }
 
     public void executeAction(String nameAction, HashMap<String, GameContex> context) {
         actions.get(nameAction).execute(context);
+        if(DiseaseAdmin.getDiseaseStarted() != null){
+            DiseaseAdmin.cure(player,(Cure) actions.get(nameAction));
+        }
     }
 
     public void eatAction(String nameSelected){
