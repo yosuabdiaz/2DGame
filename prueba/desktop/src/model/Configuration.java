@@ -10,6 +10,7 @@ public class Configuration {
     private String medicinePath = "./medicine/";
     private String friendsPath = "./friends/";
     private String enemyPath = "./enemy/";
+    private String mementoPath = "./saves.json";
     private String attacksPath = "./attacks/";
     private String logPath = "./";
     private static Configuration instance;
@@ -28,6 +29,13 @@ public class Configuration {
         return friendProbability;
     }
 
+    public void setMementoPath(String mementoPath) {
+        this.mementoPath = mementoPath;
+    }
+
+    public String getMementoPath() {
+        return mementoPath;
+    }
     public String getAttacksPath() {
         return attacksPath;
     }
