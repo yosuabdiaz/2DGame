@@ -92,6 +92,10 @@ public class ExecutionAdmin extends Thread{
         }
     }
 
+    public void restart(){
+
+    }
+
     public int getDayOfYear() {
         return dayOfYear;
     }
@@ -147,4 +151,9 @@ public class ExecutionAdmin extends Thread{
     public Garden getGarden(){
         return this.garden;
     }
+
+    public MementoAdmin getMementoAdmin() {
+        return mementoAdmin;
+    }
+
 }

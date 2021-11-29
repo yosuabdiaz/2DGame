@@ -97,4 +97,9 @@ public class Storage implements GameContex, Serializable {
         clone.medicine = medicine;
         return clone;
     }
+
+    public void clear(){
+        food.clear();
+        medicine.clear();
+    }
 }

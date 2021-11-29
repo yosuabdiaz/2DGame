@@ -40,6 +40,31 @@ public class MainController {//I need a new name
 
     }
 
+    public void dead(){
+        executionAdmin.restart();
+        executionAdmin.getMementoAdmin().clearMemento();
+        player = new Player();
+        executionAdmin.setPlayer(player);
+        garden.harvestGardenFood();
+        garden.harvestGardenCures();
+        storage.clear();
+    }
+
+    public void dead(int day){
+        if(day < Configuration.getInstance().getSavedDays()) {
+            executionAdmin.restart();
+            Memento memento = executionAdmin.getMementoAdmin().getMemento(day);
+            executionAdmin.getMementoAdmin().clearMemento();
+            player = memento.getPlayer();
+            storage = memento.getStorage();
+            executionAdmin.setPlayer(player);
+            garden.harvestGardenFood();
+            garden.harvestGardenCures();
+            storage = storage;
+            executionAdmin.setStorage(storage);
+        }
+    }
+
     public void executeAction(String nameAction) {
         HashMap<String, GameContex> context = makeContext(nameAction);
         if(actions.get(nameAction) != null){

@@ -43,4 +43,8 @@ public class MementoAdmin {
         states = (temp != null)? temp: states;
         //System.out.println(((LinkedList<Memento>)states).get(2).getPlayer().getAge());
     }
+
+    public void clearMemento(){
+        states.clear();
+    }
 }
