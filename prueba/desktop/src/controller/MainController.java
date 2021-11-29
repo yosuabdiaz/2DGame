@@ -32,6 +32,7 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
+        DiseaseAdmin.chargeData();
         executionAdmin = new ExecutionAdmin(player, garden, storage);
         Thread timingThread = new Thread(executionAdmin);
         NPCAdmin.loadData();
