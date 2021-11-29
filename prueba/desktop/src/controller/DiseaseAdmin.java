@@ -12,6 +12,7 @@ import java.util.Set;
 import model.actions.Action;
 import model.actions.MeditationAction;
 import org.lwjgl.Sys;
+import View.mainView;
 
 public class DiseaseAdmin {
 
@@ -44,8 +45,9 @@ public class DiseaseAdmin {
             System.out.println(disease.getName());
             System.out.println(disease.getTriggers());
             if(checkDisease(disease.getTriggers(), player)){
-
-                setDiseaseToPlayer(disease, player);
+                if(mainView.getInstance().getMyGameScreen().AcceptDisease()) {
+                    setDiseaseToPlayer(disease, player);
+                }
                 return;
             }
         }
