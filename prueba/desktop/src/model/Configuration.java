@@ -11,6 +11,7 @@ public class Configuration {
     private String friendsPath = "./friends/";
     private String enemyPath = "./enemy/";
     private String mementoPath = "./saves.json";
+    private String attacksPath = "./attacks/";
     private String logPath = "./";
     private static Configuration instance;
     private int hourDuration = 5;
@@ -34,6 +35,13 @@ public class Configuration {
 
     public String getMementoPath() {
         return mementoPath;
+    }
+    public String getAttacksPath() {
+        return attacksPath;
+    }
+
+    public void setAttacksPath(String attacksPath) {
+        this.attacksPath = attacksPath;
     }
 
     public void setFriendProbability(int friendProbability) {

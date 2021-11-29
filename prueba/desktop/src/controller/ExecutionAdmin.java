@@ -1,6 +1,7 @@
 package controller;
 
 import Utils.Loger;
+import View.mainView;
 import model.*;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ public class ExecutionAdmin extends Thread{
     private MementoAdmin mementoAdmin = new MementoAdmin();
     private Storage storage;
     private Garden garden;
+    private boolean sleepRecomended = false;
 
     public ExecutionAdmin(Player player, Garden garden, Storage storage){
         this.player = player;
@@ -49,17 +51,27 @@ public class ExecutionAdmin extends Thread{
                     mementoAdmin.addMemento(new Memento(player.clone(), storage.clone()));
                     NPCAdmin.setAttacksToDay(0);
                     NPCAdmin.setVisited(false);
+                    DiseaseAdmin.evaluateHealth( player, new Date(System.currentTimeMillis()) );
                     player.setMeditation(0);
+                    Date disease = DiseaseAdmin.getDiseaseStarted();
+                    if( disease != null){
+                        Date now = new Date(System.currentTimeMillis());
+                        int daysSinceStarted = (int)((now.getTime() - disease.getTime())/1000 /
+                                                    (config.getHourDuration() * config.getHoursPerDay()));
+                        if(daysSinceStarted >= 3){
+                            System.out.println("HA MUERTO");
+                        }
+                    }
+                }
+                if(hours >= config.getHoursPerDay()*0.75 && sleepRecomended == false){
+                    //mainView.getInstance().getMyGameScreen().getAcceptSleep();
                 }
                 if (dayOfYear == config.getDaysPerYear()) {
                     //Loger.getInstance().log("Day: " + dayOfYear);
                     player.setAge(player.getAge() + 1);
                     dayOfYear = 0;
                 }
-                int npcProbability = rand.nextInt(100);
-                if (npcProbability < 2) {
-                    NPCAdmin.generateNPC(player);
-                }
+                NPCAdmin.generateNPC(player);
             }
 
 

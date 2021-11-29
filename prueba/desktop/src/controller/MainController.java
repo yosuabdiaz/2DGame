@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.AttackReader;
 import Utils.DiseaseReader;
 import Utils.FoodReader;
 import Utils.MedicineReader;
@@ -18,6 +19,7 @@ public class MainController {//I need a new name
     private Garden garden;
     private HashMap<String, Action> actions;
     private HashMap<String, Sport> sports;
+    private ExecutionAdmin executionAdmin;
 
 
     public MainController() {
@@ -30,34 +32,27 @@ public class MainController {//I need a new name
         addActions();
         sports = new HashMap<String, Sport>();
         addSports();
-        Thread timingThread = new Thread(new ExecutionAdmin(player, garden, storage));
+        DiseaseAdmin.chargeData();
+        executionAdmin = new ExecutionAdmin(player, garden, storage);
+        Thread timingThread = new Thread(executionAdmin);
+        NPCAdmin.loadData();
         timingThread.start();
 
-        DiseaseReader r = new DiseaseReader();
-        Disease disease = new Disease();
-        disease.setName("Demencia");
-        disease.setSprite("demencia.png");
-        ArrayList<Cure> cures = new ArrayList<>();
-        cures.add(new MeditationAction());
-        disease.setCures(cures);
-        System.out.println( disease.getCures());
-        HashMap<Stats, DiseaseInfo> effects = new HashMap<>();
-        effects.put(Stats.MENTAL_HEALTH, new DiseaseInfo(300,false));
-        effects.put(Stats.FATNESS, new DiseaseInfo(80,true));
-        disease.setEffects(effects);
-        HashMap<Stats, DiseaseInfo> triggers = new HashMap<>();
-        triggers.put(Stats.FATNESS,new DiseaseInfo(30,true));
-        disease.setTriggers(triggers);
-        r.write(disease, "/");
     }
 
     public void executeAction(String nameAction) {
         HashMap<String, GameContex> context = makeContext(nameAction);
         actions.get(nameAction).execute(context);
+        if(DiseaseAdmin.getDiseaseStarted() != null){
+            DiseaseAdmin.cure(player,(Cure) actions.get(nameAction));
+        }
     }
 
     public void executeAction(String nameAction, HashMap<String, GameContex> context) {
         actions.get(nameAction).execute(context);
+        if(DiseaseAdmin.getDiseaseStarted() != null){
+            DiseaseAdmin.cure(player,(Cure) actions.get(nameAction));
+        }
     }
 
     public void eatAction(String nameSelected){
@@ -165,5 +160,9 @@ public class MainController {//I need a new name
                 player.addSelectedAttacks(attack);
             }
         }
+    }
+
+    public ExecutionAdmin getExecutionAdmin() {
+        return executionAdmin;
     }
 }
