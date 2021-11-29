@@ -35,9 +35,11 @@ public class EatAction extends Action{
     }
 
     private void updateStats(Player player, Medicine selectedMedicine) {
-        ArrayList<Stats> toUpdate = new ArrayList<>(selectedMedicine.getEffects().keySet());
-        for(Stats stat:toUpdate){
-            updateStat(player,stat,selectedMedicine.getEffects().get(stat));
+        if(selectedMedicine.getEffects() != null && selectedMedicine.getEffects().size() > 0){
+            ArrayList<Stats> toUpdate = new ArrayList<>(selectedMedicine.getEffects().keySet());
+            for(Stats stat:toUpdate){
+                updateStat(player,stat,selectedMedicine.getEffects().get(stat));
+            }
         }
     }
 
