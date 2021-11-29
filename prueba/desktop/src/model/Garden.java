@@ -63,20 +63,24 @@ public class Garden implements GameContex {
         File folder = new File(Configuration.getInstance().getFoodPath());
         File[] files = folder.listFiles();
         FoodReader r = new FoodReader();
-        for(File f : files){
-            System.out.println(f);
+        if(files != null){
+            for(File f : files) {
+                System.out.println(f);
                 Food food = r.read(f.getPath());
-                if(food != null){
+                if (food != null) {
                     existentFood.add(food);
                 }
+            }
         }
         folder = new File(Configuration.getInstance().getMedicinePath());
         files = folder.listFiles();
         MedicineReader mr = new MedicineReader();
-        for(File f : files){
-            Medicine medicine = mr.read(f.getPath());
-            if(medicine != null){
-                existentCures.add(medicine);
+        if(files != null) {
+            for (File f : files) {
+                Medicine medicine = mr.read(f.getPath());
+                if (medicine != null) {
+                    existentCures.add(medicine);
+                }
             }
         }
     }

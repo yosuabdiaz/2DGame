@@ -91,7 +91,7 @@ public class GameScreen extends BaseScreen{
 
         loadGarden();
 
-        if(showGarden){System.out.printf(showGarden+"");
+        if(showGarden){
             localBatch.draw((TextureRegion) gardenAnimation.getKeyFrame(elapsedTime,true),25,220,60,60);
         }
 

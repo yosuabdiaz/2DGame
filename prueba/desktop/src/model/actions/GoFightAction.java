@@ -41,6 +41,8 @@ public class GoFightAction extends Action  {
                     player.getSelectedAttacks().get(count).getName() + " (" + playerPoints + "/100)";
             String enemyAttack = "Enemigo usó " +
                     enemy.getAttackSkills().get(count).getName() + " (" + enemyPoints + "/100)";
+            mainView.getInstance().getMyGameScreen().resume(playerAttack);
+            mainView.getInstance().getMyGameScreen().resume(enemyAttack);
         }
         if(playerPoints > enemyPoints){
             winPlayer(player, enemy, enemyPoints);
@@ -63,11 +65,13 @@ public class GoFightAction extends Action  {
         Random rand = new Random();
         int indexLoot = rand.nextInt(enemy.getAttackSkills().size());
         Attack loot = enemy.getAttackSkills().get(indexLoot);
+        String lootMessage = "";
         if(isRepeated(player, loot)){
-            String lootMessage = "Te ha tocado " + loot.getName() + " pero ya tienes este ataque";
+            lootMessage = "Te ha tocado " + loot.getName() + " pero ya tienes este ataque";
         } else {
-            String lootMessage = "Te ha tocado " + loot.getName() + ", felicidades";
+            lootMessage = "Te ha tocado " + loot.getName() + ", felicidades";
             player.addAttack(loot);
+            mainView.getInstance().getMyGameScreen().resume(lootMessage);
         }
     }
 
