@@ -96,4 +96,9 @@ public class GoFightAction extends Action  {
         GameScreen g = m.getMyGameScreen();
         g.makeAnimationA(new Texture("attack.png"),5);
     }
+
+    @Override
+    public String getName() {
+        return "GoFightAction";
+    }
 }
